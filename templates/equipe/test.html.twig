@@ -1,0 +1,114 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div style="margin-top: 200px">
+
+        <html>
+        <head>
+            <meta charset="utf-8">
+            <meta name="viewport" content="width=device-width">
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+            <title>Voice Assistant</title>
+        </head>
+        <body>
+        <div id="main-container" class="cortana" style="margin-top: 280px">
+            <div id="assistant-avatar" class="avatar">
+                <img src="{{ asset("ai.png") }}" alt="Assistant Avatar">
+            </div>
+            <div id="conversation-area" class="conversation">
+                <p id="input-area">...</p>
+                <p id="output-area">...</p>
+                <button id="listen-button" onclick="listen()" class="btn btn-danger" style="border-radius: 200px"><i class="fa-solid fa-microphone"></i></button>
+            </div>
+        </div>
+
+        </body>
+
+        <style>
+            #main-container {
+                text-align: center;
+                border: 1px solid #ccc;
+                border-radius: 10px;
+                padding: 20px;
+                max-width: 400px;
+                margin: 0 auto;
+                background-color: #f9f9f9;
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            }
+
+            #assistant-avatar img {
+                width: 80px;
+                height: 80px;
+                border-radius: 50%;
+                margin-bottom: 10px;
+            }
+
+            .conversation p {
+                margin: 5px 0;
+            }
+
+            .btn {
+                margin-top: 10px;
+            }
+        </style>
+
+        <script>
+            function listen() {
+                let inputArea = document.getElementById('input-area')
+                let outputArea = document.getElementById('output-area')
+
+                var recognition = new webkitSpeechRecognition();
+                // recognition.lang = "en-GB";
+                recognition.start();
+
+                recognition.onresult = function(event) {
+                    let transcript = event.results[0][0].transcript;
+                    console.log("Transcript:", transcript);
+                    inputArea.innerHTML = event.results[0][0].transcript;
+                    console.log("Transcript:", transcript);
+                    if (transcript.includes("bonjour")) {
+                        outputArea.innerHTML = "Bonjour !"
+                        speak("Bonjour et bienvenue sur notre site ! comment je peux vous aider ? ");
+                    }
+                    else if (transcript.includes("météo")){
+                        window.open("https://www.google.com/search?q=weather")
+                        speak("voila la meteo");
+                    }
+                    else if (transcript.includes("équipes")){
+                        window.open("{{ path('equipe') }}")
+                        speak("voilà la liste des équipes ");
+                    }
+                    else if (transcript.includes("avis")){
+                        window.open("{{ path('avis') }}")
+                        speak("voilà la liste des avis ");
+                    }
+                    else if (transcript.includes("merci")){
+                        outputArea.innerHTML = "Thank you"
+                        speak("De rien! Si vous avez d'autres questions ou besoin d'aide supplémentaire, n'hésitez pas à demander. Je suis là pour vous aider !");
+                    }
+                    else if (transcript.includes("comment tu t'appelles")){
+                        outputArea.innerHTML = "Tourney"
+                        speak("je m'appelle Tourney !");
+                    }
+                    else {
+                        outputArea.innerHTML = "I don't know what you mean."
+                        speak("j'ai pas compris");
+
+                    }
+
+                }
+                function speak(text) {
+                    var utterance = new SpeechSynthesisUtterance(text);
+                    utterance.onend = function() {
+                        recognition.start();
+                    };
+                    speechSynthesis.speak(utterance);
+                }
+            }
+
+
+        </script>
+
+        </html>
+    </div>
+{% endblock %}

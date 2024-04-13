@@ -1,0 +1,150 @@
+body {
+    margin: 0 auto;
+    background: whitesmoke;
+    font-family: "Open Sans", sans-serif;
+    cursor: default;
+}
+.myclass{
+    background: #0f5132;
+    color: red;
+    z-index: 999;
+
+}
+
+header {
+    width: 100%;
+    color: #eee;
+    border-bottom: 1px solid #eee;
+    font-size: 32px;
+    padding: 20px 70px;
+    border-bottom-color: dimgray;
+
+
+}
+
+main {
+    padding: 40px 50px;
+}
+
+.pitch {
+    background: #26A65B;
+    width: 355px;
+    height: 455px;
+    border-radius: 5px;
+    padding: 20px;
+    margin: 0 16px;
+    display: inline-block;
+    margin-bottom: 30px;
+}
+
+.pitch h4 {
+    position: absolute;
+    color: #eee;
+    text-align: center;
+    margin: -40px 153px;
+}
+
+.pitch .container {
+    width: 350px;
+    height: 450px;
+    border: 2px solid #eee;
+}
+
+.pitch .half {
+    margin: 217px 0 0 -2px;
+    width: 350px;
+    border: 1px solid #eee;
+}
+
+.pitch .half:before {
+    position: absolute;
+    margin: -63px 115px;
+    width: 120px;
+    height: 120px;
+    border-radius: 60px;
+    border: 2px solid #eee;
+    content: "";
+}
+
+.pitch .box1 {
+    position: absolute;
+    margin: -2px 114px;
+    width: 120px;
+    height: 60px;
+    border: 2px solid #eee;
+}
+
+.pitch .pen1 {
+    position: absolute;
+    margin: -2px 21px;
+    width: 75px;
+    height: 35px;
+    border: 2px solid #eee;
+}
+
+.pitch .box2 {
+    position: absolute;
+    margin: 169px 114px;
+    width: 120px;
+    height: 60px;
+    border: 2px solid #eee;
+}
+
+.pitch .pen2 {
+    position: absolute;
+    margin: 23px 21px;
+    width: 75px;
+    height: 35px;
+    border: 2px solid #eee;
+}
+
+.pos {
+    position: relative; /* Change from absolute to relative */
+    width: 40px;
+    height: 40px;
+    border-radius: 20px;
+    background: #BDC3C7;
+    color: #34495e;
+    text-align: center;
+    line-height: 40px;
+    font-size: 16px; /* Adjusted font size to fit */
+    font-weight: 100;
+    transition: .3s linear all;
+    margin: 7px;
+    margin-right: 40px; /* Add margin for spacing between players */
+    margin-top: 90px;
+
+    float: left; /* Float left to make them align horizontally */
+}
+
+
+.pos:hover {
+    color: #BDC3C7;
+    background: #34495e;
+}
+
+p {
+    width: 355px;
+    height: 455px;
+    background: rgba(0, 0, 0, .6);
+    margin: 13px 16px;
+    border-radius: 5px;
+    padding: 20px;
+    display: inline-block;
+}
+
+p:after {
+    content: '';
+    position: absolute;
+    top: 87%;
+    margin: 0 0 0 160px;
+    width: 0;
+    height: 0;
+    opacity: 0.6;
+    border-bottom: solid 10px #000;
+    border-left: solid 20px transparent;
+    border-right: solid 20px transparent;
+}
+
+
+

@@ -1,0 +1,112 @@
+{% extends 'admindash/index.html.twig' %}
+
+{% block body %}
+    <div style="padding-top: 100px; white-space: nowrap;">
+
+        <div style="padding-left: 200px">
+        <h1 style="margin-left: 240px; margin-bottom:40px">main statistics</h1>
+        <div class="card">
+            <div class="first-content">
+                <span>Avis</span>
+            </div>
+            <div class="second-content">
+                <span>{{ avis }}</span>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="first-content">
+                <span>Users</span>
+            </div>
+            <div class="second-content">
+                <span>{{ user }}</span>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="first-content">
+                <span>Teams</span>
+            </div>
+            <div class="second-content">
+                <span>{{ equipe }}</span>
+            </div>
+        </div>
+
+        </div>
+
+
+        <div id="pie_chart"></div>
+        <div id="bar_chart" style="margin-left: -89px;" ></div>
+
+        <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+        <script type="text/javascript">
+            {{ gc_draw(piechart, 'pie_chart') }}
+        </script>
+
+        <script type="text/javascript">
+            {{ gc_draw(barchart, 'bar_chart') }}
+        </script>
+
+
+    </div>
+
+    <style>
+        .card {
+            width: 190px;
+            height: 254px;
+            background: rgb(103, 225, 255);
+            transition: all 0.4s;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px 5px rgba(0, 0, 0, 0.705);
+            font-size: 30px;
+            color: white;
+            font-weight: 900;
+            display: inline-block;
+            margin-right: 60px; /* Optional: Add some space between cards */
+        }
+
+        .card:hover {
+            border-radius: 15px;
+            cursor: pointer;
+            transform: scale(1.2);
+            box-shadow: 0px 0px 10px 5px rgba(0, 0, 0, 0.705);
+            background: rgb(103, 151, 255);
+        }
+
+        .first-content {
+            height: 100%;
+            width: 100%;
+            transition: all 0.4s;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 1;
+            border-radius: 15px;
+        }
+
+        .card:hover .first-content {
+            height: 0px;
+            opacity: 0;
+        }
+
+        .second-content {
+            height: 0%;
+            width: 100%;
+            opacity: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 15px;
+            transition: all 0.4s;
+            font-size: 0px;
+            transform: rotate(90deg) scale(-1);
+        }
+
+        .card:hover .second-content {
+            opacity: 1;
+            height: 100%;
+            font-size: 1.8rem;
+            transform: rotate(0deg);
+        }
+    </style>
+{% endblock %}
