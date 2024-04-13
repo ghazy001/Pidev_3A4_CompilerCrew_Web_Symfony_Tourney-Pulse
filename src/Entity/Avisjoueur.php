@@ -83,3 +83,15 @@ class Avisjoueur
         return $this;
     }
 }
+
+// Transform commentaire to textarea
+
+// Transform commentaire to textarea
+
+// Transform commentaire to textarea
+
+// Transform commentaire to textarea
+
+// Transform commentaire to textarea
+
+// Transform commentaire to textarea

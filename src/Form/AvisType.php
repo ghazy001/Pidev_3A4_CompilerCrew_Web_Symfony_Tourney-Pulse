@@ -44,3 +44,26 @@ class AvisType extends AbstractType
         ]);
     }
 }
+// Transform commentaire to textarea
+// Transform commentaire to textarea
+// Transform commentaire to textarea
+// Transform commentaire to textarea
+
+// Transform commentaire to textarea
+
+// Transform commentaire to textarea
+
+// Transform commentaire to textarea
+
+// Transform commentaire to textarea
+
+// Transform commentaire to textarea
+
+// Transform commentaire to textarea
+
+// Transform commentaire to textarea
+
+// Transform commentaire to textarea
+
+// Transform commentaire to textarea
+
