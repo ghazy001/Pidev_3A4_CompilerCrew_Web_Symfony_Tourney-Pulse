@@ -1,0 +1,11 @@
+{% extends 'baseBack.html.twig' %}
+
+{% block title %}New Stade{% endblock %}
+
+{% block content %}
+    <h1>Create new Stade</h1>
+
+    {{ include('stade/_form.html.twig') }}
+
+    <a href="{{ path('app_stade_index') }}">back to list</a>
+{% endblock %}

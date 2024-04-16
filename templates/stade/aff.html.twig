@@ -1,0 +1,37 @@
+{% extends 'baseBack.html.twig' %}
+{% block title %}Reservation{% endblock %}
+
+{% block content %}
+    <h1>Reservation</h1>
+<section class="p-96">
+    <div class="container">
+        <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Stades /</span> Browse</h4>
+    <table class="table">
+        <thead>
+            <tr>
+              
+                <th>nom Stade</th>
+                <th>Date</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for reservation in reservations %}
+            <tr>
+              
+                <td>{{ reservation.idStade.nom }}</td>
+                <td>{{ reservation.date ? reservation.date|date('Y-m-d') : '' }}</td>
+                <td>
+                    <a href="{{ path('app_reservation_show', {'id': reservation.id}) }}">show</a>
+                    </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    </div>
+</section>
+{% endblock %}

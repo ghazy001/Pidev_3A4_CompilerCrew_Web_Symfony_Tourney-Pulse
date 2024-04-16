@@ -1,0 +1,102 @@
+{% extends 'baseFront.html.twig' %}
+
+{% block title %}Stade Index{% endblock %}
+
+{% block content %}
+    <section class="p-96">
+        <div class="container">
+            <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Stades /</span> Browse</h4>
+
+            <div class="shop-grid">
+                <div class="row">
+                    {% for stade in stades %}
+                        <div class="col-lg-4 col-sm-6">
+                            <div class="product-card">
+                                {% if stade.images|length > 0 %}
+                                    <div id="carouselExample{{ loop.index }}" class="carousel slide" data-bs-ride="carousel">
+                                        <div class="carousel-inner">
+                                            {% for image in stade.images %}
+                                                <div class="carousel-item {{ loop.first ? 'active' : '' }}">
+                                                    <img src="{{ asset('uploads/images/' ~ image.urlImage) }}" class="d-block w-100" alt="{{ stade.nom }}">
+                                                </div>
+                                            {% endfor %}
+                                        </div>
+                                        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample{{ loop.index }}" data-bs-slide="prev">
+                                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                        </button>
+                                        <button class="carousel-control-next" type="button" data-bs-target="#carouselExample{{ loop.index }}" data-bs-slide="next">
+                                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                        </button>
+                                    </div>
+                                {% else %}
+                                    <img src="{{ asset('uploads/image.png') }}" alt="Default Image" class="d-block w-100">
+                                {% endif %}
+                       <style>
+    .stade-info {
+        text-align: center;
+    }
+
+    .info-row {
+        display: inline-block;
+        margin: 0 10px;
+        transition: transform 0.3s ease-in-out, color 0.3s ease-in-out;
+    }
+
+    .info-row:hover {
+        transform: scale(1.1);
+        color:  #2ecc71; /* Couleur de transition au survol */
+    }
+
+    .label {
+        font-weight: bold;
+    }
+
+    .nom,
+    .lieu,
+    .capacite,
+    .numero {
+        display: block;
+        margin-bottom: 10px;
+    }
+</style>
+
+<div class="stade-info">
+
+
+    <div class="info-row nom">
+        <span class="label">Nom:</span>
+        <span class="value">{{ stade.nom }}</span>
+    </div>
+    <div class="info-row lieu">
+        <span class="label">Lieu:</span>
+        <span class="value">{{ stade.lieu }}</span>
+    </div>
+    <div class="info-row capacite">
+        <span class="label">Capacité:</span>
+        <span class="value">{{ stade.capacity }}</span>
+    </div>
+    <div class="info-row numero">
+        <span class="label">Numéro:</span>
+        <span class="value">{{ stade.numero }}</span>
+    </div>
+</div>
+
+
+    
+                                <div class="cart-btn">
+                                    <a href="{{ path('app_stade_reservation_new', {'stadeId': stade.id}) }}" class=" cta-2"><span class="span">Reserver <i class="far fa-chevron-right"></i></span></a>
+                               
+                                </div>
+                                
+                            </div>
+                        </div>
+                    {% else %}
+                        <div class="col-12">
+                            <p>No stades available.</p>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}

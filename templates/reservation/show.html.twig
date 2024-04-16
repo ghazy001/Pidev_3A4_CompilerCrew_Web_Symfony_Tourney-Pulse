@@ -1,0 +1,39 @@
+{% extends 'baseFront.html.twig' %}
+
+{% block title %}Reservation{% endblock %}
+
+{% block content %}
+    <h1>Reservation</h1>
+<section class="p-96">
+    <div class="container">
+    <table class="table">
+        <tbody>
+            
+            <tr>
+                <th>Nom Stade</th>
+                <td>{{ reservation.idStade.nom }}</td>
+            </tr>
+            <tr>
+                <th>Date</th>
+                <td>{{ reservation.date ? reservation.date|date('Y-m-d') : '' }}</td>
+            </tr>
+             <tr>
+                <th>Premiere equipe</th>
+                <td>{{ reservation.idPremiereequipe}}</td>
+            </tr>
+             <tr>
+                <th>Deuxieme equipe</th>
+                <td>{{ reservation.idDeuxiemeequipe}}</td>
+            </tr>
+            
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_reservation_index') }}">back to list</a>
+
+    <a href="{{ path('app_reservation_edit', {'id': reservation.id}) }}">edit</a>
+
+    {{ include('reservation/_delete_form.html.twig') }}
+    </div>
+</section>
+{% endblock %}
