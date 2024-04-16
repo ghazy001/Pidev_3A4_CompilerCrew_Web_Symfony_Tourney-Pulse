@@ -14,6 +14,7 @@ use HttpException;
 use HttpRequest;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpClient\HttpClient;
+use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -55,6 +56,8 @@ class EquipeController extends AbstractController
     #[Route('/add', name: 'add')]
     public function add(ManagerRegistry $managerRegistry, Request $request): Response
     {
+
+        $error = '';
         $eq = new Equipe();
         $form = $this->createForm(EquipeType::class, $eq);
         $form->handleRequest($request);
@@ -167,8 +170,8 @@ class EquipeController extends AbstractController
 
     public function SendSms()
     {
-        $sid = "AC4d1d41f7d616d4a60ac222a861f9a695";
-        $token = "35776bcb6706c4a22d82531c5a1b7712";
+        $sid = "";
+        $token = "";
         $twilio = new Client($sid, $token);
 
         $message = $twilio->messages

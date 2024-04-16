@@ -8,7 +8,9 @@
     "@symfony/stimulus-bridge": "^3.2.0",
     "@symfony/ux-chartjs": "file:vendor/symfony/ux-chartjs/assets",
     "@symfony/ux-turbo": "file:vendor/symfony/ux-turbo/assets",
+    "@symfony/ux-typed": "file:vendor/symfony/ux-typed/assets",
     "chart.js": "^3.4.1 || ^4.0",
-    "stimulus": "^2.0.0"
+    "stimulus": "^2.0.0",
+    "typed.js": "^2.0"
   }
 }

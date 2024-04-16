@@ -84,14 +84,3 @@ class Avisjoueur
     }
 }
 
-// Transform commentaire to textarea
-
-// Transform commentaire to textarea
-
-// Transform commentaire to textarea
-
-// Transform commentaire to textarea
-
-// Transform commentaire to textarea
-
-// Transform commentaire to textarea
