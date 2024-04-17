@@ -1,0 +1,6 @@
+ <div style="margin-top: 300px;">
+<form method="post" action="{{ path('app_messages_delete', {'id': message.id}) }}" onsubmit="return confirm('Are you sure you want to delete this item?');">
+    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ message.id) }}">
+    <button class="btn">Delete</button>
+</form>
+</div>

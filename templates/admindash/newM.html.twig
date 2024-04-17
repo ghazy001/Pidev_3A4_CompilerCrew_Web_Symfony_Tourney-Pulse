@@ -1,0 +1,14 @@
+{% extends 'admindash/index.html.twig' %}
+
+{% block title %}New Messages{% endblock %}
+
+{% block body %}
+ <div style="margin-top: 300px;">
+    <h1>Create new Messages</h1>
+
+    {{ include('admindash/M_form.html.twig') }}
+
+    <a href="{{ path('SASA') }}">back to list</a>
+
+    </div>
+{% endblock %}

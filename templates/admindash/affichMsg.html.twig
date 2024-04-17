@@ -1,0 +1,45 @@
+{% extends 'admindash/index.html.twig' %}
+
+{% block title %}Messages index{% endblock %}
+
+{% block body %}
+ <div style="margin-top: 300px;">
+    <h1>Messages index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Content</th>
+                <th>Date</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for message in messages %}
+            <tr>
+                <td>{{ message.id }}</td>
+                <td>{{ message.content }}</td>
+                <td>{{ message.date ? message.date|date('Y-m-d H:i:s') : '' }}</td>
+                <td>
+                    <a href="{{ path('showmsg', {'id': message.id}) }}">show</a>
+                    <a href="{{ path('mes_edit', {'id': message.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    </div>
+
+    <a href="{{ path('mess_new') }}">Create new</a>
+
+
+    <style>
+    
+    </style>
+{% endblock %}

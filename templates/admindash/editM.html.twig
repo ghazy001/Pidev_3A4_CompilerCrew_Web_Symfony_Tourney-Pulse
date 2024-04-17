@@ -1,0 +1,15 @@
+{% extends 'admindash/index.html.twig' %}
+
+{% block title %}Edit Messages{% endblock %}
+
+{% block body %}
+ <div style="margin-top: 300px;">
+    <h1>Edit Messages</h1>
+
+    {{ include('admindash/M_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('SASA') }}">back to list</a>
+
+    {{ include('admindash/M_delete.html.twig') }}
+    </div>
+{% endblock %}

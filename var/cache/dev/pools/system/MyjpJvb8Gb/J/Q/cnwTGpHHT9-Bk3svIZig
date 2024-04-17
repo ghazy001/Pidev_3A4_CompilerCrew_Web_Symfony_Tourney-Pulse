@@ -1,0 +1,45 @@
+<?php //App%255CEntity%255CMessengerMessages
+
+return [PHP_INT_MAX, static function () { return \Symfony\Component\VarExporter\Internal\Hydrator::hydrate(
+    $o = [
+        clone (($p = &\Symfony\Component\VarExporter\Internal\Registry::$prototypes)['Doctrine\\ORM\\Mapping\\Table'] ?? \Symfony\Component\VarExporter\Internal\Registry::p('Doctrine\\ORM\\Mapping\\Table')),
+        clone ($p['Doctrine\\ORM\\Mapping\\Index'] ?? \Symfony\Component\VarExporter\Internal\Registry::p('Doctrine\\ORM\\Mapping\\Index')),
+        clone $p['Doctrine\\ORM\\Mapping\\Index'],
+        clone $p['Doctrine\\ORM\\Mapping\\Index'],
+        clone ($p['Doctrine\\ORM\\Mapping\\Entity'] ?? \Symfony\Component\VarExporter\Internal\Registry::p('Doctrine\\ORM\\Mapping\\Entity')),
+    ],
+    null,
+    [
+        'stdClass' => [
+            'name' => [
+                'messenger_messages',
+                'IDX_75EA56E0FB7336F0',
+                'IDX_75EA56E0E3BD61CE',
+                'IDX_75EA56E016BA31DB',
+            ],
+            'indexes' => [
+                [
+                    $o[1],
+                    $o[2],
+                    $o[3],
+                ],
+            ],
+            'columns' => [
+                1 => [
+                    'queue_name',
+                ],
+                [
+                    'available_at',
+                ],
+                [
+                    'delivered_at',
+                ],
+            ],
+        ],
+    ],
+    [
+        $o[0],
+        $o[4],
+    ],
+    []
+); }];

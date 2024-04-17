@@ -1,0 +1,15 @@
+{% extends 'admindash/index.html.twig' %}
+
+{% block title %}New Reclamation{% endblock %}
+
+{% block body %}
+
+ <div style="margin-top: 300px; margin-left: 600px;">
+
+   
+
+    {{ include('admindash/_form.html.twig') }}
+
+    <a href="{{ path('Rec') }}">back to list</a>
+    </div>
+{% endblock %}

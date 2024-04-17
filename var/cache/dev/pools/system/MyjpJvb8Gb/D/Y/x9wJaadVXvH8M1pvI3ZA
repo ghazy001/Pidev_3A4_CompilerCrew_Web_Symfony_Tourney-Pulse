@@ -1,0 +1,25 @@
+<?php //App%255CEntity%255CAvisjoueur%2524note
+
+return [PHP_INT_MAX, static function () { return \Symfony\Component\VarExporter\Internal\Hydrator::hydrate(
+    $o = [
+        clone (\Symfony\Component\VarExporter\Internal\Registry::$prototypes['Doctrine\\ORM\\Mapping\\Column'] ?? \Symfony\Component\VarExporter\Internal\Registry::p('Doctrine\\ORM\\Mapping\\Column')),
+    ],
+    null,
+    [
+        'stdClass' => [
+            'name' => [
+                'note',
+            ],
+            'type' => [
+                'float',
+            ],
+            'precision' => [
+                10,
+            ],
+        ],
+    ],
+    [
+        $o[0],
+    ],
+    []
+); }];
