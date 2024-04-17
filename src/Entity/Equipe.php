@@ -126,7 +126,14 @@ class Equipe
         return $this;
     }
 
-
+    /*
+       *
+       *
+       * @author : ghazi saoudi
+       *
+       *
+       *
+       */
 
 
 

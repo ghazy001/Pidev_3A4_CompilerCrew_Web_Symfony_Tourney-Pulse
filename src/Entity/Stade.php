@@ -4,6 +4,10 @@ namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
+
+
+
+
 /**
  * Stade
  *
@@ -101,6 +105,17 @@ class Stade
 
         return $this;
     }
+
+
+
+    /*
+   *
+   *
+      @author : ghazi saoudi
+   *
+   *
+   *
+   */
 
 
 }

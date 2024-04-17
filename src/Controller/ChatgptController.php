@@ -60,4 +60,18 @@ class ChatgptController extends AbstractController
         ]);
     }
 
+
+
+    function myMessage() {
+        echo "Hello world!";
+    }
+    /*
+    *
+    *
+    * @author : ghazi saoudi
+    *
+    *
+    *
+    */
+
 }

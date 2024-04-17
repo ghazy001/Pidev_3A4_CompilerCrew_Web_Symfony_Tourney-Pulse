@@ -364,7 +364,19 @@ class AdmindashController extends AbstractController
     }
 
 
+    /*
+     *
+     *
+     * @author : ghazi saoudi
+     *
+     *
+     *
+     */
 
+
+    function myMessage() {
+        echo "Hello world!";
+    }
 
 
 

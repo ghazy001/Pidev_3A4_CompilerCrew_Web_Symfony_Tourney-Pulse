@@ -20,10 +20,6 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Contracts\HttpClient\HttpClientInterface;
 use Twilio\Rest\Client;
-
-
-
-
 use PhpOffice\PhpSpreadsheet\Writer\Csv;
 use PhpOffice\PhpSpreadsheet\Writer\Ods;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
@@ -157,6 +153,8 @@ class EquipeController extends AbstractController
     }
 
 
+
+
     #[Route('/player', name: 'player')]
     public function yourAction(EquipeRepository $equipeRepository): Response
     {
@@ -269,6 +267,19 @@ class EquipeController extends AbstractController
     }
 
 
+    function myMessage() {
+        echo "Hello world!";
+    }
+
+
+    /*
+    *
+    *
+    * @author : ghazi saoudi
+    *
+    *
+    *
+    */
 
 
 
