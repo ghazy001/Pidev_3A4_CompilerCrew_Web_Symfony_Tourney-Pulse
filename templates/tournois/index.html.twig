@@ -1,0 +1,66 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Tournois index{% endblock %}
+
+{% block body %}
+
+<div class="page-title-banner">
+                <div class="bread_crumb">
+                </div>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-xl-10 col-lg-9 offset-xl-2 offset-lg-3">
+                            <ul class="breadcrumb_wrap">
+                                <li><a href="index.html.twig">Home</a></li>
+                                <li class="onpage"><a href="index.html.twig">Tournament Display</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+<div class="createt p-96">
+    <div class="container">
+        <div class="heading mb-64">
+            <h2>Tournament Display</h2>
+        </div>
+    
+    <table class="table">
+        <thead>
+            <tr>
+                <th>IdTournament</th>
+                <th>NomTournament</th>
+                <th>Stadium</th>
+                <th>NumberMatch</th>
+                <th>BeginingDate</th>
+                <th>EndDate</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for tournoi in tournois %}
+            <tr>
+                <td>{{ tournoi.idTournois }}</td>
+                <td>{{ tournoi.nomTournois }}</td>
+                <td>{{ tournoi.stade }}</td>
+                <td>{{ tournoi.nombreMatch }}</td>
+                <td>{{ tournoi.dateDebut ? tournoi.dateDebut|date('Y-m-d') : '' }}</td>
+                <td>{{ tournoi.dateFin ? tournoi.dateFin|date('Y-m-d') : '' }}</td>
+                <td>
+                    <a href="{{ path('app_tournois_show', {'idTournois': tournoi.idTournois}) }}">show</a>
+                    <a href="{{ path('app_tournois_edit', {'idTournois': tournoi.idTournois}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="7">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_tournois_new') }}">Create new</a>                                
+            
+    </div>
+</div>
+
+{% endblock %}

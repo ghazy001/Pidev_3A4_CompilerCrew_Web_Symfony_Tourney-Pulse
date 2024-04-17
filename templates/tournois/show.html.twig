@@ -1,0 +1,59 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Tournois{% endblock %}
+
+{% block body %}
+    <div class="page-title-banner">
+                <div class="bread_crumb">
+                </div>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-xl-10 col-lg-9 offset-xl-2 offset-lg-3">
+                            <ul class="breadcrumb_wrap">
+                                <li><a href="{{ path('app_tournois_index') }}">Home</a></li>
+                                <li class="onpage"><a href="newform.html.twig">Show Tournament</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+<div class="createt p-96">
+    <div class="container">
+        <div class="heading mb-64">
+            <h2>Show Tournament</h2>
+        </div>
+        <table class="table">
+        <tbody>
+            <tr>
+                <th>IdTournois</th>
+                <td>{{ tournoi.idTournois }}</td>
+            </tr>
+            <tr>
+                <th>NomTournois</th>
+                <td>{{ tournoi.nomTournois }}</td>
+            </tr>
+            <tr>
+                <th>Stade</th>
+                <td>{{ tournoi.stade }}</td>
+            </tr>
+            <tr>
+                <th>NombreMatch</th>
+                <td>{{ tournoi.nombreMatch }}</td>
+            </tr>
+            <tr>
+                <th>DateDebut</th>
+                <td>{{ tournoi.dateDebut ? tournoi.dateDebut|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>DateFin</th>
+                <td>{{ tournoi.dateFin ? tournoi.dateFin|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <button type="submit" class="form-btn w-100 mb-32" class="btn" onclick="window.location.href='{{ path('app_tournois_edit', {'idTournois': tournoi.idTournois}) }}'">Edit Tournament</button>
+    {{ include('tournois/_delete_form.html.twig') }}
+    <a href="{{ path('app_tournois_index') }}">back to list</a>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,61 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}MatchEntity index{% endblock %}
+
+{% block body %}
+    <div class="page-title-banner">
+        <div class="bread_crumb">
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-xl-10 col-lg-9 offset-xl-2 offset-lg-3">
+                    <ul class="breadcrumb_wrap">
+                        <li><a href="index.html.twig">Home</a></li>
+                        <li class="onpage"><a href="index.html.twig">Match Display</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="createt p-96">
+        <div class="container">
+            <div class="heading mb-64">
+                <h2>Match Display</h2>
+            </div>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>IdMatch</th>
+                        <th>MatchName</th>
+                        <th>DateMatch</th>
+                        <th>MatchDuration</th>
+                        <th>TournamentName</th>
+                        <th>Team1Name</th>
+                        <th>Team2Name</th>
+                        <th>actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for match_entity in match_entities %}
+                    <tr>
+                        <td>{{ match_entity.idMatch }}</td>
+                        <td>{{ match_entity.nomMatch }}</td>
+                        <td>{{ match_entity.dateMatch ? match_entity.dateMatch|date('Y-m-d') : '' }}</td>
+                        <td>{{ match_entity.dureeMatch }}</td>
+                        
+                        <td>
+                            <a href="{{ path('app_match_entity_show', {'idMatch': match_entity.idMatch}) }}">show</a>
+                            <a href="{{ path('app_match_entity_edit', {'idMatch': match_entity.idMatch}) }}">edit</a>
+                        </td>
+                    </tr>
+                {% else %}
+                    <tr>
+                        <td colspan="8">no records found</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+            <a href="{{ path('app_match_entity_new') }}">Create new</a>
+        </div>
+    </div>
+{% endblock %}
