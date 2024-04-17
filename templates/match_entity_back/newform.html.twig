@@ -1,0 +1,62 @@
+<div class="page-title-banner">
+                <div class="bread_crumb">
+                </div>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-xl-10 col-lg-9 offset-xl-2 offset-lg-3">
+                            <ul class="breadcrumb_wrap">
+                                <li><a href="{{ path('app_match_entity_index') }}">Home</a></li>
+                                <li class="onpage"><a href="newform.html.twig">Create Match</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+<div class="createt mb-3">
+    <div class="container">
+        <div class="mb-3">
+            <h2>Create a Tournament</h2>
+        </div>
+        <div class="row">
+            <div class="mb-3">
+                {{ form_start(form, {'attr': {'class': 'createm-form', 'novalidate': 'novalidate'}}) }}
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="mb-3">
+                            {{ form_label(form.nomMatch, 'Match Name') }}
+                            {{ form_widget(form.nomMatch, {'attr': {'class': 'form-control'}}) }}
+                            {{ form_errors(form.nomMatch) }}
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="mb-3">
+                            {{ form_label(form.dureeMatch, 'Match Duration') }}
+                            {{ form_widget(form.dureeMatch, {'attr': {'class': 'form-control'}}) }}
+                        </div>
+                    </div>
+                </div>
+                <div class="mb-3">
+                    {{ form_label(form.dateMatch, 'Match Date') }}
+                    {{ form_widget(form.dateMatch, {'attr': {'class': 'form-control'}}) }}
+                    {{ form_errors(form.dateMatch) }}
+                </div>
+                <div class="mb-3">
+                    {{ form_label(form.idTournois, 'Tournament ID') }}
+                    {{ form_widget(form.idTournois, {'attr': {'class': 'form-control'}}) }}
+                </div>
+                <div class="mb-7">
+                    {{ form_label(form.idEquipe1, 'Team 1 ID') }}
+                    {{ form_widget(form.idEquipe1, {'attr': {'class': 'form-control'}}) }}
+                </div>
+                <div class="mb-7">
+                    {{ form_label(form.idEquipe2, 'Team 2 ID') }}
+                    {{ form_widget(form.idEquipe2, {'attr': {'class': 'form-control'}}) }}
+                </div>
+                <button type="submit" class="btn btn-primary w-100 py-8 fs-4 mb-4 rounded-2" class="btn">{{ button_label|default('Create Match') }}</button>
+                <p class="link">Changed your mind? <a href="{{ path('app_match_entity_back_index') }}">back to list</a></p>
+                {{ form_end(form) }}
+            </div>
+        </div>
+    </div>
+</div>

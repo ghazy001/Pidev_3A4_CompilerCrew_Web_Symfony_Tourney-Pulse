@@ -16,6 +16,7 @@ class EquipeType extends AbstractType
             ->add('image')
             ->add('datecreation')
             ->add('idJoueur')
+
         ;
     }
 

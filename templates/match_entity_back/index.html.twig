@@ -1,0 +1,70 @@
+{% extends 'back.html.twig' %}
+
+{% block title %}MatchEntity index{% endblock %}
+
+{% block body %}
+    <div class="page-title-banner">
+        <div class="bread_crumb">
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-xl-10 col-lg-9 offset-xl-2 offset-lg-3">
+                    <ul class="breadcrumb_wrap">
+                        <li><a href="index.html.twig">Home</a></li>
+                        <li class="onpage"><a href="index.html.twig">Match Display</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-4 d-flex align-items-stretch">
+            <div class="card w-100">
+                <div class="card-body p-4">
+                    <div class="heading mb-64">
+                        <h2>Matchs Display</h2>
+                    </div>
+
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th>MatchName</th>
+                            <th>DateMatch</th>
+                            <th>MatchDuration</th>
+                            <th>TournamentName</th>
+                            <th>Team1Name</th>
+                            <th>Team2Name</th>
+                            <th>actions</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for match_entity in match_entities %}
+                            <tr>
+                                <td>{{ match_entity.nomMatch }}</td>
+                                <td>{{ match_entity.dateMatch ? match_entity.dateMatch|date('Y-m-d') : '' }}</td>
+                                <td>{{ match_entity.dureeMatch }}</td>
+                                <td>{{ match_entity.idTournois.nomTournois }}</td>
+                                <td>{{ match_entity.idEquipe1.nom }}</td>
+                                <td>{{ match_entity.idEquipe2.nom }}</td>
+
+                                <td>
+                                    <a href="{{ path('app_match_entity_show_back', {'idMatch': match_entity.idMatch}) }}">show</a>
+                                    <a href="{{ path('app_match_entity_edit_back', {'idMatch': match_entity.idMatch}) }}">edit</a>
+                                </td>
+                            </tr>
+                        {% else %}
+                            <tr>
+                                <td colspan="7">no records found</td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+
+                    <a href="{{ path('app_match_entity_new_back') }}">Create new</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

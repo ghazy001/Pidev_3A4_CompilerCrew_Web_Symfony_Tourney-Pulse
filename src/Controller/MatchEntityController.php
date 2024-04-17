@@ -19,10 +19,18 @@ use Symfony\Component\Routing\Annotation\Route;
 #[Route('/match/entity')]
 class MatchEntityController extends AbstractController
 {
-    #[Route('/', name: 'app_match_entity_index', methods: ['GET'])]
+    #[Route('/front', name: 'app_match_entity_index', methods: ['GET'])]
     public function index(MatchRepository $matchRepository): Response
     {
         return $this->render('match_entity/index.html.twig', [
+            'match_entities' => $matchRepository->findAll(),
+        ]);
+    }
+
+    #[Route('/back', name: 'app_match_entity_back_index', methods: ['GET'])]
+    public function index_back(MatchRepository $matchRepository): Response
+    {
+        return $this->render('match_entity_back/index.html.twig', [
             'match_entities' => $matchRepository->findAll(),
         ]);
     }
@@ -47,10 +55,38 @@ class MatchEntityController extends AbstractController
         ]);
     }
 
-    #[Route('/{idMatch}', name: 'app_match_entity_show', methods: ['GET'])]
+    #[Route('/new_back', name: 'app_match_entity_new_back', methods: ['GET', 'POST'])]
+    public function new_back(Request $request, EntityManagerInterface $entityManager): Response
+    {
+        $matchEntity = new MatchEntity();
+        $form = $this->createForm(MatchEntityType::class, $matchEntity);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager->persist($matchEntity);
+            $entityManager->flush();
+
+            return $this->redirectToRoute('app_match_entity_back_index', [], Response::HTTP_SEE_OTHER);
+        }
+
+        return $this->renderForm('match_entity_back/new.html.twig', [
+            'match_entity' => $matchEntity,
+            'form' => $form,
+        ]);
+    }
+
+    #[Route('/{idMatch}/show', name: 'app_match_entity_show', methods: ['GET'])]
     public function show(MatchEntity $matchEntity): Response
     {
         return $this->render('match_entity/show.html.twig', [
+            'match_entity' => $matchEntity,
+        ]);
+    }
+
+    #[Route('/{idMatch}/show_back', name: 'app_match_entity_show_back', methods: ['GET'])]
+    public function show_back(MatchEntity $matchEntity): Response
+    {
+        return $this->render('match_entity_back/show.html.twig', [
             'match_entity' => $matchEntity,
         ]);
     }
@@ -73,7 +109,25 @@ class MatchEntityController extends AbstractController
         ]);
     }
 
-    #[Route('/{idMatch}', name: 'app_match_entity_delete', methods: ['POST'])]
+    #[Route('/{idMatch}/edit_back', name: 'app_match_entity_edit_back', methods: ['GET', 'POST'])]
+    public function edit_back(Request $request, MatchEntity $matchEntity, EntityManagerInterface $entityManager): Response
+    {
+        $form = $this->createForm(MatchEntityType::class, $matchEntity);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager->flush();
+
+            return $this->redirectToRoute('app_match_entity_back_index', [], Response::HTTP_SEE_OTHER);
+        }
+
+        return $this->renderForm('match_entity_back/edit.html.twig', [
+            'match_entity' => $matchEntity,
+            'form' => $form,
+        ]);
+    }
+
+    #[Route('/{idMatch}/delete', name: 'app_match_entity_delete', methods: ['POST'])]
     public function delete(Request $request, MatchEntity $matchEntity, EntityManagerInterface $entityManager): Response
     {
         if ($this->isCsrfTokenValid('delete'.$matchEntity->getIdMatch(), $request->request->get('_token'))) {
@@ -82,5 +136,16 @@ class MatchEntityController extends AbstractController
         }
 
         return $this->redirectToRoute('app_match_entity_index', [], Response::HTTP_SEE_OTHER);
+    }
+
+    #[Route('/{idMatch}/delete_back', name: 'app_match_entity_delete_back', methods: ['POST'])]
+    public function delete_back(Request $request, MatchEntity $matchEntity, EntityManagerInterface $entityManager): Response
+    {
+        if ($this->isCsrfTokenValid('delete'.$matchEntity->getIdMatch(), $request->request->get('_token'))) {
+            $entityManager->remove($matchEntity);
+            $entityManager->flush();
+        }
+
+        return $this->redirectToRoute('app_match_entity_back_index', [], Response::HTTP_SEE_OTHER);
     }
 }

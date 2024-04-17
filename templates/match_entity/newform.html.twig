@@ -19,12 +19,13 @@
         </div>
         <div class="row">
             <div class="col-xl-4 col-lg-6 col-md-8 offset-xl-2 offset-lg-3 offset-md-2 mb-xl-0 mb-64">
-                {{ form_start(form, {'attr': {'class': 'createm-form'}}) }}
+                {{ form_start(form, {'attr': {'class': 'createm-form', 'novalidate': 'novalidate'}}) }}
                     <div class="row">
                         <div class="col-sm-6">
                             <div class="form-group mb-32">
                                 {{ form_label(form.nomMatch, 'Match Name') }}
                                 {{ form_widget(form.nomMatch, {'attr': {'class': 'form-control'}}) }}
+                                {{ form_errors(form.nomMatch) }}
                             </div>
                         </div>
                         <div class="col-sm-6">
@@ -37,6 +38,7 @@
                     <div class="form-group mb-32">
                         {{ form_label(form.dateMatch, 'Match Date') }}
                         {{ form_widget(form.dateMatch, {'attr': {'class': 'form-control'}}) }}
+                        {{ form_errors(form.dateMatch) }}
                     </div>
                     <div class="form-group mb-32">
                         {{ form_label(form.idTournois, 'Tournament ID') }}

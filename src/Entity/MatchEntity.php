@@ -15,9 +15,15 @@ class MatchEntity
     private ?int $idMatch = null;
 
     #[ORM\Column(length: 150)]
+    #[Assert\NotBlank(message:"Tournament Name Required")]
+    #[Assert\Length(min:3,minMessage:"Tournament Name needs at least 3 caracters")]
     private ?string $nomMatch = null;
 
     #[ORM\Column]
+    #[Assert\Range(
+        min: 'today',
+        maxMessage: "The date cannot be in the past."
+    )]
     private ?\DateTime $dateMatch = null;
 
     #[ORM\Column(length: 150)]
@@ -31,7 +37,10 @@ class MatchEntity
     #[ORM\JoinColumn(name: 'id_equipe1', referencedColumnName: 'id')]
     private ?Equipe $idEquipe1 = null;
     
-    #[ORM\OneToMany(targetEntity: Tournois::class, mappedBy: 'match_entity')]
+
+
+    #[ORM\ManyToOne(inversedBy: 'match_entity')]
+    #[ORM\JoinColumn(name: 'id_tournois', referencedColumnName: 'id_tournois')]
     private ?Tournois $idTournois = null;
 
     public function getIdMatch(): ?int
