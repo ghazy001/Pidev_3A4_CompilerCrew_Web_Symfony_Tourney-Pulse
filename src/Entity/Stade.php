@@ -31,8 +31,8 @@ class Stade
     
     
 
-    /**
-     * @ORM\Column(name="Nom", type="string", length=255, nullable=false)
+   /**
+     * @ORM\Column(name="Nom", type="string", length=255, nullable=false, unique=true)
      * @Assert\NotBlank(message="The name cannot be blank.")
      * @Assert\Length(
      *      min = 3,
@@ -44,6 +44,9 @@ class Stade
      * )
      */
     private $nom;
+
+
+    
     
 
 

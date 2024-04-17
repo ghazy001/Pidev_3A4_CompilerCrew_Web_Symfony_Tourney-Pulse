@@ -44,7 +44,7 @@ class Reservation
  * @Assert\NotNull(message="La date ne peut pas être vide")
  * @Assert\Expression(
  *     "value >= this.getCurrentDate()",
- *     message="La date doit être égale ou postérieure à la date actuelle"
+ *     message="La date doit être  postérieure à la date actuelle"
  * )
  */
 private $date;
