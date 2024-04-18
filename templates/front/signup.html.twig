@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		<meta name="description" content="Striker HTML5 Template">
+
+		<title>Tourney Pulse</title>
+
+		<!-- Favicon -->
+		<link
+		rel="shortcut icon" type="image/x-icon" href="assets/media/tournee_logo.png">
+
+		<!-- All CSS files -->
+		<link rel="stylesheet" href="assets/css/vendor/bootstrap.min.css">
+		<link rel="stylesheet" href="assets/css/vendor/font-awesome.css">
+		<link rel="stylesheet" href="assets/css/vendor/slick.css">
+		<link rel="stylesheet" href="assets/css/vendor/slick-theme.css">
+		<link rel="stylesheet" href="assets/css/app.css">
+
+		<script async src="https://www.googletagmanager.com/gtag/js?id=UA-266165434-1"></script>
+		<script>
+			window.dataLayer = window.dataLayer || [];
+function gtag() {
+dataLayer.push(arguments);
+}
+gtag('js', new Date());
+
+gtag('config', 'UA-266165434-1');
+		</script>
+
+
+	</head>
+
+	<body>
+		<!-- Back To Top Start -->
+		<a href="#main-wrapper" id="backto-top" class="back-to-top">
+			<i class="fas fa-angle-up"></i>
+		</a>
+		<!-- Main Wrapper Start -->
+		<div
+			id="main-wrapper" class="main-wrapper overflow-hidden">
+			<!-- signup area Start -->
+			<div class="signup p-96">
+				<div class="container">
+					<div class="heading mb-64">
+						<h2>Sign Up</h2>
+						<p>Join Tourney Pulse</p>
+					</div>
+					<div class="row">
+						<div class="container">
+							<div class="row justify-content-center">
+								<div class="col-xl-4 col-lg-6 col-md-8 offset-xl-2 offset-lg-3 offset-md-2 mb-xl-0 mb-64">
+									{% for flashMessage in app.flashes('error') %}
+										<div class="alert alert-danger" role="alert">
+											{{ flashMessage }}
+										</div>
+									{% endfor %}
+									<form method="post" action="{{ path('app_signup') }}" class="signup-form">
+										<div class="row">
+											<div class="col-sm-6">
+												<div class="form-group mb-32">
+													<input type="text" class="form-control" id="fname" name="fname" placeholder="First Name">
+												</div>
+											</div>
+											<div class="col-sm-6">
+												<div class="form-group mb-32">
+													<input type="text" class="form-control" id="lname" name="lname" placeholder="Last Name">
+												</div>
+											</div>
+										</div>
+										{% for flashMessage in app.flashes('error') %}
+											<div class="alert alert-danger" role="alert">
+												{{ flashMessage }}
+											</div>
+										{% endfor %}
+										<div class="form-group mb-32">
+											<input type="email" class="form-control" id="mail" name="email" placeholder="Email">
+										</div>
+										{% for flashMessage in app.flashes('error') %}
+											<div class="alert alert-danger" role="alert">
+												{{ flashMessage }}
+											</div>
+										{% endfor %}
+										<div class="form-group mb-32">
+											<input type="text" class="form-control" id="uname" name="uname" placeholder="Username">
+										</div>
+										{% for flashMessage in app.flashes('error') %}
+											<div class="alert alert-danger" role="alert">
+												{{ flashMessage }}
+											</div>
+										{% endfor %}
+										<div class="form-group mb-32">
+											<input type="text" class="form-control" id="number" name="number" placeholder="Phone number">
+										</div>
+										{% for flashMessage in app.flashes('error') %}
+											<div class="alert alert-danger" role="alert">
+												{{ flashMessage }}
+											</div>
+										{% endfor %}
+										<div class="form-group mb-32">
+											<input type="password" class="form-control" id="pas" name="password" placeholder="Password">
+										</div>
+										{% for flashMessage in app.flashes('error') %}
+											<div class="alert alert-danger" role="alert">
+												{{ flashMessage }}
+											</div>
+										{% endfor %}
+										<div class="form-group mb-32">
+											<input type="password" class="form-control" id="cpas" name="confirm_password" placeholder="Confirm Password">
+										</div>
+										<button type="submit" class="form-btn w-100 mb-32">CREATE ACCOUNT</button>
+										<p class="link">Already have an account?
+											<a href="{{ path('app_login') }}">Log in here.</a>
+										</p>
+									</form>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<!-- Jquery Js -->
+			<script src="assets/js/vendor/jquery-3.6.3.min.js"></script>
+			<script src="assets/js/vendor/bootstrap.min.js"></script>
+			<script src="assets/js/vendor/slick.min.js"></script>
+			<script src="assets/js/vendor/jquery-appear.js"></script>
+			<script src="assets/js/vendor/jquery-validator.js"></script>
+			<!-- Site Scripts -->
+			<script src="assets/js/app.js"></script>
+		</body>
+	</body>
+</html>
