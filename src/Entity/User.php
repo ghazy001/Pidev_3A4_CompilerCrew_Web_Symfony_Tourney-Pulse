@@ -20,7 +20,7 @@ class User implements UserInterface
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=false)
+     * @ORM\Column(type="string", length=255, nullable=True)
      * @Assert\NotBlank(message="Email is required.")
      * @Assert\Regex(
      *     pattern="/^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/",
@@ -31,8 +31,8 @@ class User implements UserInterface
 
     /**
      * @ORM\Column(type="string", length=255, nullable=false)
-     * @Assert\NotBlank
-     * @Assert\Length(min=6, max=255)
+     * @Assert\NotBlank(message="Password cannot be blank.")
+     * @Assert\Length(min=6, minMessage="Password must be at least {{ limit }} characters long.")
      */
     private $password;
 
@@ -51,7 +51,7 @@ class User implements UserInterface
      * @ORM\Column(type="string", length=2500, nullable=true)
      */
     private $otp;
-    
+
     /**
      * @ORM\Column(type="string", length=8, nullable=false)
      * @Assert\NotBlank(message="Phone number is required.")
@@ -99,7 +99,7 @@ class User implements UserInterface
      * )
      */
     private $username;
-    
+
     /**
      * @ORM\Column(type="boolean", nullable=false)
      */
@@ -109,13 +109,20 @@ class User implements UserInterface
     {
         return $this->id;
     }
+    public function setId(?int $id): self
+    {
+        $this->email = $id;
+
+        return $this;
+    }
+
 
     public function getEmail(): ?string
     {
         return $this->email;
     }
 
-    public function setEmail(string $email): self
+    public function setEmail(?string $email): self
     {
         $this->email = $email;
 
@@ -127,7 +134,7 @@ class User implements UserInterface
         return $this->password;
     }
 
-    public function setPassword(string $password): self
+    public function setPassword(?string $password): self
     {
         $this->password = $password;
 
@@ -139,7 +146,7 @@ class User implements UserInterface
         return $this->role;
     }
 
-    public function setRole(string $role): self
+    public function setRole(?string $role): self
     {
         $this->role = $role;
 
@@ -175,7 +182,7 @@ class User implements UserInterface
         return $this->number;
     }
 
-    public function setNumber(string $number): self
+    public function setNumber(?string $number): self
     {
         $this->number = $number;
 
@@ -187,7 +194,7 @@ class User implements UserInterface
         return $this->firstname;
     }
 
-    public function setFirstname(string $firstname): self
+    public function setFirstname(?string $firstname): self
     {
         $this->firstname = $firstname;
 
@@ -199,7 +206,7 @@ class User implements UserInterface
         return $this->lastname;
     }
 
-    public function setLastname(string $lastname): self
+    public function setLastname(?string $lastname): self
     {
         $this->lastname = $lastname;
 
@@ -211,7 +218,7 @@ class User implements UserInterface
         return $this->username;
     }
 
-    public function setUsername(string $username): self
+    public function setUsername(?string $username): self
     {
         $this->username = $username;
 

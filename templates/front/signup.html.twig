@@ -53,69 +53,75 @@ gtag('config', 'UA-266165434-1');
 						<div class="container">
 							<div class="row justify-content-center">
 								<div class="col-xl-4 col-lg-6 col-md-8 offset-xl-2 offset-lg-3 offset-md-2 mb-xl-0 mb-64">
-									{% for flashMessage in app.flashes('error') %}
-										<div class="alert alert-danger" role="alert">
-											{{ flashMessage }}
+
+
+									{{ form_start(form, {'attr': {'class': 'signup-form'}}) }}
+									{% for message in app.flashes('error') %}
+										<div class="alert alert-danger alert-dismissible fade show" role="alert">
+											{{ message }}
+											<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
 										</div>
 									{% endfor %}
-									<form method="post" action="{{ path('app_signup') }}" class="signup-form">
-										<div class="row">
-											<div class="col-sm-6">
-												<div class="form-group mb-32">
-													<input type="text" class="form-control" id="fname" name="fname" placeholder="First Name">
-												</div>
-											</div>
-											<div class="col-sm-6">
-												<div class="form-group mb-32">
-													<input type="text" class="form-control" id="lname" name="lname" placeholder="Last Name">
-												</div>
-											</div>
+
+
+									<div class="form-group mb-32">
+										{{ form_row(form.firstName, {'attr': {'class': 'form-control', 'placeholder': 'First Name'}}) }}
+										<div class="error-message">
+											{% if form_errors(form.firstName) %}
+												{{ form_errors(form.firstName) }}
+											{% endif %}
 										</div>
-										{% for flashMessage in app.flashes('error') %}
-											<div class="alert alert-danger" role="alert">
-												{{ flashMessage }}
-											</div>
-										{% endfor %}
-										<div class="form-group mb-32">
-											<input type="email" class="form-control" id="mail" name="email" placeholder="Email">
+									</div>
+								</div>
+								<div class="col-sm-6">
+									<div class="form-group mb-32">
+										{{ form_row(form.lastName, {'attr': {'class': 'form-control', 'placeholder': 'Last Name'}}) }}
+										<div class="error-message">
+											{% if form_errors(form.lastName) %}
+												{{ form_errors(form.lastName) }}
+											{% endif %}
 										</div>
-										{% for flashMessage in app.flashes('error') %}
-											<div class="alert alert-danger" role="alert">
-												{{ flashMessage }}
-											</div>
-										{% endfor %}
-										<div class="form-group mb-32">
-											<input type="text" class="form-control" id="uname" name="uname" placeholder="Username">
+									</div>
+
+									<div class="form-group mb-32">
+										{{ form_row(form.email, {'attr': {'class': 'form-control', 'placeholder': 'Email'}}) }}
+									</div>
+
+									<div class="form-group mb-32">
+										{{ form_row(form.username, {'attr': {'class': 'form-control', 'placeholder': 'Username'}}) }}
+									</div>
+
+									<div class="form-group mb-32">
+										{{ form_row(form.number, {'attr': {'class': 'form-control', 'placeholder': 'Phone number'}}) }}
+									</div>
+
+									<div class="form-group mb-32">
+										{{ form_label(form.password.first, 'Password') }}
+										{{ form_widget(form.password.first, {'attr': {'class': 'form-control password-input', 'placeholder': 'Password'}}) }}
+										<div class="error-message">
+											{% if form_errors(form.password.first) %}
+												{{ form_errors(form.password.first) }}
+											{% endif %}
 										</div>
-										{% for flashMessage in app.flashes('error') %}
-											<div class="alert alert-danger" role="alert">
-												{{ flashMessage }}
-											</div>
-										{% endfor %}
-										<div class="form-group mb-32">
-											<input type="text" class="form-control" id="number" name="number" placeholder="Phone number">
+									</div>
+
+									<div class="form-group mb-32">
+										{{ form_label(form.password.second, 'Repeat Password') }}
+										{{ form_widget(form.password.second, {'attr': {'class': 'form-control password-input', 'placeholder': 'Repeat Password'}}) }}
+										<div class="error-message">
+											{% if form_errors(form.password.second) %}
+												{{ form_errors(form.password.second) }}
+											{% endif %}
 										</div>
-										{% for flashMessage in app.flashes('error') %}
-											<div class="alert alert-danger" role="alert">
-												{{ flashMessage }}
-											</div>
-										{% endfor %}
-										<div class="form-group mb-32">
-											<input type="password" class="form-control" id="pas" name="password" placeholder="Password">
-										</div>
-										{% for flashMessage in app.flashes('error') %}
-											<div class="alert alert-danger" role="alert">
-												{{ flashMessage }}
-											</div>
-										{% endfor %}
-										<div class="form-group mb-32">
-											<input type="password" class="form-control" id="cpas" name="confirm_password" placeholder="Confirm Password">
-										</div>
-										<button type="submit" class="form-btn w-100 mb-32">CREATE ACCOUNT</button>
-										<p class="link">Already have an account?
-											<a href="{{ path('app_login') }}">Log in here.</a>
-										</p>
-									</form>
+									</div>
+
+									
+									<button type="submit" class="form-btn w-100 mb-32">CREATE ACCOUNT</button>
+									{{ form_end(form) }}
+									<p class="link">Already have an account?
+										<a href="{{ path('app_login') }}">Log in here.</a>
+									</p>
+
 								</div>
 							</div>
 						</div>

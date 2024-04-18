@@ -7,6 +7,7 @@
 		<title>Edit Page</title>
 		<link rel="shortcut icon" type="image/x-icon" href="{{asset('assets/media/tournee_logo.png')}}">
 		<link rel="stylesheet" href="{{asset('assets/css/styles.min.css')}}"/>
+
 	</head>
 
 	<body>
@@ -93,43 +94,69 @@
 								<div class="form-row">
 									<div class="form-group col-md-6">
 										{{ form_row(form.email, {'attr': {'class': 'form-control'}}) }}
+										<div class="error-message">
+											{% if form_errors(form.email) %}
+												{{ form_errors(form.email) }}
+											{% endif %}
+										</div>
 									</div>
 								</div>
 
 								<div class="form-row">
 									<div class="form-group col-md-6">
 										{{ form_row(form.password, {'attr': {'class': 'form-control'}}) }}
+										<div class="error-message">
+											{% if form_errors(form.password) %}
+												{{ form_errors(form.password) }}
+											{% endif %}
+										</div>
 									</div>
 								</div>
 
 								<div class="form-row">
 									<div class="form-group col-md-6">
 										{{ form_row(form.role, {'attr': {'class': 'form-control'}}) }}
+										<div class="error-message">
+											{% if form_errors(form.role) %}
+												{{ form_errors(form.role) }}
+											{% endif %}
+										</div>
 									</div>
 								</div>
 
 								<div class="form-row">
 									<div class="form-group col-md-6">
 										{{ form_row(form.number, {'attr': {'class': 'form-control'}}) }}
+										<div class="error-message">
+											{% if form_errors(form.number) %}
+												{{ form_errors(form.number) }}
+											{% endif %}
+										</div>
 									</div>
 								</div>
 
 								<div class="form-row">
 									<div class="form-group col-md-6">
 										{{ form_row(form.username, {'attr': {'class': 'form-control'}}) }}
+										<div class="error-message">
+											{% if form_errors(form.username) %}
+												{{ form_errors(form.username) }}
+											{% endif %}
+										</div>
 									</div>
 								</div>
-								<button type="submit" class="btn btn-primary">Save Changes</button>
-
-								<a href="{{ path('user_ban', {'id': user.id}) }}" class="btn btn-danger">Ban</a>
-
-								{{ form_end(form) }}
 							</div>
 						</div>
 					</div>
 				</div>
 
+				<button type="submit" class="btn btn-primary">Save Changes</button>
+
+				{{ form_end(form) }}
+				<form method="post" action="{{ path('user_ban', {'id': user.id}) }}">
+					<button type="submit" class="btn btn-danger">Bann</button>
+				</form>
 			</div>
-		</body>
+		</div>
 	</body>
-</html></div><script src="{{asset('assets/libs/jquery/dist/jquery.min.js')}}"></script><script src="{{asset('assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js')}}"></script><script src="{{asset('assets/js/sidebarmenu.js')}}"></script><script src="{{asset('assets/js/app.min.js')}}"></script><script src="{{asset('assets/libs/simplebar/dist/simplebar.js')}}"></script></body></html>
+</html></div></div></div></body></body></html></div><script src="{{asset('assets/libs/jquery/dist/jquery.min.js')}}"></script><script src="{{asset('assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js')}}"></script><script src="{{asset('assets/js/sidebarmenu.js')}}"></script><script src="{{asset('assets/js/app.min.js')}}"></script><script src="{{asset('assets/libs/simplebar/dist/simplebar.js')}}"></script></body></html>

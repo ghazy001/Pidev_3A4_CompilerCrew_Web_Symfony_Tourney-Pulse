@@ -66,12 +66,22 @@ class BackController extends AbstractController
     /**
      * @Route("/user/{id}/ban", name="user_ban", methods={"GET", "POST"})
      */
-    public function ban(Request $request, User $user): Response
+    public function ban(Request $request, int $id): Response
     {
+        // Get the user repository
+        $userRepository = $this->getDoctrine()->getRepository(User::class);
+        
+        // Find the user by ID
+        $user = $userRepository->find($id);
+
+        // Check if the user exists
+        if (!$user) {
+            throw $this->createNotFoundException('User not found');
+        }
+
         // Check if the form was submitted with the correct method
         if ($request->isMethod('POST')) {
-            // Implement your banning logic here
-            // For example, you can update the user's status or perform any other necessary actions
+            // Get the entity manager
             $entityManager = $this->getDoctrine()->getManager();
 
             // Set user as banned by setting the isBanned property to true
@@ -91,4 +101,5 @@ class BackController extends AbstractController
         // If the form was not submitted with the correct method, redirect back to the user's edit page
         return $this->redirectToRoute('user_edit', ['id' => $user->getId()]);
     }
+
 }
