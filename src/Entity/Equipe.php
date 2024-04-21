@@ -24,6 +24,10 @@ class Equipe
 
     #[ORM\Column(length: 255)]
     #[Assert\NotBlank(message:"nom is required")]
+    #[Assert\Regex(
+        pattern: "/^[a-zA-Z][a-zA-Z\s]*$/",
+        message: "Only alphabetic characters and spaces are allowed, and spaces are not allowed at the beginning"
+    )]
     private ?string $nom = null;
 
 

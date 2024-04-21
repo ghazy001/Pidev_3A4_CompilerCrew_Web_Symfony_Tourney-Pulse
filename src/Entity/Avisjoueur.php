@@ -17,6 +17,10 @@ class Avisjoueur
 
     #[ORM\Column(length: 255)]
     #[Assert\NotBlank(message:"Commentaire is required")]
+    #[Assert\Regex(
+        pattern: "/^[a-zA-Z0-9\s]*$/",
+        message: "Only alphanumeric characters and spaces are allowed"
+    )]
     private ?string $commentaire = null;
 
     #[ORM\Column]

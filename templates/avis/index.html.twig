@@ -1,17 +1,18 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <!-- players area Start -->
+
 
     <div class="players-grid p-96" style="margin-top: 100px; padding-left: 180px">
 
-        <button class="translateButton" data-url="{{ path('avis') }}" style="display: block" >Translate 🇫🇷</button>
+        <button class="translateButton" data-url="{{ path('avis') }}" style="display: block" >🇫🇷</button>
 
         {% for donnee in donnees %}
             <div class="flip-card">
                 <div class="flip-card-inner">
                     <div class="flip-card-front">
-                        <p class="title">{{ donnee.user.firstname}}</p>
+                        <p class="title">{{ donnee.user.firstname }}</p>
+                        <img src="/player.png" style="align-content: center">
                         <p>{{ donnee.dateavis|date('Y-m-d') }}</p>
                     </div>
                     <div class="flip-card-back">
@@ -25,7 +26,6 @@
                                 {% endif %}
                             {% endfor %}
                         </p>
-
                     </div>
                 </div>
             </div>
@@ -34,14 +34,13 @@
 
 
     <style>
-
         .translateButton {
             align-items: center;
             appearance: none;
             background-image: radial-gradient(100% 100% at 100% 0, #5adaff 0, #5468ff 100%);
             border: 0;
             border-radius: 6px;
-            box-shadow: rgba(45, 35, 66, .4) 0 2px 4px,rgba(45, 35, 66, .3) 0 7px 13px -3px,rgba(58, 65, 111, .5) 0 -3px 0 inset;
+            box-shadow: rgba(45, 35, 66, .4) 0 2px 4px, rgba(45, 35, 66, .3) 0 7px 13px -3px, rgba(58, 65, 111, .5) 0 -3px 0 inset;
             box-sizing: border-box;
             color: #fff;
             cursor: pointer;
@@ -63,7 +62,8 @@
             touch-action: manipulation;
             white-space: nowrap;
             will-change: box-shadow,transform;
-            font-size: 18px;}
+            font-size: 18px;
+        }
 
         .translateButton:focus {
             box-shadow: #3c4fe0 0 0 0 1.5px inset, rgba(45, 35, 66, .4) 0 2px 4px, rgba(45, 35, 66, .3) 0 7px 13px -3px, #3c4fe0 0 -3px 0 inset;
@@ -79,11 +79,10 @@
             transform: translateY(2px);
         }
 
-
         .flip-card {
             background-color: transparent;
-            width: 190px;
-            height: 254px;
+            width: 200px;
+            height: 300px;
             perspective: 1000px;
             font-family: sans-serif;
             display: inline-block;
@@ -92,7 +91,7 @@
         }
 
         .title {
-            font-size: 1.5em;
+            font-size: 1.2em;
             font-weight: 900;
             text-align: center;
             margin: 0;
@@ -121,21 +120,20 @@
             height: 100%;
             -webkit-backface-visibility: hidden;
             backface-visibility: hidden;
-            border: 1px solid #4CAF50; /* Green border */
-            border-radius: 1rem;
+            border: 2px solid #0056b3; /* Blue border */
+            border-radius: 10px; /* Rounded corners */
         }
 
         .flip-card-front {
-            background: linear-gradient(120deg, #7bed9f 60%, #82ccdd 88%, #6ab1d7 40%, #85c1e9 48%); /* Green gradient */
-            color: whitesmoke; /* Green text color */
+            background-color: #f8f9fa; /* Light gray background */
+            color: #343a40; /* Dark text color */
         }
 
         .flip-card-back {
-            background: linear-gradient(120deg, #2ecc71 30%, #4CAF50 88%, #7bed9f 40%, #58d68d 78%); /* Green gradient */
-            color: white;
+            background-color: #343a40; /* Dark background */
+            color: #f8f9fa; /* Light text color */
             transform: rotateY(180deg);
         }
-
     </style>
     <script>
         document.querySelectorAll('.translateButton').forEach(function(button) {

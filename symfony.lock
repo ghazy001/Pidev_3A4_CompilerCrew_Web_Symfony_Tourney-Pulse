@@ -41,6 +41,9 @@
             "./migrations/.gitignore"
         ]
     },
+    "knplabs/knp-paginator-bundle": {
+        "version": "v5.9.0"
+    },
     "php-http/discovery": {
         "version": "1.19",
         "recipe": {

@@ -12,6 +12,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ManagerRegistry;
 use HttpException;
 use HttpRequest;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpClient\HttpClient;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
@@ -39,9 +40,16 @@ class EquipeController extends AbstractController
 
 
     #[Route('/equipe', name: 'equipe')]
-    public function index(EquipeRepository $equipeRepository): Response
+    public function index(EquipeRepository $equipeRepository,Request $request,PaginatorInterface $paginator): Response
     {
         $donnees = $equipeRepository->findAll();
+
+        $donnees = $paginator->paginate(
+            $donnees, /* query NOT result */
+            $request->query->getInt('page', 1),
+            8
+        );
+
 
 
         return $this->render('equipe/index.html.twig', [

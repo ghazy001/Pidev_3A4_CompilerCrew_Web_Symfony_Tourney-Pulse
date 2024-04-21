@@ -9,7 +9,7 @@
 
         <div class="container">
             <div class="heading mb-64">
-                <p>Teams</p>
+                <p>Teams : ({{ donnees.getTotalItemCount }})</p>
             </div>
             <div class="row">
                 {% for donnee in donnees %}
@@ -44,4 +44,6 @@
         </div>
 
     </div>
+   <div class="pagination"> {{ knp_pagination_render(donnees) }} </div>
+    
 {% endblock %}

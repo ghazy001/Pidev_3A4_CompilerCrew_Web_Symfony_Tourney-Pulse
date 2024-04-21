@@ -17,6 +17,7 @@
         "doctrine/doctrine-migrations-bundle": "^3.3",
         "doctrine/orm": "^2.18.0",
         "guzzlehttp/guzzle": "^7.8",
+        "knplabs/knp-paginator-bundle": "*",
         "nyholm/psr7": "^1.8",
         "openai-php/client": "^0.8.4",
         "phpdocumentor/reflection-docblock": "^5.3",
