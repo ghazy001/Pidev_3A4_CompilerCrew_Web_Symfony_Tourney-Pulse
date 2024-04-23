@@ -1,6 +1,0 @@
- <div style="margin-top: 300px ">
-<form method="post" action="{{ path('Rec_delete', {'idRec': reclamation.idRec}) }}" onsubmit="return confirm('Are you sure you want to delete this item?');">
-    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ reclamation.idRec) }}">
-    <button class="btn">Delete</button>
-</form>
-</div>

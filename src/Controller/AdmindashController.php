@@ -36,6 +36,8 @@ class AdmindashController extends AbstractController
     public function new(Request $request, EntityManagerInterface $entityManager): Response
     {
         $reclamation = new Reclamation();
+        $reclamation->setDateRec(new \DateTime());
+
         $form = $this->createForm(ReclamationType::class, $reclamation);
         $form->handleRequest($request);
 
@@ -132,7 +134,7 @@ class AdmindashController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->flush();
 
-            return $this->redirectToRoute('app_messages_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('SASA', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('admindash/editM.html.twig', [

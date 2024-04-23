@@ -3,9 +3,11 @@
 namespace App\Form;
 
 use App\Entity\Messages;
+use App\Entity\Reclamation;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 
 class MessagesType extends AbstractType
 {
@@ -17,6 +19,7 @@ class MessagesType extends AbstractType
             ->add('sender')
             ->add('receiver')
             ->add('reclamation')
+
         ;
     }
 

@@ -13,7 +13,7 @@ use Symfony\Component\Routing\Annotation\Route;
 #[Route('/messages')]
 class MessagesController extends AbstractController
 {
-    #[Route('/', name: 'app_messages_index', methods: ['GET'])]
+    #[Route('/sasa', name: 'mymain', methods: ['GET'])]
     public function index(EntityManagerInterface $entityManager): Response
     {
         $messages = $entityManager
@@ -36,7 +36,7 @@ class MessagesController extends AbstractController
             $entityManager->persist($message);
             $entityManager->flush();
 
-            return $this->redirectToRoute('app_messages_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('mymain', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('messages/new.html.twig', [
@@ -62,7 +62,7 @@ class MessagesController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->flush();
 
-            return $this->redirectToRoute('app_messages_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('mymain', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('messages/edit.html.twig', [
@@ -79,6 +79,6 @@ class MessagesController extends AbstractController
             $entityManager->flush();
         }
 
-        return $this->redirectToRoute('app_messages_index', [], Response::HTTP_SEE_OTHER);
+        return $this->redirectToRoute('mymain', [], Response::HTTP_SEE_OTHER);
     }
 }

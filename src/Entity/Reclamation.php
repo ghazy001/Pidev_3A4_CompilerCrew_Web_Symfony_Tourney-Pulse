@@ -31,12 +31,13 @@ class Reclamation
     private $dateRec;
 
     /**
-     * @var string
-     * @Assert\NotBlank(message="Le champ 'object' ne peut pas être vide.")
-     * @ORM\Column(name="object", type="string", length=255, nullable=false)
-     */
-    private ?string $object;
-
+ * @var string
+ * @Assert\NotBlank(message="Le champ 'object' ne peut pas être vide.")
+ 
+ * )
+ * @ORM\Column(name="object", type="string", length=255, nullable=false)
+ */
+private ?string $object;
     /**
      * @var string
      * @Assert\NotBlank(message="Le champ 'reclamation' ne peut pas être vide.")
