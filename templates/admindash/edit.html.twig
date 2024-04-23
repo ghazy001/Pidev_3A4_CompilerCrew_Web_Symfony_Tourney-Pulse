@@ -1,0 +1,21 @@
+{% extends 'admindash/index.html.twig' %}
+
+{% block title %}Edit Reclamation{% endblock %}
+
+{% block body %}
+    <h1>Edit Reclamation</h1>
+     <div style="margin-top: 100px;">
+
+
+    {{ include('admindash/_form.html.twig', {'button_label': 'Update'}) }}
+        </div>
+
+ <div style="margin-top: 50px;">
+
+    <a href="{{ path('Rec') }}">back to list</a>
+     <div style="margin-top: 50px;">
+
+
+    {{ include('admindash/_delete_form.html.twig') }}
+    </div>
+{% endblock %}

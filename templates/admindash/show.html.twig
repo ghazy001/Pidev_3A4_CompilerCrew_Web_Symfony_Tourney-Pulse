@@ -1,0 +1,45 @@
+{% extends 'admindash/index.html.twig' %}
+
+{% block title %}Reclamation{% endblock %}
+
+{% block body %}
+    <h1>Reclamation</h1>
+
+
+
+    
+     <div style="margin-top: 300px">
+    <table class="table">
+        <tbody>
+           
+            <tr>
+                <th>DateRec</th>
+                <td>{{ reclamation.dateRec ? reclamation.dateRec|date('Y-m-d') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Object</th>
+                <td>{{ reclamation.object }}</td>
+            </tr>
+            <tr>
+                <th>Reclamation</th>
+                <td>{{ reclamation.reclamation }}</td>
+            </tr>
+            <tr>
+                <th>Email</th>
+                <td>{{ reclamation.email }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+  
+
+    <a href="{{ path('Rec') }}">back to list</a>
+
+    <a href="{{ path('Rec_Edit', {'idRec': reclamation.idRec}) }}">edit</a>
+
+      
+
+    {{ include('admindash/_delete_form.html.twig') }}
+
+      </div>
+{% endblock %}

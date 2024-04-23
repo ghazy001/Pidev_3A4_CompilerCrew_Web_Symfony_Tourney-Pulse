@@ -1,0 +1,12 @@
+<style>
+    .custom-btn {
+        background-color: #B0413E;
+        color: #ffffff; /* Couleur du texte */
+        border-color: #5d87ff; /* Couleur de la bordure */
+    }
+</style>
+<form method="post" action="{{ path('Rec_delete', {'idRec': reclamation.idRec}) }}" onsubmit="return confirm('Are you sure you want to delete this item?');">
+    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ reclamation.idRec) }}">
+    <button type="submit" class="btn btn-danger">Delete</button>
+
+</form>

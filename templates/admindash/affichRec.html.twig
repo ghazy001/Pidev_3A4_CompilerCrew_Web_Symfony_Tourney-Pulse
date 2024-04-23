@@ -1,0 +1,46 @@
+{% extends 'admindash/index.html.twig' %}
+
+{% block title %}Reclamation index{% endblock %}
+
+{% block body %}
+    <h1>Reclamation index</h1>
+
+
+
+  <div style="margin-top: 300px">
+    <table class="table">
+        <thead>
+            <tr>
+                
+                <th>DateRec</th>
+                <th>Object</th>
+                <th>Reclamation</th>
+                <th>Email</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for reclamation in reclamations %}
+            <tr>
+               
+                <td>{{ reclamation.dateRec ? reclamation.dateRec|date('Y-m-d') : '' }}</td>
+                <td>{{ reclamation.object }}</td>
+                <td>{{ reclamation.reclamation }}</td>
+                <td>{{ reclamation.email }}</td>
+                <td>
+                <a></a>
+                    <a href="{{ path('reclamation_show', {'idRec': reclamation.idRec}) }}">show</a>
+                    <a href="{{ path('Rec_Edit', {'idRec': reclamation.idRec}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="6">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    </div>
+
+    <a href="{{ path('Rec_new') }}">Create new</a>
+{% endblock %}
