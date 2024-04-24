@@ -3,9 +3,16 @@
 {% block title %}Stade Index{% endblock %}
 
 {% block content %}
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css"/>
+
     <section class="p-96">
         <div class="container">
             <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Stades /</span> Browse</h4>
+
+            <div class="search-container">
+                <input type="text" id="searchBox" class="search-input" placeholder="Enter location">
+                <button onclick="searchLocation()" class="search-button">Search</button>
+            </div>
 
             <div class="shop-grid">
                 <div class="row">
@@ -31,63 +38,15 @@
                                 {% else %}
                                     <img src="{{ asset('uploads/image.png') }}" alt="Default Image" class="d-block w-100">
                                 {% endif %}
-                       <style>
-    .stade-info {
-        text-align: center;
-    }
-
-    .info-row {
-        display: inline-block;
-        margin: 0 10px;
-        transition: transform 0.3s ease-in-out, color 0.3s ease-in-out;
-    }
-
-    .info-row:hover {
-        transform: scale(1.1);
-        color:  #2ecc71; /* Couleur de transition au survol */
-    }
-
-    .label {
-        font-weight: bold;
-    }
-
-    .nom,
-    .lieu,
-    .capacite,
-    .numero {
-        display: block;
-        margin-bottom: 10px;
-    }
-</style>
-
-<div class="stade-info">
-
-
-    <div class="info-row nom">
-        <span class="label">Nom:</span>
-        <span class="value">{{ stade.nom }}</span>
-    </div>
-    <div class="info-row lieu">
-        <span class="label">Lieu:</span>
-        <span class="value">{{ stade.lieu }}</span>
-    </div>
-    <div class="info-row capacite">
-        <span class="label">Capacité:</span>
-        <span class="value">{{ stade.capacity }}</span>
-    </div>
-    <div class="info-row numero">
-        <span class="label">Numéro:</span>
-        <span class="value">{{ stade.numero }}</span>
-    </div>
-</div>
-
-
-    
-                                <div class="cart-btn">
-                                    <a href="{{ path('app_stade_reservation_new', {'stadeId': stade.id}) }}" class=" cta-2"><span class="span">Reserver <i class="far fa-chevron-right"></i></span></a>
-                               
+                                <div class="stade-info">
+                                    <div class="info-row nom"><span class="label">Nom:</span><span class="value">{{ stade.nom }}</span></div>
+                                    <div class="info-row lieu"><span class="label">Lieu:</span><span class="value">{{ stade.lieu }}</span></div>
+                                    <div class="info-row capacite"><span class="label">Capacité:</span><span class="value">{{ stade.capacity }}</span></div>
+                                    <div class="info-row numero"><span class="label">Numéro:</span><span class="value">{{ stade.numero }}</span></div>
                                 </div>
-                                
+                                <div class="cart-btn">
+                                    <a href="{{ path('app_stade_reservation_new', {'stadeId': stade.id}) }}" class="cta-2"><span class="span">Reserve <i class="far fa-chevron-right"></i></span></a>
+                                </div>
                             </div>
                         </div>
                     {% else %}
@@ -97,6 +56,83 @@
                     {% endfor %}
                 </div>
             </div>
+            <div id="mapid" style="width: 100%; height: 400px;"></div>
+
         </div>
     </section>
+    <style>
+        /* General Container Styling */
+        .search-container {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
+
+        /* Styling for the Search Input */
+        .search-input {
+            padding: 10px 15px;
+            font-size: 16px;
+            border: 2px solid #ccc;
+            border-radius: 5px 0 0 5px; /* Rounded left corners */
+            width: 300px; /* You can adjust width as needed */
+        }
+
+        /* Styling for the Search Button */
+        .search-button {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #0056b3; /* Primary color for the button */
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 0 5px 5px 0; /* Rounded right corners */
+            transition: background-color 0.3s;
+        }
+
+        .search-button:hover {
+            background-color: #004494; /* Darker shade for hover effect */
+        }
+    </style>
+
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var map = L.map('mapid').setView([51.505, -0.09], 2); // Start with a global view
+
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors'
+            }).addTo(map);
+
+            var markers = [];
+
+            {% for stade in stades %}
+            var address = "{{ stade.lieu|e('js') }}";
+            fetch('https://nominatim.openstreetmap.org/search?format=json&q=' + encodeURIComponent(address))
+                .then(response => response.json())
+                .then(data => {
+                    if (data.length > 0) {
+                        var lat = data[0].lat;
+                        var lon = data[0].lon;
+                        var marker = L.marker([lat, lon]).addTo(map);
+                        marker.bindPopup("<b>{{ stade.nom|e('js') }}</b><br>{{ stade.lieu|e('js') }}");
+                        markers.push({marker: marker, lieu: "{{ stade.lieu|e('js') }}"});
+                    }
+                });
+            {% endfor %}
+
+            window.searchLocation = function() {
+                var inputLocation = document.getElementById('searchBox').value.toLowerCase();
+                var found = false;
+                markers.forEach(function(item) {
+                    if (item.lieu.toLowerCase().includes(inputLocation)) {
+                        map.setView(item.marker.getLatLng(), 10);
+                        item.marker.openPopup();
+                        found = true;
+                    }
+                });
+                if (!found) alert('No matching location found.');
+            };
+        });
+    </script>
 {% endblock %}
