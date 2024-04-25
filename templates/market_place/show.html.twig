@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Product Details{% endblock %}
+
+{% block body %}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-...." crossorigin="anonymous" />
+    <div style="padding: 12rem;">
+        <h1>{{ market_place.ProdName }}</h1>
+
+        <p>{{ market_place.ProdDescription }}</p>
+        <p>Price: {{ market_place.Price }}</p>
+        <p>Quantity: {{ market_place.Quantity }}</p>
+        <p>Date: {{ market_place.DateProd ? market_place.DateProd|date('Y-m-d') : '' }}</p>
+
+        <img src="data:image/jpeg;base64,{{ image }}" alt="{{ market_place.ProdName }}" style="width: 300px; height: 300px;">
+
+        <!-- Average Rating -->
+        <p class="average-rating">Average Rating:
+            {% for i in 1..5 %}
+                {% if i <= averageRating %}
+                    <i class="fas fa-star"></i>
+                {% elseif i <= averageRating + 0.5 %}
+                    <i class="fas fa-star-half-alt"></i>
+                {% else %}
+                    <i class="far fa-star"></i>
+                {% endif %}
+            {% endfor %}
+        </p>
+        <!-- Stars -->
+
+        <!-- Review Form -->
+        <h2>Leave a Review</h2>
+        {{ include('avis/_form.html.twig', {'form': form}) }}
+
+
+        <a href="{{ path('app_market_place_index') }}">Back to Product List</a>
+
+        {{ dump(averageRating) }}average rating
+        //test
+    </div>
+{% endblock %}

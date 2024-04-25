@@ -1,0 +1,56 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-...." crossorigin="anonymous" />
+    <div class="row" style="padding: 14rem;">
+        {% for market_place in market_places %}
+            <div class="col-md-4">
+                <div class="card mb-4 shadow-sm" style="width: 300px; height: 400px;">
+                    <img class="card-img-top" src="data:image/jpeg;base64,{{ market_place.Image|split(';')|last|split(',')|last }}" alt="{{ market_place.ProdName }}" style="width: 300px; height: 300px;">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ market_place.ProdName }}</h5>
+                        <p class="card-text">{{ market_place.ProdDescription }}</p>
+                        <p>
+                            {% if market_place.avis|length > 0 %}
+                            {% set totalRating = 0 %}
+                            {% set ratingCount = 0 %}
+
+                            {% for avis in market_place.avis %}
+                                {% set totalRating = totalRating + avis.note %}
+                                {% set ratingCount = ratingCount + 1 %}
+                            {% endfor %}
+
+                            {% set averageRating = totalRating / ratingCount %}
+
+                        <p class="average-rating">Average Rating:
+                            {% for i in 1..5 %}
+                                {% set averageRating = totalRating / ratingCount %}
+                                {% if i <= averageRating %}
+                                    <i class="fas fa-star"></i>
+                                {% elseif i <= averageRating + 0.5 %}
+                                    <i class="fas fa-star-half-alt"></i>
+                                {% else %}
+                                    <i class="far fa-star"></i>
+                                {% endif %}
+
+                            {% endfor %}
+                        </p>
+                        {% else %}
+                            No Reviews Assigned
+                        {% endif %}
+                        </p>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div class="btn-group">
+                                <a href="{{ path('app_market_place_show', { 'id': market_place.id }) }}" class="btn btn-sm btn-outline-secondary">View</a>
+                            </div>
+                            <div class="btn-group">
+                                <a href="{{ path('app_market_place_mail', { 'id': market_place.id }) }}" class="btn btn-sm btn-outline-secondary">Purchase</a>
+                            </div>
+                            <small class="text-muted">{{ market_place.Price }}</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}

@@ -1,0 +1,56 @@
+{% extends 'base1.html.twig' %}
+
+{% block title %}MarketPlace index{% endblock %}
+
+{% block body %}
+    <h1 style="padding-top: 4rem;">MarketPlace index</h1>
+
+    <table class="table" style="padding: 2rem;">
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>Price</th>
+            <th>Quantity</th>
+            <th>ProdName</th>
+            <th>ProdDescription</th>
+            <th>DateProd</th>
+            <th>Image</th>
+            <th>Avis</th>
+            <th>actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for market_place in market_places %}
+            <tr>
+                <td>{{ market_place.id }}</td>
+                <td>{{ market_place.Price }}</td>
+                <td>{{ market_place.Quantity }}</td>
+                <td>{{ market_place.ProdName }}</td>
+                <td>{{ market_place.ProdDescription }}</td>
+                <td>{{ market_place.DateProd ? market_place.DateProd|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ market_place.Image }}</td>
+                <td>
+                    {% if market_place.avis|length > 0 %}
+                        {% for avis in market_place.avis %}
+                            {{ avis.note }}
+                            {% if not loop.last %}, {% endif %}
+                        {% endfor %}
+                    {% else %}
+                        No Reviews Assigned
+                    {% endif %}
+                </td>
+                <td>
+                    <a href="{{ path('app_market_place_show', {'id': market_place.id}) }}">show</a>
+                    <a href="{{ path('app_market_place_edit', {'id': market_place.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="8">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_market_place_new') }}">Create new</a>
+{% endblock %}

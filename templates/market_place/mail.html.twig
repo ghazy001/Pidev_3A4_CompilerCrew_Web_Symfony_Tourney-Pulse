@@ -1,0 +1,70 @@
+{% extends 'base1.html.twig' %}
+
+{% block title %}Purchase Confirmation{% endblock %}
+
+{% block body %}
+    <div class="row" style="padding: 4rem;">
+        <h1>Purchase Confirmation</h1>
+        <p>Product Name: {{ marketPlace.ProdName }}</p>
+        <p>Price: {{ marketPlace.Price }}</p>
+        <p>Description: {{ marketPlace.ProdDescription }}</p>
+        <button id="sendEmailButton">Send Email</button>
+
+        <!-- Modal for writing email address -->
+        <div class="modal" tabindex="-1" id="emailModal">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <form id="emailForm">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Write Email</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="mb-3">
+                                <label for="emailTo" class="form-label">To:</label>
+                                <input type="email" class="form-control" id="emailTo" name="to" required>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-primary">Send</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <script>
+            // Handle the "Send Email" button click event
+            document.getElementById('sendEmailButton').addEventListener('click', function() {
+                // Show the email modal
+                var emailModal = new bootstrap.Modal(document.getElementById('emailModal'));
+                emailModal.show();
+            });
+
+            // Handle the email form submission
+            document.getElementById('emailForm').addEventListener('submit', function(event) {
+                // Prevent the default form submission behavior
+                event.preventDefault();
+
+                // Get the email address from the form
+                var emailTo = document.getElementById('emailTo').value;
+
+                // Send the AJAX request to send the email
+                var xhr = new XMLHttpRequest();
+                xhr.open('POST', '{{ path('app_market_place_mail_ajax', {'id': marketPlace.id}) }}');
+                xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+                xhr.onload = function() {
+                    if (xhr.status === 200 && xhr.responseText === '{"success":true}') {
+                        // Email sent successfully
+                        alert('Email sent successfully!');
+                    } else {
+                        // Email sending failed
+                        alert('Error sending email.');
+                    }
+                };
+                xhr.send('to=' + encodeURIComponent(emailTo));
+            });
+        </script>
+    </div>
+{% endblock %}
