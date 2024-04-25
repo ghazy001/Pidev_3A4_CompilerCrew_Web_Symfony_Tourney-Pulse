@@ -27,6 +27,16 @@ use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 use Symfony\Component\HttpFoundation\StreamedResponse;
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 
+
+/*
+   *
+   *
+   * @author : ghazi saoudi
+   *
+   *
+   *
+   */
+
 class EquipeController extends AbstractController
 {
 
@@ -176,7 +186,7 @@ class EquipeController extends AbstractController
 
     public function SendSms()
     {
-        $sid = "";
+        $sid = "AC4d1d41f7d616d4a60ac222a861f9a695";
         $token = "";
         $twilio = new Client($sid, $token);
 

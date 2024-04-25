@@ -8,6 +8,16 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
+
+/*
+   *
+   *
+   * @author : ghazi saoudi
+   *
+   *
+   *
+   */
+
 class ChatgptController extends AbstractController
 {
     #[Route('/chatgpt', name: 'app_chatgpt')]
