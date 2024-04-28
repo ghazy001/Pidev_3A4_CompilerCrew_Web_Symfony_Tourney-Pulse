@@ -14,11 +14,11 @@
 
   <!-- All CSS files -->
   {% block css %}
-  <link rel="stylesheet" href="{{asset('assets/css/vendor/bootstrap.min.css')}}" />
-  <link rel="stylesheet" href="{{asset('assets/css/vendor/font-awesome.css')}}" />
-  <link rel="stylesheet" href="{{asset('assets/css/vendor/slick.css')}}" />
-  <link rel="stylesheet" href="{{asset('assets/css/vendor/slick-theme.css')}}" />
-  <link rel="stylesheet" href="{{asset('assets/css/app.css')}}" />
+    <link rel="stylesheet" href="{{asset('assets/css/vendor/bootstrap.min.css')}}" />
+    <link rel="stylesheet" href="{{asset('assets/css/vendor/font-awesome.css')}}" />
+    <link rel="stylesheet" href="{{asset('assets/css/vendor/slick.css')}}" />
+    <link rel="stylesheet" href="{{asset('assets/css/vendor/slick-theme.css')}}" />
+    <link rel="stylesheet" href="{{asset('assets/css/app.css')}}" />
   {% endblock %}
 
 
@@ -30,786 +30,600 @@
 
     gtag('config', 'UA-266165434-1');
   </script>
-  
+
 </head>
 
 <body>
 
 
-  <!-- Preloader -->
-  <div id="preloader">
-      <div class="main-fader" responsive-height-comments>
-          <div class="loader">
-              <svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 164.83 151.5">
-                  <path class="path-0" d="M117.24,69.24A8,8,0,0,0,115.67,67c-4.88-4-9.8-7.89-14.86-11.62A4.93,4.93,0,0,0,96.93,55c-5.76,1.89-11.4,4.17-17.18,6a4.36,4.36,0,0,0-3.42,4.12c-1,6.89-2.1,13.76-3,20.66a4,4,0,0,0,1,3.07c5.12,4.36,10.39,8.61,15.68,12.76a3.62,3.62,0,0,0,2.92.75c6.29-2.66,12.52-5.47,18.71-8.36a3.49,3.49,0,0,0,1.68-2.19c1.34-7.25,2.54-14.55,3.9-22.58Z" fill="#000" />
-                  <path class="path-1" d="M97.55,38.68A43.76,43.76,0,0,1,98,33.44c.41-2.36-.5-3.57-2.57-4.64C91.1,26.59,87,24,82.66,21.82a6.18,6.18,0,0,0-4-.71C73.45,22.55,68.32,24.25,63.22,26c-3.63,1.21-6.08,3.35-5.76,7.69a26.67,26.67,0,0,1-.6,4.92c-1.08,8.06-1.08,8.08,5.86,11.92,3.95,2.19,7.82,5.75,11.94,6.08s8.76-2.41,13.12-3.93c9.33-3.29,9.33-3.3,9.78-14Z" fill="#000" />
-                  <path class="path-2" d="M66.11,126.56c5.91-.91,11.37-1.7,16.81-2.71a3.3,3.3,0,0,0,1.87-2.17c1-4.06,1.73-8.19,2.84-12.24.54-2-.11-3-1.55-4.15-5-4-9.9-8.12-15-12a6.19,6.19,0,0,0-4.15-1.1c-5.35.66-10.7,1.54-16,2.54A4,4,0,0,0,48.34,97a109.13,109.13,0,0,0-3,12.19,4.47,4.47,0,0,0,1.34,3.6c5.54,4.36,11.23,8.53,16.91,12.69a10.84,10.84,0,0,0,2.57,1.11Z" fill="#000" />
-                  <path class="path-3" d="M127.42,104.12c4.1-2.1,8-3.93,11.72-6a6,6,0,0,0,2.27-3,58.22,58.22,0,0,0,3.18-29.92c-.26-1.7-8-7.28-9.71-6.85A5,5,0,0,0,133,59.65c-2.81,2.49-5.71,4.88-8.33,7.56a9.46,9.46,0,0,0-2.47,4.4c-1.29,6.49-2.38,13-3.35,19.55a5.73,5.73,0,0,0,.83,3.91c2.31,3.08,5,5.88,7.7,9Z" fill="#000" />
-                  <path class="path-4" d="M52.58,29.89c-2.15-.36-3.78-.54-5.39-.9-2.83-.64-4.92.1-7,2.32A64.1,64.1,0,0,0,26.09,54.64c-2.64,7.92-2.62,7.84,5.15,10.87,1.76.69,2.73.45,3.93-1C39.79,59,44.54,53.65,49.22,48.2a4.2,4.2,0,0,0,1.13-2c.8-5.32,1.49-10.68,2.24-16.34Z" fill="#000" />
-                  <path class="path-5" fill="#000" d="M23,68.13c0,2.51,0,4.7,0,6.87a60.49,60.49,0,0,0,9.75,32.15c1.37,2.13,6.4,3,7,1.2,1.55-5,2.68-10.2,3.82-15.34.13-.58-.58-1.38-.94-2.06-2.51-4.77-5.47-9.38-7.45-14.37C32.94,71,28.22,69.84,23,68.13Z" />
-                  <path class="path-6" fill="#000" d="M83.91,12.86c-.32.36-.66.71-1,1.07.9,1.13,1.57,2.62,2.73,3.33,4.71,2.84,9.56,5.48,14.39,8.1a9.29,9.29,0,0,0,3.13.83c5.45.69,10.89,1.38,16.35,1.94a10.41,10.41,0,0,0,3.07-.71c-11.48-9.9-24.26-14.61-38.71-14.56Z" />
-                  <path class="path-7" fill="#000" d="M66.28,132.51c13.36,3.78,25.62,3.5,38-.9C91.68,129.59,79.36,128,66.28,132.51Z" />
-                  <path class="path-8" fill="#000" d="M127.2,30.66l-1.27.37a18.58,18.58,0,0,0,1,3.08c3,5.52,6.21,10.89,8.89,16.54,1.34,2.83,3.41,3.82,6.49,4.9a60.38,60.38,0,0,0-15.12-24.9Z" />
-                  <path class="bb-9" fill="#000" d="M117.35,125c5.58-2.32,16.9-13.84,18.1-19.2-2.41,1.46-5.18,2.36-6.78,4.23-4.21,5-7.89,10.37-11.32,15Z" />
-              </svg>
-              <h1 class="color-white">LOADING...</h1>
-          </div>
-      </div>
+<!-- Preloader -->
+<div id="preloader">
+  <div class="main-fader" responsive-height-comments>
+    <div class="loader">
+      <svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 164.83 151.5">
+        <path class="path-0" d="M117.24,69.24A8,8,0,0,0,115.67,67c-4.88-4-9.8-7.89-14.86-11.62A4.93,4.93,0,0,0,96.93,55c-5.76,1.89-11.4,4.17-17.18,6a4.36,4.36,0,0,0-3.42,4.12c-1,6.89-2.1,13.76-3,20.66a4,4,0,0,0,1,3.07c5.12,4.36,10.39,8.61,15.68,12.76a3.62,3.62,0,0,0,2.92.75c6.29-2.66,12.52-5.47,18.71-8.36a3.49,3.49,0,0,0,1.68-2.19c1.34-7.25,2.54-14.55,3.9-22.58Z" fill="#000" />
+        <path class="path-1" d="M97.55,38.68A43.76,43.76,0,0,1,98,33.44c.41-2.36-.5-3.57-2.57-4.64C91.1,26.59,87,24,82.66,21.82a6.18,6.18,0,0,0-4-.71C73.45,22.55,68.32,24.25,63.22,26c-3.63,1.21-6.08,3.35-5.76,7.69a26.67,26.67,0,0,1-.6,4.92c-1.08,8.06-1.08,8.08,5.86,11.92,3.95,2.19,7.82,5.75,11.94,6.08s8.76-2.41,13.12-3.93c9.33-3.29,9.33-3.3,9.78-14Z" fill="#000" />
+        <path class="path-2" d="M66.11,126.56c5.91-.91,11.37-1.7,16.81-2.71a3.3,3.3,0,0,0,1.87-2.17c1-4.06,1.73-8.19,2.84-12.24.54-2-.11-3-1.55-4.15-5-4-9.9-8.12-15-12a6.19,6.19,0,0,0-4.15-1.1c-5.35.66-10.7,1.54-16,2.54A4,4,0,0,0,48.34,97a109.13,109.13,0,0,0-3,12.19,4.47,4.47,0,0,0,1.34,3.6c5.54,4.36,11.23,8.53,16.91,12.69a10.84,10.84,0,0,0,2.57,1.11Z" fill="#000" />
+        <path class="path-3" d="M127.42,104.12c4.1-2.1,8-3.93,11.72-6a6,6,0,0,0,2.27-3,58.22,58.22,0,0,0,3.18-29.92c-.26-1.7-8-7.28-9.71-6.85A5,5,0,0,0,133,59.65c-2.81,2.49-5.71,4.88-8.33,7.56a9.46,9.46,0,0,0-2.47,4.4c-1.29,6.49-2.38,13-3.35,19.55a5.73,5.73,0,0,0,.83,3.91c2.31,3.08,5,5.88,7.7,9Z" fill="#000" />
+        <path class="path-4" d="M52.58,29.89c-2.15-.36-3.78-.54-5.39-.9-2.83-.64-4.92.1-7,2.32A64.1,64.1,0,0,0,26.09,54.64c-2.64,7.92-2.62,7.84,5.15,10.87,1.76.69,2.73.45,3.93-1C39.79,59,44.54,53.65,49.22,48.2a4.2,4.2,0,0,0,1.13-2c.8-5.32,1.49-10.68,2.24-16.34Z" fill="#000" />
+        <path class="path-5" fill="#000" d="M23,68.13c0,2.51,0,4.7,0,6.87a60.49,60.49,0,0,0,9.75,32.15c1.37,2.13,6.4,3,7,1.2,1.55-5,2.68-10.2,3.82-15.34.13-.58-.58-1.38-.94-2.06-2.51-4.77-5.47-9.38-7.45-14.37C32.94,71,28.22,69.84,23,68.13Z" />
+        <path class="path-6" fill="#000" d="M83.91,12.86c-.32.36-.66.71-1,1.07.9,1.13,1.57,2.62,2.73,3.33,4.71,2.84,9.56,5.48,14.39,8.1a9.29,9.29,0,0,0,3.13.83c5.45.69,10.89,1.38,16.35,1.94a10.41,10.41,0,0,0,3.07-.71c-11.48-9.9-24.26-14.61-38.71-14.56Z" />
+        <path class="path-7" fill="#000" d="M66.28,132.51c13.36,3.78,25.62,3.5,38-.9C91.68,129.59,79.36,128,66.28,132.51Z" />
+        <path class="path-8" fill="#000" d="M127.2,30.66l-1.27.37a18.58,18.58,0,0,0,1,3.08c3,5.52,6.21,10.89,8.89,16.54,1.34,2.83,3.41,3.82,6.49,4.9a60.38,60.38,0,0,0-15.12-24.9Z" />
+        <path class="bb-9" fill="#000" d="M117.35,125c5.58-2.32,16.9-13.84,18.1-19.2-2.41,1.46-5.18,2.36-6.78,4.23-4.21,5-7.89,10.37-11.32,15Z" />
+      </svg>
+      <h1 class="color-white">LOADING...</h1>
+    </div>
   </div>
-  <!-- Back To Top Start -->
-  <a href="#main-wrapper" id="backto-top" class="back-to-top">
-    <i class="fas fa-angle-up"></i>
-  </a>
-  <!-- Main Wrapper Start -->
-  <div id="main-wrapper" class="main-wrapper overflow-hidden">
-    <!--=====================================-->
-    <!--=          Top Bar Start        	=-->
-    <!--=====================================-->
+</div>
+<!-- Back To Top Start -->
+<a href="#main-wrapper" id="backto-top" class="back-to-top">
+  <i class="fas fa-angle-up"></i>
+</a>
+<!-- Main Wrapper Start -->
+<div id="main-wrapper" class="main-wrapper overflow-hidden">
+  <!--=====================================-->
+  <!--=          Top Bar Start        	=-->
+  <!--=====================================-->
 
-    <!-- Header Area Start -->
-    <header class="header-2">
-      <div class="container">
-        <nav class="navbar upper d-lg-flex d-none">
-          <a class="navbar-brand" href="index.html"><img alt="" src="{{asset('./assets/media/logo-dark.png')}}" /></a>
-          <div class="search-bar">
-            <form method="get" action="index.html">
-              <div class="form-group header-search">
-                <button type="submit" class="fa fa-search form-control-search"></button>
-                <input type="text" class="form-control" placeholder="Search" />
-              </div>
-            </form>
-          </div>
-          <div class="right-content">
-            <ul>
-              <li>
-                <a href="login.html"><img src="{{asset('assets/media/icon/user.png')}}" alt="" /><br />ACCOUNT</a>
-              </li>
-              <li>
-                <a href=""><img src="{{asset('assets/media/icon/wishlist.png')}}" alt="" /><br />WISHLIST(7)</a>
-              </li>
-              <li>
-                <a href="javascript:;" class="cart-button" ><img src="{{asset('assets/media/icon/shopping-cart.png')}}" alt="" /><br />CART</a>
-              </li>
-            </ul>
-          </div>
-        </nav>
-        <nav class="navbar navbar-expand-lg">
-          <a class="navbar-brand d-lg-none" href="index.html"><img alt="" src="{{asset('./assets/media/logo-dark.png')}}" /></a>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mynavbar">
-            <i class="fas fa-bars"></i>
-          </button>
-          <div class="collapse navbar-collapse" id="mynavbar">
-            <ul class="navbar-nav mainmenu m-0">
-              <li class="menu-item-has-children">
-                <a href="javascript:void(0);" class="active">HOME</a>
-                <ul class="submenu">
-                  <li><a href="{{ path('app_tournois_index') }}" class="active">Tournaments</a></li>
-                  <li><a href="{{ path('app_match_entity_index') }}" class="active">Matchs</a></li>
-                  <li><a href="index-3.html">Home 3</a></li>
-                </ul>
-              </li>
-              <li class="menu-item-has-children">
-                <a href="javascript:void(0);">SHOP</a>
-                <ul class="submenu">
-                  <li><a href="shop-grid.html">Shop grid</a></li>
-                  <li><a href="product-detail.html">Product Detail</a></li>
-                  <li><a href="cart.html">Cart</a></li>
-                  <li><a href="checkout.html">Checkout</a></li>
-                </ul>
-              </li>
-              <li class="menu-item-has-children">
-                <a href="javascript:void(0);">PAGES</a>
-                <ul class="submenu">
-                  <li><a href="blog-grid.html">Blog Grid</a></li>
-                  <li><a href="blog-list.html">Blog List</a></li>
-                  <li><a href="blog-detail.html">Blog Detail</a></li>
-                  <li><a href="players.html">Players</a></li>
-                  <li><a href="player-detail.html">Player detail</a></li>
-                  <li><a href="privacy-policy.html">Privacy policy</a></li>
-                  <li><a href="login.html">Login</a></li>
-                  <li><a href="signup.html">Signup</a></li>
-                  <li><a href="404.html">404 Error</a></li>
-                  <li><a href="coming-soon.html">Coming Soon</a></li>
-                </ul>
-              </li>
-              <li class="menu-item"><a href="contact.html">CONTACT</a></li>
-              <li class="menu-item"><a href="about.html">ABOUT</a></li>
-            </ul>
-          </div>
-        </nav>
-      </div>
-    </header>
-    <!-- Header Area end -->
- 
-     {% block body %}
+  <!-- Header Area Start -->
+  <header class="header-2">
+    <div class="container">
+      <nav class="navbar upper d-lg-flex d-none">
+        <a class="navbar-brand" href="index.html"><img alt="" src="{{asset('./assets/media/logo-dark.png')}}" /></a>
+
+        <div class="right-content">
+          <ul>
+            <li>
+              <a href="login.html"><img src="{{asset('assets/media/icon/user.png')}}" alt="" /><br />ACCOUNT</a>
+            </li>
+            <li>
+              <a href=""><img src="{{asset('assets/media/icon/wishlist.png')}}" alt="" /><br />WISHLIST(7)</a>
+            </li>
+            <li>
+              <a href="javascript:;" class="cart-button" ><img src="{{asset('assets/media/icon/shopping-cart.png')}}" alt="" /><br />CART</a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+      <nav class="navbar navbar-expand-lg">
+        <a class="navbar-brand d-lg-none" href="index.html"><img alt="" src="{{asset('./assets/media/logo-dark.png')}}" /></a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mynavbar">
+          <i class="fas fa-bars"></i>
+        </button>
+        <div class="collapse navbar-collapse" id="mynavbar">
+          <ul class="navbar-nav mainmenu m-0">
+            <li class="menu-item-has-children">
+              <a href="javascript:void(0);" class="active">HOME</a>
+              <ul class="submenu">
+                <li><a href="{{ path('app_tournois_index') }}" class="active">Tournaments</a></li>
+                <li><a href="{{ path('app_match_entity_index') }}" class="active">Matchs</a></li>
+                <li><a href="index-3.html">Home 3</a></li>
+              </ul>
+            </li>
+            <li class="menu-item-has-children">
+              <a href="javascript:void(0);">SHOP</a>
+              <ul class="submenu">
+                <li><a href="shop-grid.html">Shop grid</a></li>
+                <li><a href="product-detail.html">Product Detail</a></li>
+                <li><a href="cart.html">Cart</a></li>
+                <li><a href="checkout.html">Checkout</a></li>
+              </ul>
+            </li>
+            <li class="menu-item-has-children">
+              <a href="javascript:void(0);">PAGES</a>
+              <ul class="submenu">
+                <li><a href="blog-grid.html">Blog Grid</a></li>
+                <li><a href="blog-list.html">Blog List</a></li>
+                <li><a href="blog-detail.html">Blog Detail</a></li>
+                <li><a href="players.html">Players</a></li>
+                <li><a href="player-detail.html">Player detail</a></li>
+                <li><a href="privacy-policy.html">Privacy policy</a></li>
+                <li><a href="login.html">Login</a></li>
+                <li><a href="signup.html">Signup</a></li>
+                <li><a href="404.html">404 Error</a></li>
+                <li><a href="coming-soon.html">Coming Soon</a></li>
+              </ul>
+            </li>
+            <li class="menu-item"><a href="contact.html">CONTACT</a></li>
+            <li class="menu-item"><a href="about.html">ABOUT</a></li>
+          </ul>
+        </div>
+      </nav>
+    </div>
+  </header>
+  <!-- Header Area end -->
+
+  {% block body %}
 
 
-    <!-- Hero Slider start -->
-    <div class="hero-banner-1">
-      <div class="container">
-        <div class="content">
-          <div class="title">
-            <h6>STRIKER CLUB PRESENTS</h6>
-            <h2>TRAINING<br />CAMP</h2>
-          </div>
-          <div class="content-block">
-            <h4>ARE YOU READY?</h4>
-            <p>
-              Join us for an unforgettable training <br />camp experience and
-              take your skills <br />
-              to the next level.
-            </p>
-          </div>
-          <a href="contact.html" class="cta">
-            <span class="span">Join Us</span>
-            <span class="second">
+  <!-- Hero Slider start -->
+  <div class="hero-banner-1">
+    <div class="container">
+      <div class="content">
+        <div class="title">
+          <h6>STRIKER CLUB PRESENTS</h6>
+          <h2>TRAINING<br />CAMP</h2>
+        </div>
+        <div class="content-block">
+          <h4>ARE YOU READY?</h4>
+          <p>
+            Join us for an unforgettable training <br />camp experience and
+            take your skills <br />
+            to the next level.
+          </p>
+        </div>
+        <a href="contact.html" class="cta">
+          <span class="span">Join Us</span>
+          <span class="second">
               <svg width="50px" height="20px" color="black" viewBox="0 0 66 43" version="1.1"
-                xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                   xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                 <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
                   <path class="one"
-                    d="M40.1543933,3.89485454 L43.9763149,0.139296592 C44.1708311,-0.0518420739 44.4826329,-0.0518571125 44.6771675,0.139262789 L65.6916134,20.7848311 C66.0855801,21.1718824 66.0911863,21.8050225 65.704135,22.1989893 C65.7000188,22.2031791 65.6958657,22.2073326 65.6916762,22.2114492 L44.677098,42.8607841 C44.4825957,43.0519059 44.1708242,43.0519358 43.9762853,42.8608513 L40.1545186,39.1069479 C39.9575152,38.9134427 39.9546793,38.5968729 40.1481845,38.3998695 C40.1502893,38.3977268 40.1524132,38.395603 40.1545562,38.3934985 L56.9937789,21.8567812 C57.1908028,21.6632968 57.193672,21.3467273 57.0001876,21.1497035 C56.9980647,21.1475418 56.9959223,21.1453995 56.9937605,21.1432767 L40.1545208,4.60825197 C39.9574869,4.41477773 39.9546013,4.09820839 40.1480756,3.90117456 C40.1501626,3.89904911 40.1522686,3.89694235 40.1543933,3.89485454 Z"
-                    fill="#FFFFFF"></path>
+                        d="M40.1543933,3.89485454 L43.9763149,0.139296592 C44.1708311,-0.0518420739 44.4826329,-0.0518571125 44.6771675,0.139262789 L65.6916134,20.7848311 C66.0855801,21.1718824 66.0911863,21.8050225 65.704135,22.1989893 C65.7000188,22.2031791 65.6958657,22.2073326 65.6916762,22.2114492 L44.677098,42.8607841 C44.4825957,43.0519059 44.1708242,43.0519358 43.9762853,42.8608513 L40.1545186,39.1069479 C39.9575152,38.9134427 39.9546793,38.5968729 40.1481845,38.3998695 C40.1502893,38.3977268 40.1524132,38.395603 40.1545562,38.3934985 L56.9937789,21.8567812 C57.1908028,21.6632968 57.193672,21.3467273 57.0001876,21.1497035 C56.9980647,21.1475418 56.9959223,21.1453995 56.9937605,21.1432767 L40.1545208,4.60825197 C39.9574869,4.41477773 39.9546013,4.09820839 40.1480756,3.90117456 C40.1501626,3.89904911 40.1522686,3.89694235 40.1543933,3.89485454 Z"
+                        fill="#FFFFFF"></path>
                   <path class="two"
-                    d="M20.1543933,3.89485454 L23.9763149,0.139296592 C24.1708311,-0.0518420739 24.4826329,-0.0518571125 24.6771675,0.139262789 L45.6916134,20.7848311 C46.0855801,21.1718824 46.0911863,21.8050225 45.704135,22.1989893 C45.7000188,22.2031791 45.6958657,22.2073326 45.6916762,22.2114492 L24.677098,42.8607841 C24.4825957,43.0519059 24.1708242,43.0519358 23.9762853,42.8608513 L20.1545186,39.1069479 C19.9575152,38.9134427 19.9546793,38.5968729 20.1481845,38.3998695 C20.1502893,38.3977268 20.1524132,38.395603 20.1545562,38.3934985 L36.9937789,21.8567812 C37.1908028,21.6632968 37.193672,21.3467273 37.0001876,21.1497035 C36.9980647,21.1475418 36.9959223,21.1453995 36.9937605,21.1432767 L20.1545208,4.60825197 C19.9574869,4.41477773 19.9546013,4.09820839 20.1480756,3.90117456 C20.1501626,3.89904911 20.1522686,3.89694235 20.1543933,3.89485454 Z"
-                    fill="#FFFFFF"></path>
+                        d="M20.1543933,3.89485454 L23.9763149,0.139296592 C24.1708311,-0.0518420739 24.4826329,-0.0518571125 24.6771675,0.139262789 L45.6916134,20.7848311 C46.0855801,21.1718824 46.0911863,21.8050225 45.704135,22.1989893 C45.7000188,22.2031791 45.6958657,22.2073326 45.6916762,22.2114492 L24.677098,42.8607841 C24.4825957,43.0519059 24.1708242,43.0519358 23.9762853,42.8608513 L20.1545186,39.1069479 C19.9575152,38.9134427 19.9546793,38.5968729 20.1481845,38.3998695 C20.1502893,38.3977268 20.1524132,38.395603 20.1545562,38.3934985 L36.9937789,21.8567812 C37.1908028,21.6632968 37.193672,21.3467273 37.0001876,21.1497035 C36.9980647,21.1475418 36.9959223,21.1453995 36.9937605,21.1432767 L20.1545208,4.60825197 C19.9574869,4.41477773 19.9546013,4.09820839 20.1480756,3.90117456 C20.1501626,3.89904911 20.1522686,3.89694235 20.1543933,3.89485454 Z"
+                        fill="#FFFFFF"></path>
                   <path class="three"
-                    d="M0.154393339,3.89485454 L3.97631488,0.139296592 C4.17083111,-0.0518420739 4.48263286,-0.0518571125 4.67716753,0.139262789 L25.6916134,20.7848311 C26.0855801,21.1718824 26.0911863,21.8050225 25.704135,22.1989893 C25.7000188,22.2031791 25.6958657,22.2073326 25.6916762,22.2114492 L4.67709797,42.8607841 C4.48259567,43.0519059 4.17082418,43.0519358 3.97628526,42.8608513 L0.154518591,39.1069479 C-0.0424848215,38.9134427 -0.0453206733,38.5968729 0.148184538,38.3998695 C0.150289256,38.3977268 0.152413239,38.395603 0.154556228,38.3934985 L16.9937789,21.8567812 C17.1908028,21.6632968 17.193672,21.3467273 17.0001876,21.1497035 C16.9980647,21.1475418 16.9959223,21.1453995 16.9937605,21.1432767 L0.15452076,4.60825197 C-0.0425130651,4.41477773 -0.0453986756,4.09820839 0.148075568,3.90117456 C0.150162624,3.89904911 0.152268631,3.89694235 0.154393339,3.89485454 Z"
-                    fill="#FFFFFF"></path>
+                        d="M0.154393339,3.89485454 L3.97631488,0.139296592 C4.17083111,-0.0518420739 4.48263286,-0.0518571125 4.67716753,0.139262789 L25.6916134,20.7848311 C26.0855801,21.1718824 26.0911863,21.8050225 25.704135,22.1989893 C25.7000188,22.2031791 25.6958657,22.2073326 25.6916762,22.2114492 L4.67709797,42.8607841 C4.48259567,43.0519059 4.17082418,43.0519358 3.97628526,42.8608513 L0.154518591,39.1069479 C-0.0424848215,38.9134427 -0.0453206733,38.5968729 0.148184538,38.3998695 C0.150289256,38.3977268 0.152413239,38.395603 0.154556228,38.3934985 L16.9937789,21.8567812 C17.1908028,21.6632968 17.193672,21.3467273 17.0001876,21.1497035 C16.9980647,21.1475418 16.9959223,21.1453995 16.9937605,21.1432767 L0.15452076,4.60825197 C-0.0425130651,4.41477773 -0.0453986756,4.09820839 0.148075568,3.90117456 C0.150162624,3.89904911 0.152268631,3.89694235 0.154393339,3.89485454 Z"
+                        fill="#FFFFFF"></path>
                 </g>
               </svg>
             </span>
+        </a>
+      </div>
+    </div>
+    <div class="overlay"></div>
+  </div>
+  <!-- Hero Slider End -->
+
+  <!-- matches scheduled Start -->
+  <div class="match-times p-96">
+    <div class="container">
+      <div class="content text-center">
+        <h4>19 April</h4>
+        <p>15:00, Expert Stadium CAL</p>
+        <div class="teams">
+          <div class="row">
+            <div class="col-xl-5">
+              <div class="team mb-xl-0 mb-24 justify-content-xl-end justify-content-center">
+                <img src="{{asset('assets/media/team-logos/team-1.png')}}" alt="" />
+                <h5>Red Star United</h5>
+              </div>
+            </div>
+            <div class="col-xl-2">
+              <span class="bold-text">VS</span>
+            </div>
+            <div class="col-xl-5">
+              <div class="team mt-xl-0 mt-24">
+                <img src="{{asset('assets/media/team-logos/team-2.png')}}" alt="" />
+                <h5>Thunderbolt FC</h5>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="text-center">
+          <a href="contact.html" class="cta">
+            <span class="span">Get A Seat</span>
+            <span class="second">
+                <svg width="50px" height="20px" color="black" viewBox="0 0 66 43" version="1.1"
+                     xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                  <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                    <path class="one"
+                          d="M40.1543933,3.89485454 L43.9763149,0.139296592 C44.1708311,-0.0518420739 44.4826329,-0.0518571125 44.6771675,0.139262789 L65.6916134,20.7848311 C66.0855801,21.1718824 66.0911863,21.8050225 65.704135,22.1989893 C65.7000188,22.2031791 65.6958657,22.2073326 65.6916762,22.2114492 L44.677098,42.8607841 C44.4825957,43.0519059 44.1708242,43.0519358 43.9762853,42.8608513 L40.1545186,39.1069479 C39.9575152,38.9134427 39.9546793,38.5968729 40.1481845,38.3998695 C40.1502893,38.3977268 40.1524132,38.395603 40.1545562,38.3934985 L56.9937789,21.8567812 C57.1908028,21.6632968 57.193672,21.3467273 57.0001876,21.1497035 C56.9980647,21.1475418 56.9959223,21.1453995 56.9937605,21.1432767 L40.1545208,4.60825197 C39.9574869,4.41477773 39.9546013,4.09820839 40.1480756,3.90117456 C40.1501626,3.89904911 40.1522686,3.89694235 40.1543933,3.89485454 Z"
+                          fill="#FFFFFF"></path>
+                    <path class="two"
+                          d="M20.1543933,3.89485454 L23.9763149,0.139296592 C24.1708311,-0.0518420739 24.4826329,-0.0518571125 24.6771675,0.139262789 L45.6916134,20.7848311 C46.0855801,21.1718824 46.0911863,21.8050225 45.704135,22.1989893 C45.7000188,22.2031791 45.6958657,22.2073326 45.6916762,22.2114492 L24.677098,42.8607841 C24.4825957,43.0519059 24.1708242,43.0519358 23.9762853,42.8608513 L20.1545186,39.1069479 C19.9575152,38.9134427 19.9546793,38.5968729 20.1481845,38.3998695 C20.1502893,38.3977268 20.1524132,38.395603 20.1545562,38.3934985 L36.9937789,21.8567812 C37.1908028,21.6632968 37.193672,21.3467273 37.0001876,21.1497035 C36.9980647,21.1475418 36.9959223,21.1453995 36.9937605,21.1432767 L20.1545208,4.60825197 C19.9574869,4.41477773 19.9546013,4.09820839 20.1480756,3.90117456 C20.1501626,3.89904911 20.1522686,3.89694235 20.1543933,3.89485454 Z"
+                          fill="#FFFFFF"></path>
+                    <path class="three"
+                          d="M0.154393339,3.89485454 L3.97631488,0.139296592 C4.17083111,-0.0518420739 4.48263286,-0.0518571125 4.67716753,0.139262789 L25.6916134,20.7848311 C26.0855801,21.1718824 26.0911863,21.8050225 25.704135,22.1989893 C25.7000188,22.2031791 25.6958657,22.2073326 25.6916762,22.2114492 L4.67709797,42.8607841 C4.48259567,43.0519059 4.17082418,43.0519358 3.97628526,42.8608513 L0.154518591,39.1069479 C-0.0424848215,38.9134427 -0.0453206733,38.5968729 0.148184538,38.3998695 C0.150289256,38.3977268 0.152413239,38.395603 0.154556228,38.3934985 L16.9937789,21.8567812 C17.1908028,21.6632968 17.193672,21.3467273 17.0001876,21.1497035 C16.9980647,21.1475418 16.9959223,21.1453995 16.9937605,21.1432767 L0.15452076,4.60825197 C-0.0425130651,4.41477773 -0.0453986756,4.09820839 0.148075568,3.90117456 C0.150162624,3.89904911 0.152268631,3.89694235 0.154393339,3.89485454 Z"
+                          fill="#FFFFFF"></path>
+                  </g>
+                </svg>
+              </span>
           </a>
         </div>
       </div>
-      <div class="overlay"></div>
     </div>
-    <!-- Hero Slider End -->
+  </div>
 
-    <!-- matches scheduled Start -->
-    <div class="match-times p-96">
-      <div class="container">
-        <div class="content text-center">
-          <h4>19 April</h4>
-          <p>15:00, Expert Stadium CAL</p>
-          <div class="teams">
-            <div class="row">
-              <div class="col-xl-5">
-                <div class="team mb-xl-0 mb-24 justify-content-xl-end justify-content-center">
-                  <img src="{{asset('assets/media/team-logos/team-1.png')}}" alt="" />
-                  <h5>Red Star United</h5>
+  <!-- club inside Start -->
+  <div class="club-inside p-96">
+    <div class="container">
+      <div class="row">
+        <div class="col-xl-6">
+          <div class="heading">
+            <h2>Inside the Club</h2>
+            <p>Featured Insights</p>
+          </div>
+          <p class="description">
+            Welcome to Striker Sports Club's news section! Here, you'll find
+            all latest updates, highlights, and behind-the-scenes glimpses
+            of what's happening in our club. Championship wins to player
+            profiles and interviews, we're excited to share our passion for
+            soccer.
+          </p>
+          <img src="{{asset('assets/media/club/Video.png')}}" alt="" class="mb-xl-0 mb-30" />
+        </div>
+        <div class="col-xl-3 col-sm-7 d-grid align-content-center">
+          <img src="{{asset('assets/media/club/Image.png')}}" alt="" class="mb-sm-0 mb-30" />
+        </div>
+        <div class="col-xl-3 col-sm-5">
+          <img src="{{asset('assets/media/club/Image-1.png')}}" alt="" class="mb-30" />
+          <img src="{{asset('assets/media/club/Image-2.png')}}" alt="" />
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- club inside Start -->
+  <div class="showdowns">
+    <div class="container">
+      <div class="heading mb-64">
+        <h2 class="color-white-2">Exciting Showdowns</h2>
+        <p class="color-white-2">Upcoming Fixtures</p>
+      </div>
+      <div class="row">
+        <div class="col-xl-8 offset-xl-2 p-0">
+          <div class="teams-slider">
+            <div class="slide_wrap">
+              <div class="fixture">
+                <h5>2023-08-10</h5>
+                <p>Madrid Football Stadium</p>
+              </div>
+              <div class="teams">
+                <div class="team-1">
+                  <h5>Phoenix SC</h5>
+                </div>
+                <div class="vs-logo">
+                  <img src="{{asset('assets/media/team-logos/vs.png')}}" alt="" />
+                </div>
+                <div class="team-2">
+                  <h5>Red Lion SC</h5>
                 </div>
               </div>
-              <div class="col-xl-2">
-                <span class="bold-text">VS</span>
+            </div>
+            <div class="slide_wrap">
+              <div class="fixture">
+                <h5>2023-08-10</h5>
+                <p>Madrid Football Stadium</p>
               </div>
-              <div class="col-xl-5">
-                <div class="team mt-xl-0 mt-24">
-                  <img src="{{asset('assets/media/team-logos/team-2.png')}}" alt="" />
-                  <h5>Thunderbolt FC</h5>
+              <div class="teams">
+                <div class="team-1">
+                  <h5>Phoenix SC</h5>
+                </div>
+                <div class="vs-logo">
+                  <img src="{{asset('assets/media/team-logos/vs.png')}}" alt="" />
+                </div>
+                <div class="team-2">
+                  <h5>Red Lion SC</h5>
                 </div>
               </div>
             </div>
           </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!--Achievements  Start -->
+  <div class="achievements m-96">
+    <div class="container">
+      <div class="heading">
+        <h2>Achievements</h2>
+        <p>Over past years</p>
+      </div>
+      <div class="row">
+        <div class="col-xl-3 col-sm-6">
+          <div class="achievement-block first">
+            <h2>35k</h2>
+            <p>
+              We have earned 35k trophies, demonstrating our hard work and
+              dedication to the sport.
+            </p>
+          </div>
+        </div>
+        <div class="col-xl-3 col-sm-6">
+          <div class="achievement-block second">
+            <h2>24k</h2>
+            <p>
+              Our team has achieved more than 24k victories, showing our
+              commitment to excellence.
+            </p>
+          </div>
+        </div>
+        <div class="col-xl-3 col-sm-6">
+          <div class="achievement-block third">
+            <h2>10k</h2>
+            <p>
+              With 10k undefeated seasons, we’ve established ourselves as a
+              reckoning force.
+            </p>
+          </div>
+        </div>
+        <div class="col-xl-3 col-sm-6">
+          <div class="achievement-block fourth">
+            <h2>198</h2>
+            <p>
+              Our 198 championship titles reflect our team's relentless
+              pursuit of success.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!--Promotional Banner Start -->
+  <div class="promotional-banner">
+    <div class="container">
+      <div class="content text-end">
+        <h6>Are you Ready to</h6>
+        <h3 class="mb-32">
+          <span class="cc color-primary">Kick</span> the Ball?
+        </h3>
+        <p class="mb-64">
+          Elevate your soccer skills to the <br />
+          next level with us!
+        </p>
+        <a href="contact.html" class="cta">
+          <span class="span">Join Us</span>
+          <span class="second">
+              <svg width="50px" height="20px" color="black" viewBox="0 0 66 43" version="1.1"
+                   xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                  <path class="one"
+                        d="M40.1543933,3.89485454 L43.9763149,0.139296592 C44.1708311,-0.0518420739 44.4826329,-0.0518571125 44.6771675,0.139262789 L65.6916134,20.7848311 C66.0855801,21.1718824 66.0911863,21.8050225 65.704135,22.1989893 C65.7000188,22.2031791 65.6958657,22.2073326 65.6916762,22.2114492 L44.677098,42.8607841 C44.4825957,43.0519059 44.1708242,43.0519358 43.9762853,42.8608513 L40.1545186,39.1069479 C39.9575152,38.9134427 39.9546793,38.5968729 40.1481845,38.3998695 C40.1502893,38.3977268 40.1524132,38.395603 40.1545562,38.3934985 L56.9937789,21.8567812 C57.1908028,21.6632968 57.193672,21.3467273 57.0001876,21.1497035 C56.9980647,21.1475418 56.9959223,21.1453995 56.9937605,21.1432767 L40.1545208,4.60825197 C39.9574869,4.41477773 39.9546013,4.09820839 40.1480756,3.90117456 C40.1501626,3.89904911 40.1522686,3.89694235 40.1543933,3.89485454 Z"
+                        fill="#FFFFFF"></path>
+                  <path class="two"
+                        d="M20.1543933,3.89485454 L23.9763149,0.139296592 C24.1708311,-0.0518420739 24.4826329,-0.0518571125 24.6771675,0.139262789 L45.6916134,20.7848311 C46.0855801,21.1718824 46.0911863,21.8050225 45.704135,22.1989893 C45.7000188,22.2031791 45.6958657,22.2073326 45.6916762,22.2114492 L24.677098,42.8607841 C24.4825957,43.0519059 24.1708242,43.0519358 23.9762853,42.8608513 L20.1545186,39.1069479 C19.9575152,38.9134427 19.9546793,38.5968729 20.1481845,38.3998695 C20.1502893,38.3977268 20.1524132,38.395603 20.1545562,38.3934985 L36.9937789,21.8567812 C37.1908028,21.6632968 37.193672,21.3467273 37.0001876,21.1497035 C36.9980647,21.1475418 36.9959223,21.1453995 36.9937605,21.1432767 L20.1545208,4.60825197 C19.9574869,4.41477773 19.9546013,4.09820839 20.1480756,3.90117456 C20.1501626,3.89904911 20.1522686,3.89694235 20.1543933,3.89485454 Z"
+                        fill="#FFFFFF"></path>
+                  <path class="three"
+                        d="M0.154393339,3.89485454 L3.97631488,0.139296592 C4.17083111,-0.0518420739 4.48263286,-0.0518571125 4.67716753,0.139262789 L25.6916134,20.7848311 C26.0855801,21.1718824 26.0911863,21.8050225 25.704135,22.1989893 C25.7000188,22.2031791 25.6958657,22.2073326 25.6916762,22.2114492 L4.67709797,42.8607841 C4.48259567,43.0519059 4.17082418,43.0519358 3.97628526,42.8608513 L0.154518591,39.1069479 C-0.0424848215,38.9134427 -0.0453206733,38.5968729 0.148184538,38.3998695 C0.150289256,38.3977268 0.152413239,38.395603 0.154556228,38.3934985 L16.9937789,21.8567812 C17.1908028,21.6632968 17.193672,21.3467273 17.0001876,21.1497035 C16.9980647,21.1475418 16.9959223,21.1453995 16.9937605,21.1432767 L0.15452076,4.60825197 C-0.0425130651,4.41477773 -0.0453986756,4.09820839 0.148075568,3.90117456 C0.150162624,3.89904911 0.152268631,3.89694235 0.154393339,3.89485454 Z"
+                        fill="#FFFFFF"></path>
+                </g>
+              </svg>
+            </span>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Instagram Feed Start -->
+  <div class="insta_feed p-96">
+    <div class="container">
+      <div class="heading mb-64">
+        <h2>Striker Feed</h2>
+        <p>Club Chronicles</p>
+      </div>
+      <div class="row">
+        <div class="col-lg-6 offset-lg-3">
+          <div class="feed">
+            <img src="{{asset('assets/media/instagram/Image.png')}}" alt="" />
+            <img src="{{asset('assets/media/instagram/Image-1.png')}}" alt="" />
+            <img src="{{asset('assets/media/instagram/Image-2.png')}}" alt="" />
+            <img src="{{asset('assets/media/instagram/Image-3.png')}}" alt="" />
+            <img src="{{asset('assets/media/instagram/Image-4.png')}}" alt="" />
+            <img src="{{asset('assets/media/instagram/Image-5.png')}}" alt="" />
+            <img src="{{asset('assets/media/instagram/Image-6.png')}}" alt="" />
+            <img src="{{asset('assets/media/instagram/Image-7.png')}}" alt="" />
+            <img src="{{asset('assets/media/instagram/Image-8.png')}}" alt="" />
+          </div>
+        </div>
+        <div class="col-xl-3 d-grid align-content-end p-lg-0">
+          <div class="insta-link">
+            <a href=""><i class="fab fa-instagram"></i><span>/strikersportsclub</span></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Blogs area Start -->
+  <div class="blogs-grid p-96">
+    <div class="container">
+      <div class="row">
+        <div class="col-xl-4 col-md-6">
+          <div class="heading short mb-64">
+            <h2>Blog Stories</h2>
+            <p>Latest News and Insights</p>
+          </div>
+          <div class="blog-card">
+            <img src="{{asset('assets/media/blogs/image.png')}}" alt="" />
+            <div class="overlay">
+              <div class="content">
+                <span class="date-block">21 May<br />2023</span>
+                <a href="blog-detail.html" class="title">Behind the Scenes: A Day in the Life of a Striker SC
+                  Player</a>
+                <p>
+                  Relive some of Striker SC's greatest moments, from winning
+                  crucial games to lifting trophies. Learn what makes this
+                  club a force to be reckoned with in the world of soccer.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-xl-4 col-md-6">
+          <div class="blog-card">
+            <img src="{{asset('assets/media/blogs/image-2.png')}}" alt="" />
+            <div class="overlay">
+              <div class="content">
+                <span class="date-block">21 May<br />2023</span>
+                <a href="blog-detail.html" class="title">Top 5 Memorable Moments in Striker SC History</a>
+                <p>
+                  Relive some of Striker SC's greatest moments, from winning
+                  crucial games to lifting trophies. Learn what makes this
+                  club a force to be reckoned with in the world of soccer.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-xl-4 col-md-6 offset-xl-0 offset-md-3">
+          <div class="blog-card mb-64">
+            <img src="{{asset('assets/media/blogs/image-3.png')}}" alt="" />
+            <div class="overlay">
+              <div class="content">
+                <span class="date-block">21 May<br />2023</span>
+                <a href="blog-detail.html" class="title">Interview with the Coach: Insights into Striker SC's
+                  Winning Strategy</a>
+                <p>
+                  Relive some of Striker SC's greatest moments, from winning
+                  crucial games to lifting trophies. Learn what makes this
+                  club a force to be reckoned with in the world of soccer.
+                </p>
+              </div>
+            </div>
+          </div>
           <div class="text-center">
-            <a href="contact.html" class="cta">
-              <span class="span">Get A Seat</span>
+            <a href="blog-grid.html" class="cta">
+              <span class="span">View More</span>
               <span class="second">
-                <svg width="50px" height="20px" color="black" viewBox="0 0 66 43" version="1.1"
-                  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-                  <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                    <path class="one"
-                      d="M40.1543933,3.89485454 L43.9763149,0.139296592 C44.1708311,-0.0518420739 44.4826329,-0.0518571125 44.6771675,0.139262789 L65.6916134,20.7848311 C66.0855801,21.1718824 66.0911863,21.8050225 65.704135,22.1989893 C65.7000188,22.2031791 65.6958657,22.2073326 65.6916762,22.2114492 L44.677098,42.8607841 C44.4825957,43.0519059 44.1708242,43.0519358 43.9762853,42.8608513 L40.1545186,39.1069479 C39.9575152,38.9134427 39.9546793,38.5968729 40.1481845,38.3998695 C40.1502893,38.3977268 40.1524132,38.395603 40.1545562,38.3934985 L56.9937789,21.8567812 C57.1908028,21.6632968 57.193672,21.3467273 57.0001876,21.1497035 C56.9980647,21.1475418 56.9959223,21.1453995 56.9937605,21.1432767 L40.1545208,4.60825197 C39.9574869,4.41477773 39.9546013,4.09820839 40.1480756,3.90117456 C40.1501626,3.89904911 40.1522686,3.89694235 40.1543933,3.89485454 Z"
-                      fill="#FFFFFF"></path>
-                    <path class="two"
-                      d="M20.1543933,3.89485454 L23.9763149,0.139296592 C24.1708311,-0.0518420739 24.4826329,-0.0518571125 24.6771675,0.139262789 L45.6916134,20.7848311 C46.0855801,21.1718824 46.0911863,21.8050225 45.704135,22.1989893 C45.7000188,22.2031791 45.6958657,22.2073326 45.6916762,22.2114492 L24.677098,42.8607841 C24.4825957,43.0519059 24.1708242,43.0519358 23.9762853,42.8608513 L20.1545186,39.1069479 C19.9575152,38.9134427 19.9546793,38.5968729 20.1481845,38.3998695 C20.1502893,38.3977268 20.1524132,38.395603 20.1545562,38.3934985 L36.9937789,21.8567812 C37.1908028,21.6632968 37.193672,21.3467273 37.0001876,21.1497035 C36.9980647,21.1475418 36.9959223,21.1453995 36.9937605,21.1432767 L20.1545208,4.60825197 C19.9574869,4.41477773 19.9546013,4.09820839 20.1480756,3.90117456 C20.1501626,3.89904911 20.1522686,3.89694235 20.1543933,3.89485454 Z"
-                      fill="#FFFFFF"></path>
-                    <path class="three"
-                      d="M0.154393339,3.89485454 L3.97631488,0.139296592 C4.17083111,-0.0518420739 4.48263286,-0.0518571125 4.67716753,0.139262789 L25.6916134,20.7848311 C26.0855801,21.1718824 26.0911863,21.8050225 25.704135,22.1989893 C25.7000188,22.2031791 25.6958657,22.2073326 25.6916762,22.2114492 L4.67709797,42.8607841 C4.48259567,43.0519059 4.17082418,43.0519358 3.97628526,42.8608513 L0.154518591,39.1069479 C-0.0424848215,38.9134427 -0.0453206733,38.5968729 0.148184538,38.3998695 C0.150289256,38.3977268 0.152413239,38.395603 0.154556228,38.3934985 L16.9937789,21.8567812 C17.1908028,21.6632968 17.193672,21.3467273 17.0001876,21.1497035 C16.9980647,21.1475418 16.9959223,21.1453995 16.9937605,21.1432767 L0.15452076,4.60825197 C-0.0425130651,4.41477773 -0.0453986756,4.09820839 0.148075568,3.90117456 C0.150162624,3.89904911 0.152268631,3.89694235 0.154393339,3.89485454 Z"
-                      fill="#FFFFFF"></path>
-                  </g>
-                </svg>
-              </span>
+                  <svg width="50px" height="20px" color="black" viewBox="0 0 66 43" version="1.1"
+                       xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                      <path class="one"
+                            d="M40.1543933,3.89485454 L43.9763149,0.139296592 C44.1708311,-0.0518420739 44.4826329,-0.0518571125 44.6771675,0.139262789 L65.6916134,20.7848311 C66.0855801,21.1718824 66.0911863,21.8050225 65.704135,22.1989893 C65.7000188,22.2031791 65.6958657,22.2073326 65.6916762,22.2114492 L44.677098,42.8607841 C44.4825957,43.0519059 44.1708242,43.0519358 43.9762853,42.8608513 L40.1545186,39.1069479 C39.9575152,38.9134427 39.9546793,38.5968729 40.1481845,38.3998695 C40.1502893,38.3977268 40.1524132,38.395603 40.1545562,38.3934985 L56.9937789,21.8567812 C57.1908028,21.6632968 57.193672,21.3467273 57.0001876,21.1497035 C56.9980647,21.1475418 56.9959223,21.1453995 56.9937605,21.1432767 L40.1545208,4.60825197 C39.9574869,4.41477773 39.9546013,4.09820839 40.1480756,3.90117456 C40.1501626,3.89904911 40.1522686,3.89694235 40.1543933,3.89485454 Z"
+                            fill="#FFFFFF"></path>
+                      <path class="two"
+                            d="M20.1543933,3.89485454 L23.9763149,0.139296592 C24.1708311,-0.0518420739 24.4826329,-0.0518571125 24.6771675,0.139262789 L45.6916134,20.7848311 C46.0855801,21.1718824 46.0911863,21.8050225 45.704135,22.1989893 C45.7000188,22.2031791 45.6958657,22.2073326 45.6916762,22.2114492 L24.677098,42.8607841 C24.4825957,43.0519059 24.1708242,43.0519358 23.9762853,42.8608513 L20.1545186,39.1069479 C19.9575152,38.9134427 19.9546793,38.5968729 20.1481845,38.3998695 C20.1502893,38.3977268 20.1524132,38.395603 20.1545562,38.3934985 L36.9937789,21.8567812 C37.1908028,21.6632968 37.193672,21.3467273 37.0001876,21.1497035 C36.9980647,21.1475418 36.9959223,21.1453995 36.9937605,21.1432767 L20.1545208,4.60825197 C19.9574869,4.41477773 19.9546013,4.09820839 20.1480756,3.90117456 C20.1501626,3.89904911 20.1522686,3.89694235 20.1543933,3.89485454 Z"
+                            fill="#FFFFFF"></path>
+                      <path class="three"
+                            d="M0.154393339,3.89485454 L3.97631488,0.139296592 C4.17083111,-0.0518420739 4.48263286,-0.0518571125 4.67716753,0.139262789 L25.6916134,20.7848311 C26.0855801,21.1718824 26.0911863,21.8050225 25.704135,22.1989893 C25.7000188,22.2031791 25.6958657,22.2073326 25.6916762,22.2114492 L4.67709797,42.8607841 C4.48259567,43.0519059 4.17082418,43.0519358 3.97628526,42.8608513 L0.154518591,39.1069479 C-0.0424848215,38.9134427 -0.0453206733,38.5968729 0.148184538,38.3998695 C0.150289256,38.3977268 0.152413239,38.395603 0.154556228,38.3934985 L16.9937789,21.8567812 C17.1908028,21.6632968 17.193672,21.3467273 17.0001876,21.1497035 C16.9980647,21.1475418 16.9959223,21.1453995 16.9937605,21.1432767 L0.15452076,4.60825197 C-0.0425130651,4.41477773 -0.0453986756,4.09820839 0.148075568,3.90117456 C0.150162624,3.89904911 0.152268631,3.89694235 0.154393339,3.89485454 Z"
+                            fill="#FFFFFF"></path>
+                    </g>
+                  </svg>
+                </span>
             </a>
           </div>
         </div>
       </div>
     </div>
+  </div>
 
-    <!-- club inside Start -->
-    <div class="club-inside p-96">
-      <div class="container">
-        <div class="row">
-          <div class="col-xl-6">
-            <div class="heading">
-              <h2>Inside the Club</h2>
-              <p>Featured Insights</p>
-            </div>
-            <p class="description">
-              Welcome to Striker Sports Club's news section! Here, you'll find
-              all latest updates, highlights, and behind-the-scenes glimpses
-              of what's happening in our club. Championship wins to player
-              profiles and interviews, we're excited to share our passion for
-              soccer.
-            </p>
-            <img src="{{asset('assets/media/club/Video.png')}}" alt="" class="mb-xl-0 mb-30" />
-          </div>
-          <div class="col-xl-3 col-sm-7 d-grid align-content-center">
-            <img src="{{asset('assets/media/club/Image.png')}}" alt="" class="mb-sm-0 mb-30" />
-          </div>
-          <div class="col-xl-3 col-sm-5">
-            <img src="{{asset('assets/media/club/Image-1.png')}}" alt="" class="mb-30" />
-            <img src="{{asset('assets/media/club/Image-2.png')}}" alt="" />
-          </div>
-        </div>
+  <!-- players area Start -->
+  <div class="players-grid p-96">
+    <div class="container">
+      <div class="heading mb-64">
+        <h2>Player Profiles</h2>
+        <p>Top Rising Stars</p>
       </div>
-    </div>
-
-    <!-- club inside Start -->
-    <div class="showdowns">
-      <div class="container">
-        <div class="heading mb-64">
-          <h2 class="color-white-2">Exciting Showdowns</h2>
-          <p class="color-white-2">Upcoming Fixtures</p>
-        </div>
-        <div class="row">
-          <div class="col-xl-8 offset-xl-2 p-0">
-            <div class="teams-slider">
-              <div class="slide_wrap">
-                <div class="fixture">
-                  <h5>2023-08-10</h5>
-                  <p>Madrid Football Stadium</p>
-                </div>
-                <div class="teams">
-                  <div class="team-1">
-                    <h5>Phoenix SC</h5>
-                  </div>
-                  <div class="vs-logo">
-                    <img src="{{asset('assets/media/team-logos/vs.png')}}" alt="" />
-                  </div>
-                  <div class="team-2">
-                    <h5>Red Lion SC</h5>
-                  </div>
-                </div>
-              </div>
-              <div class="slide_wrap">
-                <div class="fixture">
-                  <h5>2023-08-10</h5>
-                  <p>Madrid Football Stadium</p>
-                </div>
-                <div class="teams">
-                  <div class="team-1">
-                    <h5>Phoenix SC</h5>
-                  </div>
-                  <div class="vs-logo">
-                    <img src="{{asset('assets/media/team-logos/vs.png')}}" alt="" />
-                  </div>
-                  <div class="team-2">
-                    <h5>Red Lion SC</h5>
-                  </div>
-                </div>
-              </div>
+      <div class="row">
+        <div class="col-xl-3 col-sm-6 mb-xl-0 mb-30">
+          <div class="player-card">
+            <div class="player-role">
+              <h6>Forward</h6>
             </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!--Achievements  Start -->
-    <div class="achievements m-96">
-      <div class="container">
-        <div class="heading">
-          <h2>Achievements</h2>
-          <p>Over past years</p>
-        </div>
-        <div class="row">
-          <div class="col-xl-3 col-sm-6">
-            <div class="achievement-block first">
-              <h2>35k</h2>
-              <p>
-                We have earned 35k trophies, demonstrating our hard work and
-                dedication to the sport.
-              </p>
-            </div>
-          </div>
-          <div class="col-xl-3 col-sm-6">
-            <div class="achievement-block second">
-              <h2>24k</h2>
-              <p>
-                Our team has achieved more than 24k victories, showing our
-                commitment to excellence.
-              </p>
-            </div>
-          </div>
-          <div class="col-xl-3 col-sm-6">
-            <div class="achievement-block third">
-              <h2>10k</h2>
-              <p>
-                With 10k undefeated seasons, we’ve established ourselves as a
-                reckoning force.
-              </p>
-            </div>
-          </div>
-          <div class="col-xl-3 col-sm-6">
-            <div class="achievement-block fourth">
-              <h2>198</h2>
-              <p>
-                Our 198 championship titles reflect our team's relentless
-                pursuit of success.
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!--Promotional Banner Start -->
-    <div class="promotional-banner">
-      <div class="container">
-        <div class="content text-end">
-          <h6>Are you Ready to</h6>
-          <h3 class="mb-32">
-            <span class="cc color-primary">Kick</span> the Ball?
-          </h3>
-          <p class="mb-64">
-            Elevate your soccer skills to the <br />
-            next level with us!
-          </p>
-          <a href="contact.html" class="cta">
-            <span class="span">Join Us</span>
-            <span class="second">
-              <svg width="50px" height="20px" color="black" viewBox="0 0 66 43" version="1.1"
-                xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-                <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                  <path class="one"
-                    d="M40.1543933,3.89485454 L43.9763149,0.139296592 C44.1708311,-0.0518420739 44.4826329,-0.0518571125 44.6771675,0.139262789 L65.6916134,20.7848311 C66.0855801,21.1718824 66.0911863,21.8050225 65.704135,22.1989893 C65.7000188,22.2031791 65.6958657,22.2073326 65.6916762,22.2114492 L44.677098,42.8607841 C44.4825957,43.0519059 44.1708242,43.0519358 43.9762853,42.8608513 L40.1545186,39.1069479 C39.9575152,38.9134427 39.9546793,38.5968729 40.1481845,38.3998695 C40.1502893,38.3977268 40.1524132,38.395603 40.1545562,38.3934985 L56.9937789,21.8567812 C57.1908028,21.6632968 57.193672,21.3467273 57.0001876,21.1497035 C56.9980647,21.1475418 56.9959223,21.1453995 56.9937605,21.1432767 L40.1545208,4.60825197 C39.9574869,4.41477773 39.9546013,4.09820839 40.1480756,3.90117456 C40.1501626,3.89904911 40.1522686,3.89694235 40.1543933,3.89485454 Z"
-                    fill="#FFFFFF"></path>
-                  <path class="two"
-                    d="M20.1543933,3.89485454 L23.9763149,0.139296592 C24.1708311,-0.0518420739 24.4826329,-0.0518571125 24.6771675,0.139262789 L45.6916134,20.7848311 C46.0855801,21.1718824 46.0911863,21.8050225 45.704135,22.1989893 C45.7000188,22.2031791 45.6958657,22.2073326 45.6916762,22.2114492 L24.677098,42.8607841 C24.4825957,43.0519059 24.1708242,43.0519358 23.9762853,42.8608513 L20.1545186,39.1069479 C19.9575152,38.9134427 19.9546793,38.5968729 20.1481845,38.3998695 C20.1502893,38.3977268 20.1524132,38.395603 20.1545562,38.3934985 L36.9937789,21.8567812 C37.1908028,21.6632968 37.193672,21.3467273 37.0001876,21.1497035 C36.9980647,21.1475418 36.9959223,21.1453995 36.9937605,21.1432767 L20.1545208,4.60825197 C19.9574869,4.41477773 19.9546013,4.09820839 20.1480756,3.90117456 C20.1501626,3.89904911 20.1522686,3.89694235 20.1543933,3.89485454 Z"
-                    fill="#FFFFFF"></path>
-                  <path class="three"
-                    d="M0.154393339,3.89485454 L3.97631488,0.139296592 C4.17083111,-0.0518420739 4.48263286,-0.0518571125 4.67716753,0.139262789 L25.6916134,20.7848311 C26.0855801,21.1718824 26.0911863,21.8050225 25.704135,22.1989893 C25.7000188,22.2031791 25.6958657,22.2073326 25.6916762,22.2114492 L4.67709797,42.8607841 C4.48259567,43.0519059 4.17082418,43.0519358 3.97628526,42.8608513 L0.154518591,39.1069479 C-0.0424848215,38.9134427 -0.0453206733,38.5968729 0.148184538,38.3998695 C0.150289256,38.3977268 0.152413239,38.395603 0.154556228,38.3934985 L16.9937789,21.8567812 C17.1908028,21.6632968 17.193672,21.3467273 17.0001876,21.1497035 C16.9980647,21.1475418 16.9959223,21.1453995 16.9937605,21.1432767 L0.15452076,4.60825197 C-0.0425130651,4.41477773 -0.0453986756,4.09820839 0.148075568,3.90117456 C0.150162624,3.89904911 0.152268631,3.89694235 0.154393339,3.89485454 Z"
-                    fill="#FFFFFF"></path>
-                </g>
-              </svg>
-            </span>
-          </a>
-        </div>
-      </div>
-    </div>
-
-    <!-- Instagram Feed Start -->
-    <div class="insta_feed p-96">
-      <div class="container">
-        <div class="heading mb-64">
-          <h2>Striker Feed</h2>
-          <p>Club Chronicles</p>
-        </div>
-        <div class="row">
-          <div class="col-lg-6 offset-lg-3">
-            <div class="feed">
-              <img src="{{asset('assets/media/instagram/Image.png')}}" alt="" />
-              <img src="{{asset('assets/media/instagram/Image-1.png')}}" alt="" />
-              <img src="{{asset('assets/media/instagram/Image-2.png')}}" alt="" />
-              <img src="{{asset('assets/media/instagram/Image-3.png')}}" alt="" />
-              <img src="{{asset('assets/media/instagram/Image-4.png')}}" alt="" />
-              <img src="{{asset('assets/media/instagram/Image-5.png')}}" alt="" />
-              <img src="{{asset('assets/media/instagram/Image-6.png')}}" alt="" />
-              <img src="{{asset('assets/media/instagram/Image-7.png')}}" alt="" />
-              <img src="{{asset('assets/media/instagram/Image-8.png')}}" alt="" />
-            </div>
-          </div>
-          <div class="col-xl-3 d-grid align-content-end p-lg-0">
-            <div class="insta-link">
-              <a href=""><i class="fab fa-instagram"></i><span>/strikersportsclub</span></a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Blogs area Start -->
-    <div class="blogs-grid p-96">
-      <div class="container">
-        <div class="row">
-          <div class="col-xl-4 col-md-6">
-            <div class="heading short mb-64">
-              <h2>Blog Stories</h2>
-              <p>Latest News and Insights</p>
-            </div>
-            <div class="blog-card">
-              <img src="{{asset('assets/media/blogs/image.png')}}" alt="" />
+            <div class="img-block">
+              <img src="{{asset('assets/media/players/p-1.png')}}" alt="" />
               <div class="overlay">
                 <div class="content">
-                  <span class="date-block">21 May<br />2023</span>
-                  <a href="blog-detail.html" class="title">Behind the Scenes: A Day in the Life of a Striker SC
-                    Player</a>
-                  <p>
-                    Relive some of Striker SC's greatest moments, from winning
-                    crucial games to lifting trophies. Learn what makes this
-                    club a force to be reckoned with in the world of soccer.
-                  </p>
+                  <ul class="social-links">
+                    <li>
+                      <a href=""><img src="{{asset('assets/media/icon/facebook-w.png')}}" alt="" /></a>
+                    </li>
+                    <li>
+                      <a href=""><img src="{{asset('assets/media/icon/instagram-w.png')}}" alt="" /></a>
+                    </li>
+                    <li>
+                      <a href=""><img src="{{asset('assets/media/icon/twitter-w.png')}}" alt="" /></a>
+                    </li>
+                    <li>
+                      <a href=""><img src="{{asset('assets/media/icon/youtube-w.png')}}" alt="" /></a>
+                    </li>
+                  </ul>
+                  <a href="player-detail.html" class="name">Lional.M</a>
                 </div>
               </div>
             </div>
           </div>
-          <div class="col-xl-4 col-md-6">
-            <div class="blog-card">
-              <img src="{{asset('assets/media/blogs/image-2.png')}}" alt="" />
+        </div>
+        <div class="col-xl-3 col-sm-6 mb-xl-0 mb-30">
+          <div class="player-card">
+            <div class="player-role">
+              <h6>Midfielder</h6>
+            </div>
+            <div class="img-block">
+              <img src="{{asset('assets/media/players/p-2.png')}}" alt="" />
               <div class="overlay">
                 <div class="content">
-                  <span class="date-block">21 May<br />2023</span>
-                  <a href="blog-detail.html" class="title">Top 5 Memorable Moments in Striker SC History</a>
-                  <p>
-                    Relive some of Striker SC's greatest moments, from winning
-                    crucial games to lifting trophies. Learn what makes this
-                    club a force to be reckoned with in the world of soccer.
-                  </p>
+                  <ul class="social-links">
+                    <li>
+                      <a href=""><img src="{{asset('assets/media/icon/facebook-w.png')}}" alt="" /></a>
+                    </li>
+                    <li>
+                      <a href=""><img src="{{asset('assets/media/icon/instagram-w.png')}}" alt="" /></a>
+                    </li>
+                    <li>
+                      <a href=""><img src="{{asset('assets/media/icon/twitter-w.png')}}" alt="" /></a>
+                    </li>
+                    <li>
+                      <a href=""><img src="{{asset('assets/media/icon/youtube-w.png')}}" alt="" /></a>
+                    </li>
+                  </ul>
+                  <a href="player-detail.html" class="name">Hannah.P</a>
                 </div>
               </div>
             </div>
           </div>
-          <div class="col-xl-4 col-md-6 offset-xl-0 offset-md-3">
-            <div class="blog-card mb-64">
-              <img src="{{asset('assets/media/blogs/image-3.png')}}" alt="" />
+        </div>
+        <div class="col-xl-3 col-sm-6 mb-sm-0 mb-30">
+          <div class="player-card">
+            <div class="player-role">
+              <h6>Defender</h6>
+            </div>
+            <div class="img-block">
+              <img src="{{asset('assets/media/players/p-3.png')}}" alt="" />
               <div class="overlay">
                 <div class="content">
-                  <span class="date-block">21 May<br />2023</span>
-                  <a href="blog-detail.html" class="title">Interview with the Coach: Insights into Striker SC's
-                    Winning Strategy</a>
-                  <p>
-                    Relive some of Striker SC's greatest moments, from winning
-                    crucial games to lifting trophies. Learn what makes this
-                    club a force to be reckoned with in the world of soccer.
-                  </p>
-                </div>
-              </div>
-            </div>
-            <div class="text-center">
-              <a href="blog-grid.html" class="cta">
-                <span class="span">View More</span>
-                <span class="second">
-                  <svg width="50px" height="20px" color="black" viewBox="0 0 66 43" version="1.1"
-                    xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-                    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                      <path class="one"
-                        d="M40.1543933,3.89485454 L43.9763149,0.139296592 C44.1708311,-0.0518420739 44.4826329,-0.0518571125 44.6771675,0.139262789 L65.6916134,20.7848311 C66.0855801,21.1718824 66.0911863,21.8050225 65.704135,22.1989893 C65.7000188,22.2031791 65.6958657,22.2073326 65.6916762,22.2114492 L44.677098,42.8607841 C44.4825957,43.0519059 44.1708242,43.0519358 43.9762853,42.8608513 L40.1545186,39.1069479 C39.9575152,38.9134427 39.9546793,38.5968729 40.1481845,38.3998695 C40.1502893,38.3977268 40.1524132,38.395603 40.1545562,38.3934985 L56.9937789,21.8567812 C57.1908028,21.6632968 57.193672,21.3467273 57.0001876,21.1497035 C56.9980647,21.1475418 56.9959223,21.1453995 56.9937605,21.1432767 L40.1545208,4.60825197 C39.9574869,4.41477773 39.9546013,4.09820839 40.1480756,3.90117456 C40.1501626,3.89904911 40.1522686,3.89694235 40.1543933,3.89485454 Z"
-                        fill="#FFFFFF"></path>
-                      <path class="two"
-                        d="M20.1543933,3.89485454 L23.9763149,0.139296592 C24.1708311,-0.0518420739 24.4826329,-0.0518571125 24.6771675,0.139262789 L45.6916134,20.7848311 C46.0855801,21.1718824 46.0911863,21.8050225 45.704135,22.1989893 C45.7000188,22.2031791 45.6958657,22.2073326 45.6916762,22.2114492 L24.677098,42.8607841 C24.4825957,43.0519059 24.1708242,43.0519358 23.9762853,42.8608513 L20.1545186,39.1069479 C19.9575152,38.9134427 19.9546793,38.5968729 20.1481845,38.3998695 C20.1502893,38.3977268 20.1524132,38.395603 20.1545562,38.3934985 L36.9937789,21.8567812 C37.1908028,21.6632968 37.193672,21.3467273 37.0001876,21.1497035 C36.9980647,21.1475418 36.9959223,21.1453995 36.9937605,21.1432767 L20.1545208,4.60825197 C19.9574869,4.41477773 19.9546013,4.09820839 20.1480756,3.90117456 C20.1501626,3.89904911 20.1522686,3.89694235 20.1543933,3.89485454 Z"
-                        fill="#FFFFFF"></path>
-                      <path class="three"
-                        d="M0.154393339,3.89485454 L3.97631488,0.139296592 C4.17083111,-0.0518420739 4.48263286,-0.0518571125 4.67716753,0.139262789 L25.6916134,20.7848311 C26.0855801,21.1718824 26.0911863,21.8050225 25.704135,22.1989893 C25.7000188,22.2031791 25.6958657,22.2073326 25.6916762,22.2114492 L4.67709797,42.8607841 C4.48259567,43.0519059 4.17082418,43.0519358 3.97628526,42.8608513 L0.154518591,39.1069479 C-0.0424848215,38.9134427 -0.0453206733,38.5968729 0.148184538,38.3998695 C0.150289256,38.3977268 0.152413239,38.395603 0.154556228,38.3934985 L16.9937789,21.8567812 C17.1908028,21.6632968 17.193672,21.3467273 17.0001876,21.1497035 C16.9980647,21.1475418 16.9959223,21.1453995 16.9937605,21.1432767 L0.15452076,4.60825197 C-0.0425130651,4.41477773 -0.0453986756,4.09820839 0.148075568,3.90117456 C0.150162624,3.89904911 0.152268631,3.89694235 0.154393339,3.89485454 Z"
-                        fill="#FFFFFF"></path>
-                    </g>
-                  </svg>
-                </span>
-              </a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- players area Start -->
-    <div class="players-grid p-96">
-      <div class="container">
-        <div class="heading mb-64">
-          <h2>Player Profiles</h2>
-          <p>Top Rising Stars</p>
-        </div>
-        <div class="row">
-          <div class="col-xl-3 col-sm-6 mb-xl-0 mb-30">
-            <div class="player-card">
-              <div class="player-role">
-                <h6>Forward</h6>
-              </div>
-              <div class="img-block">
-                <img src="{{asset('assets/media/players/p-1.png')}}" alt="" />
-                <div class="overlay">
-                  <div class="content">
-                    <ul class="social-links">
-                      <li>
-                        <a href=""><img src="{{asset('assets/media/icon/facebook-w.png')}}" alt="" /></a>
-                      </li>
-                      <li>
-                        <a href=""><img src="{{asset('assets/media/icon/instagram-w.png')}}" alt="" /></a>
-                      </li>
-                      <li>
-                        <a href=""><img src="{{asset('assets/media/icon/twitter-w.png')}}" alt="" /></a>
-                      </li>
-                      <li>
-                        <a href=""><img src="{{asset('assets/media/icon/youtube-w.png')}}" alt="" /></a>
-                      </li>
-                    </ul>
-                    <a href="player-detail.html" class="name">Lional.M</a>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-xl-3 col-sm-6 mb-xl-0 mb-30">
-            <div class="player-card">
-              <div class="player-role">
-                <h6>Midfielder</h6>
-              </div>
-              <div class="img-block">
-                <img src="{{asset('assets/media/players/p-2.png')}}" alt="" />
-                <div class="overlay">
-                  <div class="content">
-                    <ul class="social-links">
-                      <li>
-                        <a href=""><img src="{{asset('assets/media/icon/facebook-w.png')}}" alt="" /></a>
-                      </li>
-                      <li>
-                        <a href=""><img src="{{asset('assets/media/icon/instagram-w.png')}}" alt="" /></a>
-                      </li>
-                      <li>
-                        <a href=""><img src="{{asset('assets/media/icon/twitter-w.png')}}" alt="" /></a>
-                      </li>
-                      <li>
-                        <a href=""><img src="{{asset('assets/media/icon/youtube-w.png')}}" alt="" /></a>
-                      </li>
-                    </ul>
-                    <a href="player-detail.html" class="name">Hannah.P</a>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-xl-3 col-sm-6 mb-sm-0 mb-30">
-            <div class="player-card">
-              <div class="player-role">
-                <h6>Defender</h6>
-              </div>
-              <div class="img-block">
-                <img src="{{asset('assets/media/players/p-3.png')}}" alt="" />
-                <div class="overlay">
-                  <div class="content">
-                    <ul class="social-links">
-                      <li>
-                        <a href=""><img src="{{asset('assets/media/icon/facebook-w.png')}}" alt="" /></a>
-                      </li>
-                      <li>
-                        <a href=""><img src="{{asset('assets/media/icon/instagram-w.png')}}" alt="" /></a>
-                      </li>
-                      <li>
-                        <a href=""><img src="{{asset('assets/media/icon/twitter-w.png')}}" alt="" /></a>
-                      </li>
-                      <li>
-                        <a href=""><img src="{{asset('assets/media/icon/youtube-w.png')}}" alt="" /></a>
-                      </li>
-                    </ul>
-                    <a href="player-detail.html" class="name">Aanna J.</a>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-xl-3 col-sm-6">
-            <div class="player-card">
-              <div class="player-role">
-                <h6>Goal Keeper</h6>
-              </div>
-              <div class="img-block">
-                <img src="{{asset('assets/media/players/p-4.png')}}" alt="" />
-                <div class="overlay">
-                  <div class="content">
-                    <ul class="social-links">
-                      <li>
-                        <a href=""><img src="{{asset('assets/media/icon/facebook-w.png')}}" alt="" /></a>
-                      </li>
-                      <li>
-                        <a href=""><img src="{{asset('assets/media/icon/instagram-w.png')}}" alt="" /></a>
-                      </li>
-                      <li>
-                        <a href=""><img src="{{asset('assets/media/icon/twitter-w.png')}}" alt="" /></a>
-                      </li>
-                      <li>
-                        <a href=""><img src="{{asset('assets/media/icon/youtube-w.png')}}" alt="" /></a>
-                      </li>
-                    </ul>
-                    <a href="player-detail.html" class="name">SMITH W.</a>
-                  </div>
+                  <ul class="social-links">
+                    <li>
+                      <a href=""><img src="{{asset('assets/media/icon/facebook-w.png')}}" alt="" /></a>
+                    </li>
+                    <li>
+                      <a href=""><img src="{{asset('assets/media/icon/instagram-w.png')}}" alt="" /></a>
+                    </li>
+                    <li>
+                      <a href=""><img src="{{asset('assets/media/icon/twitter-w.png')}}" alt="" /></a>
+                    </li>
+                    <li>
+                      <a href=""><img src="{{asset('assets/media/icon/youtube-w.png')}}" alt="" /></a>
+                    </li>
+                  </ul>
+                  <a href="player-detail.html" class="name">Aanna J.</a>
                 </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
-    </div>
-
-    <!-- Footer area Start  -->
-    <footer class="footer pt-96">
-      <div class="text-center">
-        <a href="index.html"><img src="{{asset('assets/media/logo-light.png')}}" alt="" /></a>
-      </div>
-      <div class="main">
-        <div class="container">
-          <div class="row">
-            <div class="col-xl-3 col-md-8">
-              <div class="footer-widget">
-                <h5 class="title">Opening Hours</h5>
-                <ul class="list-unstyled open-hours">
-                  <li>Mon - Fri</li>
-                  <li>07:00 - 23:00</li>
-                  <li>Saturday</li>
-                  <li>Closed</li>
-                  <li>Sunday</li>
-                  <li>Closed</li>
-                </ul>
-              </div>
+        <div class="col-xl-3 col-sm-6">
+          <div class="player-card">
+            <div class="player-role">
+              <h6>Goal Keeper</h6>
             </div>
-            <div class="col-xl-6">
-              <div class="footer-widget up-space">
-                <a class="modal-popup popup-btn">SUBSCRIBE</a>
-                <p class="sub">To our news letter for latest updates</p>
-                <ul class="footer-social-links">
-                  <li>
-                    <a href=""><img src="{{asset('assets/media/icon/facebook.png')}}" alt="" /></a>
-                  </li>
-                  <li>
-                    <a href=""><img src="{{asset('assets/media/icon/instagram.png')}}" alt="" /></a>
-                  </li>
-                  <li>
-                    <a href=""><img src="{{asset('assets/media/icon/twitter.png')}}" alt="" /></a>
-                  </li>
-                  <li>
-                    <a href=""><img src="{{asset('assets/media/icon/youtube.png')}}" alt="" /></a>
-                  </li>
-                </ul>
-              </div>
-            </div>
-            <div class="col-xl-3 col-md-8">
-              <div class="footer-widget mb-0 text-xl-end">
-                <h5 class="title">Contact Info</h5>
-                <ul class="contact-list">
-                  <li>
-                    <a href="mailto:info@example.com">example@info.com</a>
-                  </li>
-                  <li><a href="tel:123456789">+1 234 567 78910</a></li>
-                  <li>123 Main Street, Cityville, State, 38000</li>
-                </ul>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="text-center">
-        <p class="copyright-text">
-          All rights reserved by Striker Soccer Club.
-        </p>
-      </div>
-    </footer>
-
-    <!-- Shopping Cart Popup Start -->
-      <aside id="sidebar-cart">
-          <a href="#" class="close-button"><span class="close-icon">X</span></a>
-          <div class="mb-32">
-              <h3 class="font-sec mb-32">SHOPPING CART <span class="h-27">(2)</span></h3>
-              <div class="vr-line"></div>
-          </div>
-          <ul class="product-list">
-              <li class="product-item mb-24">
-                  <a href="javascript:;">
-                      <span class="item-image">
-                          <img src="{{asset('assets/media/products/cart/image.png')}}" alt="Product Photo">
-                      </span>
-                  </a>
-                  <div class="product-text">
-                      <a href="javascript:;">
-                          <h4 class="mb-16">Work Out Sipper</h4>
-                      </a>
-                      <div class="qp_row mb-8">
-                        <div class="quantity quantity-wrap">
-                            <input class="decrement" type="button" value="-" >
-                            <input type="text" name="quantity" value="1" maxlength="2" size="1" class="number">
-                            <input class="increment" type="button" value="+" >
-                        </div>
-                        <div class="price"><h5 class="mb-0"> $99.99</h5></div>
-                      </div>
-                      <a href="#remove" class="color-primary">REMOVE</a>
-                  </div>
-              </li>
-              <li class="vr-line mb-24"></li>
-              <li class="product-item mb-24">
-                  <a href="javascript:;">
-                      <span class="item-image">
-                          <img src="{{asset('assets/media/products/cart/image-2.png')}}" alt="Product Photo">
-                      </span>
-                  </a>
-                  <div class="product-text">
-                      <a href="javascript:;">
-                          <h4 class="mb-16">Flexible Sports Bra</h4>
-                      </a>
-                      <div class="qp_row mb-8">
-                        <div class="quantity quantity-wrap">
-                            <input class="decrement" type="button" value="-" >
-                            <input type="text" name="quantity" value="1" maxlength="2" size="1" class="number">
-                            <input class="increment" type="button" value="+" >
-                        </div>
-                        <div class="price"><h5 class="mb-0"> $56.29</h5></div>
-                      </div>
-                      <a href="#remove" class="color-primary">REMOVE</a>
-                  </div>
-              </li>
-              <li class="vr-line mb-24"></li>
-              <li class="product-item">
-                  <a href="javascript:;">
-                      <span class="item-image">
-                          <img src="{{asset('assets/media/products/cart/image-3.png')}}" alt="Product Photo">
-                      </span>
-                  </a>
-                  <div class="product-text">
-                      <a href="javascript:;">
-                          <h4 class="mb-16">Durable Gym Weight</h4>
-                      </a>
-                      <div class="qp_row mb-8">
-                        <div class="quantity quantity-wrap">
-                            <input class="decrement" type="button" value="-" >
-                            <input type="text" name="quantity" value="1" maxlength="2" size="1" class="number">
-                            <input class="increment" type="button" value="+" >
-                        </div>
-                        <div class="price"><h5 class="mb-0"> $200.00</h5></div>
-                      </div>
-                      <a href="#remove" class="color-primary">REMOVE</a>
-                  </div>
-              </li>
-          </ul>
-          <div class="price-total mb-24">
-              <h4>SUBTOTAL</h4>
-              <h4>$281.98</h4>
-          </div>
-          <div class="vr-line mb-24"></div>
-          <div class="action-buttons">
-              <a href="cart.html" class="cta-4">VIEW CART</a>
-              <a href="checkout.html" class="cta-5">CHECKOUT</a>
-          </div>
-      </aside>
-      <div id="sidebar-cart-curtain"></div>
-    <!-- Shopping Cart Popup End -->
-
-    <!-- newsletter popup form Area start -->
-    <div class="newsletter-popup">
-      <div class="container">
-        <div class="text-end">
-          <button class="close"><i class="far fa-times"></i></button>
-        </div>
-        <div class="row justify-content-center align-items-center">
-          <div class="block">
-            <p>
-              Subscribe to our Newsletter! we will let you know when we are
-              live.
-            </p>
-            <div class="newsletter">
-              <form action="index.html">
-                <div class="input-group">
-                  <input type="email" class="form-control" id="newsletteremail" name="email" required
-                    placeholder="Your mail" />
-                  <button type="submit">
-                    <i class="fal fa-paper-plane"></i>
-                  </button>
+            <div class="img-block">
+              <img src="{{asset('assets/media/players/p-4.png')}}" alt="" />
+              <div class="overlay">
+                <div class="content">
+                  <ul class="social-links">
+                    <li>
+                      <a href=""><img src="{{asset('assets/media/icon/facebook-w.png')}}" alt="" /></a>
+                    </li>
+                    <li>
+                      <a href=""><img src="{{asset('assets/media/icon/instagram-w.png')}}" alt="" /></a>
+                    </li>
+                    <li>
+                      <a href=""><img src="{{asset('assets/media/icon/twitter-w.png')}}" alt="" /></a>
+                    </li>
+                    <li>
+                      <a href=""><img src="{{asset('assets/media/icon/youtube-w.png')}}" alt="" /></a>
+                    </li>
+                  </ul>
+                  <a href="player-detail.html" class="name">SMITH W.</a>
                 </div>
-              </form>
+              </div>
             </div>
           </div>
         </div>
@@ -817,10 +631,189 @@
     </div>
   </div>
 
-  {% endblock %}
+  <!-- Footer area Start  -->
+  <footer class="footer pt-96">
+    <div class="text-center">
+      <a href="index.html"><img src="{{asset('assets/media/logo-light.png')}}" alt="" /></a>
+    </div>
+    <div class="main">
+      <div class="container">
+        <div class="row">
+          <div class="col-xl-3 col-md-8">
+            <div class="footer-widget">
+              <h5 class="title">Opening Hours</h5>
+              <ul class="list-unstyled open-hours">
+                <li>Mon - Fri</li>
+                <li>07:00 - 23:00</li>
+                <li>Saturday</li>
+                <li>Closed</li>
+                <li>Sunday</li>
+                <li>Closed</li>
+              </ul>
+            </div>
+          </div>
+          <div class="col-xl-6">
+            <div class="footer-widget up-space">
+              <a class="modal-popup popup-btn">SUBSCRIBE</a>
+              <p class="sub">To our news letter for latest updates</p>
+              <ul class="footer-social-links">
+                <li>
+                  <a href=""><img src="{{asset('assets/media/icon/facebook.png')}}" alt="" /></a>
+                </li>
+                <li>
+                  <a href=""><img src="{{asset('assets/media/icon/instagram.png')}}" alt="" /></a>
+                </li>
+                <li>
+                  <a href=""><img src="{{asset('assets/media/icon/twitter.png')}}" alt="" /></a>
+                </li>
+                <li>
+                  <a href=""><img src="{{asset('assets/media/icon/youtube.png')}}" alt="" /></a>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div class="col-xl-3 col-md-8">
+            <div class="footer-widget mb-0 text-xl-end">
+              <h5 class="title">Contact Info</h5>
+              <ul class="contact-list">
+                <li>
+                  <a href="mailto:info@example.com">example@info.com</a>
+                </li>
+                <li><a href="tel:123456789">+1 234 567 78910</a></li>
+                <li>123 Main Street, Cityville, State, 38000</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="text-center">
+      <p class="copyright-text">
+        All rights reserved by Striker Soccer Club.
+      </p>
+    </div>
+  </footer>
 
-  <!-- Jquery Js -->
-  {% block js %}
+  <!-- Shopping Cart Popup Start -->
+  <aside id="sidebar-cart">
+    <a href="#" class="close-button"><span class="close-icon">X</span></a>
+    <div class="mb-32">
+      <h3 class="font-sec mb-32">SHOPPING CART <span class="h-27">(2)</span></h3>
+      <div class="vr-line"></div>
+    </div>
+    <ul class="product-list">
+      <li class="product-item mb-24">
+        <a href="javascript:;">
+                      <span class="item-image">
+                          <img src="{{asset('assets/media/products/cart/image.png')}}" alt="Product Photo">
+                      </span>
+        </a>
+        <div class="product-text">
+          <a href="javascript:;">
+            <h4 class="mb-16">Work Out Sipper</h4>
+          </a>
+          <div class="qp_row mb-8">
+            <div class="quantity quantity-wrap">
+              <input class="decrement" type="button" value="-" >
+              <input type="text" name="quantity" value="1" maxlength="2" size="1" class="number">
+              <input class="increment" type="button" value="+" >
+            </div>
+            <div class="price"><h5 class="mb-0"> $99.99</h5></div>
+          </div>
+          <a href="#remove" class="color-primary">REMOVE</a>
+        </div>
+      </li>
+      <li class="vr-line mb-24"></li>
+      <li class="product-item mb-24">
+        <a href="javascript:;">
+                      <span class="item-image">
+                          <img src="{{asset('assets/media/products/cart/image-2.png')}}" alt="Product Photo">
+                      </span>
+        </a>
+        <div class="product-text">
+          <a href="javascript:;">
+            <h4 class="mb-16">Flexible Sports Bra</h4>
+          </a>
+          <div class="qp_row mb-8">
+            <div class="quantity quantity-wrap">
+              <input class="decrement" type="button" value="-" >
+              <input type="text" name="quantity" value="1" maxlength="2" size="1" class="number">
+              <input class="increment" type="button" value="+" >
+            </div>
+            <div class="price"><h5 class="mb-0"> $56.29</h5></div>
+          </div>
+          <a href="#remove" class="color-primary">REMOVE</a>
+        </div>
+      </li>
+      <li class="vr-line mb-24"></li>
+      <li class="product-item">
+        <a href="javascript:;">
+                      <span class="item-image">
+                          <img src="{{asset('assets/media/products/cart/image-3.png')}}" alt="Product Photo">
+                      </span>
+        </a>
+        <div class="product-text">
+          <a href="javascript:;">
+            <h4 class="mb-16">Durable Gym Weight</h4>
+          </a>
+          <div class="qp_row mb-8">
+            <div class="quantity quantity-wrap">
+              <input class="decrement" type="button" value="-" >
+              <input type="text" name="quantity" value="1" maxlength="2" size="1" class="number">
+              <input class="increment" type="button" value="+" >
+            </div>
+            <div class="price"><h5 class="mb-0"> $200.00</h5></div>
+          </div>
+          <a href="#remove" class="color-primary">REMOVE</a>
+        </div>
+      </li>
+    </ul>
+    <div class="price-total mb-24">
+      <h4>SUBTOTAL</h4>
+      <h4>$281.98</h4>
+    </div>
+    <div class="vr-line mb-24"></div>
+    <div class="action-buttons">
+      <a href="cart.html" class="cta-4">VIEW CART</a>
+      <a href="checkout.html" class="cta-5">CHECKOUT</a>
+    </div>
+  </aside>
+  <div id="sidebar-cart-curtain"></div>
+  <!-- Shopping Cart Popup End -->
+
+  <!-- newsletter popup form Area start -->
+  <div class="newsletter-popup">
+    <div class="container">
+      <div class="text-end">
+        <button class="close"><i class="far fa-times"></i></button>
+      </div>
+      <div class="row justify-content-center align-items-center">
+        <div class="block">
+          <p>
+            Subscribe to our Newsletter! we will let you know when we are
+            live.
+          </p>
+          <div class="newsletter">
+            <form action="index.html">
+              <div class="input-group">
+                <input type="email" class="form-control" id="newsletteremail" name="email" required
+                       placeholder="Your mail" />
+                <button type="submit">
+                  <i class="fal fa-paper-plane"></i>
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}
+
+<!-- Jquery Js -->
+{% block js %}
   <script src="{{asset('assets/js/vendor/jquery-3.6.3.min.js')}}"></script>
   <script src="{{asset('assets/js/vendor/bootstrap.min.js')}}"></script>
   <script src="{{asset('assets/js/vendor/slick.min.js')}}"></script>
@@ -828,7 +821,7 @@
   <script src="{{asset('assets/js/vendor/jquery-validator.js')}}"></script>
   <!-- Site Scripts -->
   <script src="{{asset('assets/js/app.js')}}"></script>
-  {% endblock %}
+{% endblock %}
 
 </body>
 

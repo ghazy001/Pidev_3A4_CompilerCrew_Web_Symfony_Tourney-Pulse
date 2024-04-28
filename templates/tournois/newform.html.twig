@@ -25,29 +25,61 @@
                             <div class="form-group mb-32">
                                 {{ form_label(form.nomTournois, 'Tournament Name') }}
                                 {{ form_widget(form.nomTournois, {'attr': {'class': 'form-control'}}) }}
-                                {{ form_errors(form.nomTournois) }}
+                                {% if form.nomTournois.vars.errors|length > 0 %}
+                                    <div style="color: red;">
+                                        {% for error in form.nomTournois.vars.errors %}
+                                            <span>{{ error.message }}</span><br>
+                                        {% endfor %}
+                                    </div>
+                                {% endif %}
                             </div>
                         </div>
                         <div class="col-sm-6">
                             <div class="form-group mb-32">
                                 {{ form_label(form.stade, 'Stadium Name') }}
                                 {{ form_widget(form.stade, {'attr': {'class': 'form-control'}}) }}
-                                {{ form_errors(form.nomTournois) }}
+                                {% if form.stade.vars.errors|length > 0 %}
+                                    <div style="color: red;">
+                                        {% for error in form.stade.vars.errors %}
+                                            <span>{{ error.message }}</span><br>
+                                        {% endfor %}
+                                    </div>
+                                {% endif %}
                             </div>
                         </div>
                     </div>
                     <div class="form-group mb-32">
                         {{ form_label(form.nombreMatch, 'Number of Matchs') }}
                         {{ form_widget(form.nombreMatch, {'attr': {'class': 'form-control'}}) }}
-                        {{ form_errors(form.nombreMatch) }}
+                        {% if form.nombreMatch.vars.errors|length > 0 %}
+                            <div style="color: red;">
+                                {% for error in form.nombreMatch.vars.errors %}
+                                    <span>{{ error.message }}</span><br>
+                                {% endfor %}
+                            </div>
+                        {% endif %}
                     </div>
                     <div class="form-group mb-32">
                         {{ form_label(form.dateDebut, 'Begining Date') }}
                         {{ form_widget(form.dateDebut, {'attr': {'class': 'form-control'}}) }}
+                        {% if form.dateDebut.vars.errors|length > 0 %}
+                            <div style="color: red;">
+                                {% for error in form.dateDebut.vars.errors %}
+                                    <span>{{ error.message }}</span><br>
+                                {% endfor %}
+                            </div>
+                        {% endif %}
                     </div>
                     <div class="form-group mb-32">
                         {{ form_label(form.dateFin, 'End Date') }}
                         {{ form_widget(form.dateFin, {'attr': {'class': 'form-control'}}) }}
+                        {% if form.dateFin.vars.errors|length > 0 %}
+                            <div style="color: red;">
+                                {% for error in form.dateFin.vars.errors %}
+                                    <span>{{ error.message }}</span><br>
+                                {% endfor %}
+                            </div>
+                        {% endif %}
                     </div>
                     <button type="submit" class="form-btn w-100 mb-32" class="btn">{{ button_label|default('Create Tournament') }}</button>
                     <p class="link">Changed your mind? <a href="{{ path('app_tournois_index') }}">back to list</a></p>

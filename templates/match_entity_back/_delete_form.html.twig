@@ -1,4 +1,4 @@
 <form method="post" action="{{ path('app_match_entity_delete_back', {'idMatch': match_entity.idMatch}) }}" onsubmit="return confirm('Are you sure you want to delete this item?');">
     <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ match_entity.idMatch) }}">
-    <button type="submit" class="btn btn-primary w-100 py-8 fs-4 mb-4 rounded-2" class="btn">Delete</button>
+    <button type="submit" class="btn btn-danger w-100 py-8 fs-4 mb-4 rounded-2" class="btn">Delete</button>
 </form>

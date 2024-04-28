@@ -1,62 +1,179 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}MatchEntity index{% endblock %}
+    {% block title %}Tournois index{% endblock %}
 
-{% block body %}
-    <div class="page-title-banner">
-        <div class="bread_crumb">
-        </div>
+    {% block body %}
+
         <div class="container">
             <div class="row">
                 <div class="col-xl-10 col-lg-9 offset-xl-2 offset-lg-3">
-                    <ul class="breadcrumb_wrap">
-                        <li><a href="index.html.twig">Home</a></li>
-                        <li class="onpage"><a href="index.html.twig">Match Display</a></li>
-                    </ul>
+
                 </div>
             </div>
         </div>
-    </div>
-    <div class="createt p-96">
-        <div class="container">
-            <div class="heading mb-64">
-                <h2>Match Display</h2>
-            </div>
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th>MatchName</th>
-                        <th>DateMatch</th>
-                        <th>MatchDuration</th>
-                        <th>TournamentName</th>
-                        <th>Team1Name</th>
-                        <th>Team2Name</th>
-                        <th>actions</th>
-                    </tr>
-                </thead>
-                <tbody>
-                {% for match_entity in match_entities %}
-                    <tr>
-                        <td>{{ match_entity.nomMatch }}</td>
-                        <td>{{ match_entity.dateMatch ? match_entity.dateMatch|date('Y-m-d') : '' }}</td>
-                        <td>{{ match_entity.dureeMatch }}</td>
-                        <td>{{ match_entity.idTournois.nomTournois }}</td>
-                        <td>{{ match_entity.idEquipe1.nom }}</td>
-                        <td>{{ match_entity.idEquipe2.nom }}</td>
-                        
-                        <td>
-                            <a href="{{ path('app_match_entity_show', {'idMatch': match_entity.idMatch}) }}">show</a>
-                            <a href="{{ path('app_match_entity_edit', {'idMatch': match_entity.idMatch}) }}">edit</a>
-                        </td>
-                    </tr>
-                {% else %}
-                    <tr>
-                        <td colspan="8">no records found</td>
-                    </tr>
-                {% endfor %}
-                </tbody>
-            </table>
-            <a href="{{ path('app_match_entity_new') }}">Create new</a>
+
+        <div class="players-grid p-96" style="margin-top: 100px; padding-left: 180px">
+
+            <nav class="navbar upper d-lg-flex d-none">
+
+                <div class="right-content">
+                    <ul>
+                        <li>
+                            <form action="{{ path('app_match_entity_index') }}" method="GET">
+                                <input type="text" class="form-control" id="searchInput" name="query" placeholder="Search...">
+                            </form>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+
+            {% for match_entity in match_entities %}
+                <div class="flip-card">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front">
+                            <p class="title">{{ match_entity.nomMatch }}</p>
+                            <img src="{{asset('assets/images/match.png')}}" style="align-content: center">
+                            <p>{{ match_entity.dateMatch ? match_entity.dateMatch|date('Y-m-d') : '' }}</p>
+                        </div>
+                        <div class="flip-card-back">
+                            <p class="title nomTournois">Tournament Name: {{ match_entity.idTournois.nomTournois }}</p>
+                            <p class="title idEquipe1">Team 1 Name: {{ match_entity.idEquipe1.nom }}</p>
+                            <p class="title idEquipe1">Team 2 Name: {{ match_entity.idEquipe2.nom }}</p>
+                            <button type="submit" class="form-btn w-100 mb-32" class="btn" onclick="window.location.href='{{ path('app_match_entity_show', {'idMatch': match_entity.idMatch}) }}'">Details</button>
+                        </div>
+                    </div>
+                </div>
+            {% else %}
+                <tr>
+                    <td colspan="7">no records found</td>
+                </tr>
+            {% endfor %}
         </div>
-    </div>
-{% endblock %}
+
+        <style>
+            .flip-card {
+                background-color: transparent;
+                width: 200px;
+                height: 300px;
+                perspective: 1000px;
+                font-family: sans-serif;
+                display: inline-block;
+                margin-right: 100px;
+                margin-top: 30px;
+            }
+
+            .title {
+                font-size: 1.2em;
+                font-weight: 900;
+                text-align: center;
+                margin: 0;
+            }
+
+            .flip-card-inner {
+                position: relative;
+                width: 100%;
+                height: 100%;
+                text-align: center;
+                transition: transform 0.8s;
+                transform-style: preserve-3d;
+            }
+
+            .flip-card:hover .flip-card-inner {
+                transform: rotateY(180deg);
+            }
+
+            .flip-card-front, .flip-card-back {
+                box-shadow: 0 8px 14px 0 rgba(0, 0, 0, 0.2);
+                position: absolute;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                width: 100%;
+                height: 100%;
+                -webkit-backface-visibility: hidden;
+                backface-visibility: hidden;
+                border: 2px solid #0056b3; /* Blue border */
+                border-radius: 10px; /* Rounded corners */
+            }
+
+            .flip-card-front {
+                background-color: #f8f9fa; /* Light gray background */
+                color: #343a40; /* Dark text color */
+            }
+
+            .flip-card-back {
+                background-color: #343a40; /* Dark background */
+                color: #f8f9fa; /* Light text color */
+                transform: rotateY(180deg);
+            }
+
+            nav {
+                display: flex;
+                justify-content: center;
+            }
+
+            .paginassion {
+                display: inline-block;
+                border-radius: 5px;
+            }
+
+            .paginassion a {
+                color: black;
+                float: left;
+                padding: 8px 16px;
+                text-decoration: none;
+                border-radius: 5px;
+                transition: background-color .3s;
+                border: 1px solid #2CDD3D; /* Gray */
+                margin: 0 4px; /* 0 is for top and bottom. Feel free to change it */
+                font-size: 22px;
+                text-align: center;
+                box-shadow: 0 8px 14px 0 rgba(0, 0, 0, 0.2);
+            }
+
+            .paginassion a.active {
+                background-color: #4CAF50;
+                color: white;
+                border-radius: 5px;
+            }
+
+            .paginassion a:hover:not(.active) {background-color: #2CDD3D;}
+
+            .paginassion a:first-child {
+                border-top-left-radius: 5px;
+                border-bottom-left-radius: 5px;
+            }
+
+            .paginassion a:last-child {
+                border-top-right-radius: 5px;
+                border-bottom-right-radius: 5px;
+            }
+
+        </style>
+
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script>
+            $(document).ready(function() {
+                // Function to trigger search as the user types
+                $('#searchInput').on('input', function() {
+                    var query = $(this).val(); // Get the search query from the input field
+                    // Make an AJAX request to fetch search results based on the query
+                    $.ajax({
+                        url: 'MatchEntityController.php', // Assuming your PHP script handling the search is named search.php
+                        method: 'GET',
+                        data: {query: query}, // Pass the search query as a parameter
+                        success: function(response) {
+                            $('#searchResults').html(response); // Display the search results
+                        }
+                    });
+                });
+            });
+        </script>
+
+        <nav aria-label="pagination">
+            <ul class="paginassion">
+                <li>{{ knp_pagination_render(match_entities) }}</li>
+            </ul>
+        </nav>
+
+    {% endblock %}

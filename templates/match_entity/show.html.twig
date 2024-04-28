@@ -3,20 +3,15 @@
 {% block title %}MatchEntity{% endblock %}
 
 {% block body %}
-    <div class="page-title-banner">
                 <div class="bread_crumb">
                 </div>
                 <div class="container">
                     <div class="row">
                         <div class="col-xl-10 col-lg-9 offset-xl-2 offset-lg-3">
-                            <ul class="breadcrumb_wrap">
-                                <li><a href="{{ path('app_match_entity_index') }}">Home</a></li>
-                                <li class="onpage"><a href="newform.html.twig">Show Match</a></li>
-                            </ul>
+                            
                         </div>
                     </div>
                 </div>
-            </div>
 <div class="createt p-96">
     <div class="container">
         <div class="heading mb-64">
@@ -54,10 +49,7 @@
             </tr>
         </tbody>
     </table>
-
-
-    <button type="submit" class="form-btn w-100 mb-32" class="btn" onclick="window.location.href='{{ path('app_match_entity_edit', {'idMatch': match_entity.idMatch}) }}'">Edit Match</button>
-    {{ include('match_entity/_delete_form.html.twig') }}
+        
     <a href="{{ path('app_match_entity_index') }}">back to list</a>
     </div>
 </div>

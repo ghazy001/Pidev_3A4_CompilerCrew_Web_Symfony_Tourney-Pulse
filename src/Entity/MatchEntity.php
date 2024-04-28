@@ -36,7 +36,7 @@ class MatchEntity
     #[ORM\ManyToOne(inversedBy: 'match_entity')]
     #[ORM\JoinColumn(name: 'id_equipe1', referencedColumnName: 'id')]
     private ?Equipe $idEquipe1 = null;
-    
+
 
 
     #[ORM\ManyToOne(inversedBy: 'match_entity')]

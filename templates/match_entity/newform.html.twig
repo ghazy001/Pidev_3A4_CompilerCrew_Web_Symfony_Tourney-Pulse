@@ -25,7 +25,13 @@
                             <div class="form-group mb-32">
                                 {{ form_label(form.nomMatch, 'Match Name') }}
                                 {{ form_widget(form.nomMatch, {'attr': {'class': 'form-control'}}) }}
-                                {{ form_errors(form.nomMatch) }}
+                                {% if form.nomMatch.vars.errors|length > 0 %}
+                                    <div style="color: red;">
+                                        {% for error in form.nomMatch.vars.errors %}
+                                            <span>{{ error.message }}</span><br>
+                                        {% endfor %}
+                                    </div>
+                                {% endif %}
                             </div>
                         </div>
                         <div class="col-sm-6">
@@ -38,7 +44,13 @@
                     <div class="form-group mb-32">
                         {{ form_label(form.dateMatch, 'Match Date') }}
                         {{ form_widget(form.dateMatch, {'attr': {'class': 'form-control'}}) }}
-                        {{ form_errors(form.dateMatch) }}
+                        {% if form.dateMatch.vars.errors|length > 0 %}
+                            <div style="color: red;">
+                                {% for error in form.dateMatch.vars.errors %}
+                                    <span>{{ error.message }}</span><br>
+                                {% endfor %}
+                            </div>
+                        {% endif %}
                     </div>
                     <div class="form-group mb-32">
                         {{ form_label(form.idTournois, 'Tournament ID') }}

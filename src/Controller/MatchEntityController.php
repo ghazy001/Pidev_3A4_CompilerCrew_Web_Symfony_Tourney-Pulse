@@ -11,6 +11,7 @@ use App\Repository\MatchRepository;
 use App\Repository\TournoisRepository;
 use App\Repository\EquipeRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -20,18 +21,49 @@ use Symfony\Component\Routing\Annotation\Route;
 class MatchEntityController extends AbstractController
 {
     #[Route('/front', name: 'app_match_entity_index', methods: ['GET'])]
-    public function index(MatchRepository $matchRepository): Response
+    public function index(MatchRepository $matchRepository,Request $request, PaginatorInterface $paginator): Response
     {
-        return $this->render('match_entity/index.html.twig', [
-            'match_entities' => $matchRepository->findAll(),
+        $query = $request->query->get('query');
+
+        if ($query) {
+            $match_entity = $matchRepository->findBySearchTerm($query);
+        }else {
+            // If no search query provided, fetch all tournois
+            $match_entity = $matchRepository->findAll();
+        }
+
+        $match_entity = $paginator->paginate(
+            $match_entity, /* query NOT result */
+            $request->query->getInt('page', 1),
+            4
+        );
+
+        return $this->render('match_entity/index.html.twig', ['match_entities'=>$match_entity
+
         ]);
+
     }
 
     #[Route('/back', name: 'app_match_entity_back_index', methods: ['GET'])]
-    public function index_back(MatchRepository $matchRepository): Response
+    public function index_back(MatchRepository $matchRepository,Request $request, PaginatorInterface $paginator): Response
     {
-        return $this->render('match_entity_back/index.html.twig', [
-            'match_entities' => $matchRepository->findAll(),
+        $query = $request->query->get('query');
+
+        if ($query) {
+            $match_entiti = $matchRepository->findBySearchTerm($query);
+        }else {
+            // If no search query provided, fetch all tournois
+            $match_entiti = $matchRepository->findAll();
+        }
+
+        $match_entiti = $paginator->paginate(
+            $match_entiti, /* query NOT result */
+            $request->query->getInt('page', 1),
+            4
+        );
+
+        return $this->render('match_entity_back/index.html.twig', ['match_entities'=>$match_entiti
+
         ]);
     }
 

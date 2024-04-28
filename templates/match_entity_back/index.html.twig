@@ -3,68 +3,127 @@
 {% block title %}MatchEntity index{% endblock %}
 
 {% block body %}
-    <div class="page-title-banner">
-        <div class="bread_crumb">
-        </div>
-        <div class="container">
-            <div class="row">
-                <div class="col-xl-10 col-lg-9 offset-xl-2 offset-lg-3">
-                    <ul class="breadcrumb_wrap">
-                        <li><a href="index.html.twig">Home</a></li>
-                        <li class="onpage"><a href="index.html.twig">Match Display</a></li>
+    <div style="padding-top: 100px">
+
+        <h1 style="padding-top: 40px; text-align: center;">Liste des Matchs</h1>
+        <div style="overflow-x:auto;">
+            <nav class="navbar upper d-lg-flex d-none">
+                <form action="{{ path('app_match_entity_new_back') }}">
+                    <button class="btn btn-primary" style="padding-right: 30px;" > Crée Match</button>
+                </form>
+                <div class="right-content">
+                    <ul>
+                        <li>
+                            <form action="{{ path('app_match_entity_back_index') }}" method="GET">
+                                <input type="text" class="form-control" id="searchInput" name="query" placeholder="Search...">
+                            </form>
+                        </li>
                     </ul>
                 </div>
-            </div>
+            </nav>
+            <table class="table table-bordered table-striped">
+                <thead>
+                <tr>
+                    <th style="width: 10%;">Match Name</th>
+                    <th style="width: 30%;">Date Match</th>
+                    <th style="width: 30%;">Match Duration</th>
+                    <th style="width: 30%;">Tournament Name</th>
+                    <th style="width: 30%;">Team 1 Name</th>
+                    <th style="width: 30%;">Team 2 Name</th>
+                    <th style="width: 30%;">Actions</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for match_entity in match_entities %}
+                    <tr>
+                        <td>{{ match_entity.nomMatch }}</td>
+                        <td>{{ match_entity.dateMatch ? match_entity.dateMatch|date('Y-m-d') : '' }}</td>
+                        <td>{{ match_entity.dureeMatch }}</td>
+                        <td>{{ match_entity.idTournois.nomTournois }}</td>
+                        <td>{{ match_entity.idEquipe1.nom }}</td>
+                        <td>{{ match_entity.idEquipe2.nom }}</td>
+                        <td> <form action="{{ path('app_match_entity_show_back', {'idMatch': match_entity.idMatch}) }}">
+                                <button class="btn btn-info"  style="margin-bottom: 10px">Show</button>
+                            </form>
+                            <form action="{{ path('app_match_entity_edit_back', {'idMatch': match_entity.idMatch}) }}">
+                                <button class="btn btn-primary" style="padding-right: 30px;" > Edit</button>
+                            </form>
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
         </div>
     </div>
 
-    <div class="row">
-        <div class="col-lg-4 d-flex align-items-stretch">
-            <div class="card w-100">
-                <div class="card-body p-4">
-                    <div class="heading mb-64">
-                        <h2>Matchs Display</h2>
-                    </div>
+    <style>
+        nav {
+            display: flex;
+            justify-content: center;
+        }
 
-                    <table class="table">
-                        <thead>
-                        <tr>
-                            <th>MatchName</th>
-                            <th>DateMatch</th>
-                            <th>MatchDuration</th>
-                            <th>TournamentName</th>
-                            <th>Team1Name</th>
-                            <th>Team2Name</th>
-                            <th>actions</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        {% for match_entity in match_entities %}
-                            <tr>
-                                <td>{{ match_entity.nomMatch }}</td>
-                                <td>{{ match_entity.dateMatch ? match_entity.dateMatch|date('Y-m-d') : '' }}</td>
-                                <td>{{ match_entity.dureeMatch }}</td>
-                                <td>{{ match_entity.idTournois.nomTournois }}</td>
-                                <td>{{ match_entity.idEquipe1.nom }}</td>
-                                <td>{{ match_entity.idEquipe2.nom }}</td>
+        .paginassion {
+            display: inline-block;
+            border-radius: 5px;
+        }
 
-                                <td>
-                                    <a href="{{ path('app_match_entity_show_back', {'idMatch': match_entity.idMatch}) }}">show</a>
-                                    <a href="{{ path('app_match_entity_edit_back', {'idMatch': match_entity.idMatch}) }}">edit</a>
-                                </td>
-                            </tr>
-                        {% else %}
-                            <tr>
-                                <td colspan="7">no records found</td>
-                            </tr>
-                        {% endfor %}
-                        </tbody>
-                    </table>
+        .paginassion a {
+            color: black;
+            float: left;
+            padding: 8px 16px;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color .3s;
+            border: 1px solid #0056b3; /* Blue */
+            margin: 0 4px; /* 0 is for top and bottom. Feel free to change it */
+            font-size: 22px;
+            text-align: center;
+            box-shadow: 0 8px 14px 0 rgba(0, 0, 0, 0.2);
+        }
 
-                    <a href="{{ path('app_match_entity_new_back') }}">Create new</a>
-                </div>
-            </div>
-        </div>
-    </div>
+        .paginassion a.active {
+            background-color: #4CAF50;
+            color: white;
+            border-radius: 5px;
+        }
+
+        .paginassion a:hover:not(.active) {background-color: #0056b3;}
+
+        .paginassion a:first-child {
+            border-top-left-radius: 5px;
+            border-bottom-left-radius: 5px;
+        }
+
+        .paginassion a:last-child {
+            border-top-right-radius: 5px;
+            border-bottom-right-radius: 5px;
+        }
+
+    </style>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            // Function to trigger search as the user types
+            $('#searchInput').on('input', function() {
+                var query = $(this).val(); // Get the search query from the input field
+                // Make an AJAX request to fetch search results based on the query
+                $.ajax({
+                    url: 'MatchEntityController.php', // Assuming your PHP script handling the search is named search.php
+                    method: 'GET',
+                    data: {query: query}, // Pass the search query as a parameter
+                    success: function(response) {
+                        $('#searchResults').html(response); // Display the search results
+                    }
+                });
+            });
+        });
+    </script>
+
+    <nav aria-label="pagination">
+        <ul class="paginassion">
+            <li>{{ knp_pagination_render(match_entities) }}</li>
+        </ul>
+    </nav>
 
 {% endblock %}

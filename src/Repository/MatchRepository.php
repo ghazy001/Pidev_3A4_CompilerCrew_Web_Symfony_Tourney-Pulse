@@ -21,6 +21,48 @@ class MatchRepository extends ServiceEntityRepository
         parent::__construct($registry, MatchEntity::class);
     }
 
+    /**
+     * Find match by search term.
+     *
+     * @param string $searchTerm The search term
+     * @return array The matching tournois
+     */
+    public function findBySearchTerm(string $searchTerm): array
+    {
+        // Implement your search logic here, for example:
+        return $this->createQueryBuilder('m')
+            ->andWhere('m.nomMatch LIKE :searchTerm')
+            ->setParameter('searchTerm', '%' . $searchTerm . '%')
+            ->getQuery()
+            ->getResult();
+    }
+
+    public function Nbrmatchs(): int
+    {
+        $entityManager = $this->getEntityManager();
+
+        $query = $entityManager->createQuery(
+            'SELECT COUNT(m.idMatch) AS total FROM App\Entity\MatchEntity m'
+        );
+
+        $total = $query->getSingleScalarResult(); // Utilisez getSingleScalarResult() pour obtenir directement le résultat du compte
+
+        return (int) $total; // Convertissez le résultat en entier
+    }
+
+    public function countMatchByDate()
+    {
+        $entityManager = $this->getEntityManager();
+        $query = $entityManager->createQuery(
+            'SELECT SUBSTRING(m.dateMatch,1,4) AS matchDate, COUNT(m.idMatch) AS matchCount 
+         FROM App\Entity\MatchEntity m 
+         GROUP BY matchDate 
+         ORDER BY matchDate'
+        );
+
+        return $query->getResult();
+    }
+
 //    /**
 //     * @return MatchEntity[] Returns an array of MatchEntity objects
 //     */

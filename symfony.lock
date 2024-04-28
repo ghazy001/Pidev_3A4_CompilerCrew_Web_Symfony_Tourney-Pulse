@@ -1,4 +1,7 @@
 {
+    "cmen/google-charts-bundle": {
+        "version": "6.0.0"
+    },
     "doctrine/annotations": {
         "version": "2.0",
         "recipe": {
@@ -37,6 +40,9 @@
             "./config/packages/doctrine_migrations.yaml",
             "./migrations/.gitignore"
         ]
+    },
+    "knplabs/knp-paginator-bundle": {
+        "version": "v5.9.0"
     },
     "phpunit/phpunit": {
         "version": "9.6",
@@ -117,6 +123,18 @@
             "./public/index.php",
             "./src/Controller/.gitignore",
             "./src/Kernel.php"
+        ]
+    },
+    "symfony/lock": {
+        "version": "5.4",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "main",
+            "version": "5.2",
+            "ref": "8e937ff2b4735d110af1770f242c1107fdab4c8e"
+        },
+        "files": [
+            "./config/packages/lock.yaml"
         ]
     },
     "symfony/mailer": {
@@ -255,6 +273,9 @@
             "./config/packages/twig.yaml",
             "./templates/base.html.twig"
         ]
+    },
+    "symfony/ux-chartjs": {
+        "version": "v2.17.0"
     },
     "symfony/ux-turbo": {
         "version": "v2.14.2"
