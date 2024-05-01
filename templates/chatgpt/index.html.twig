@@ -1,90 +1,43 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ChatGPT</title>
+
     <style>
-        body {
-            font-family: 'Roboto', sans-serif;
-            background-color: #f0f0f0;
-            margin: 0;
-            padding: 0;
-        }
 
         .container {
-            max-width: 600px;
-            margin: 20px auto;
-            background-color: #f9f9f9;
-            padding: 20px;
-            border-radius: 12px;
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            max-width: 330px;
+            background-color: #fff;
+            border-radius: 10px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             overflow: hidden;
+            z-index: 9999; /* Ensure it's above other content */
         }
 
         h1 {
             text-align: center;
-            color: #333;
-            font-size: 36px;
-            margin-bottom: 20px;
-        }
-
-        form {
-            text-align: center;
-            margin-top: 20px;
-        }
-
-        label {
-            font-size: 18px;
-            color: #333;
-        }
-
-        input[type="text"] {
-            width: calc(100% - 80px);
-            padding: 15px;
-            margin: 10px 0;
-            box-sizing: border-box;
-            border: none;
-            border-bottom: 2px solid #007bff;
-            font-size: 18px;
-            background-color: transparent;
-            transition: border-bottom 0.3s ease;
-        }
-
-        input[type="text"]:focus {
-            outline: none;
-            border-bottom: 2px solid #4caf50;
-        }
-
-        button[type="submit"] {
-            padding: 15px 30px;
-            background-color: #007bff;
-            color: #fff;
-            border: none;
-            border-radius: 25px;
-            cursor: pointer;
-            font-size: 18px;
-            transition: background-color 0.3s ease;
-        }
-
-        button[type="submit"]:hover {
-            background-color: #0056b3;
+            color: #007bff; /* Change color to match AI support bot theme */
+            font-size: 24px;
+            margin: 0;
+            padding: 10px;
+            background-color: #f0f0f0;
+            border-bottom: 1px solid #ddd; /* Add border to separate header */
+            border-radius: 10px 10px 0 0; /* Add rounded corners only to top */
         }
 
         .message-container {
-            clear: both;
-            margin-top: 20px;
-            overflow-y: auto;
-            max-height: 300px;
+            max-height: 250px; /* Limit message container height */
+            overflow-y: auto; /* Add scroll if needed */
+            padding: 10px;
         }
 
         .message {
-            padding: 15px;
-            border-radius: 20px;
-            margin-bottom: 20px;
+            padding: 10px;
+            border-radius: 10px;
+            margin-bottom: 10px;
             max-width: 70%;
             position: relative;
             overflow: hidden;
+            font-size: 16px; /* Decrease font size for better readability */
         }
 
         .user-message {
@@ -93,6 +46,7 @@
             float: left;
             clear: both;
             animation: slideFromLeft 0.5s ease forwards;
+            border-radius: 10px 10px 10px 0; /* Add rounded corners only to top left */
         }
 
         .bot-message {
@@ -101,6 +55,69 @@
             float: right;
             clear: both;
             animation: slideFromRight 0.5s ease forwards;
+            border-radius: 10px 10px 0 10px; /* Add rounded corners only to top right */
+        }
+
+        .suggested-questions {
+            margin-top: 10px; /* Decrease margin for better alignment */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .suggested-question-btn {
+            padding: 8px 16px; /* Decrease padding for smaller buttons */
+            margin: 5px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px; /* Decrease font size for smaller buttons */
+            transition: background-color 0.3s ease;
+        }
+
+        .suggested-question-btn:hover {
+            background-color: #0056b3;
+        }
+
+        /* Input Field and Send Button CSS */
+
+        input[type="text"] {
+            width: calc(70% - 10px);
+            padding: 10px;
+            margin: 10px 0;
+            margin-left: 3px;
+            box-sizing: border-box;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            background-color: #f0f0f0;
+            transition: background-color 0.3s ease;
+            display: inline-block;
+        }
+
+        input[type="text"]:focus {
+            outline: none;
+            background-color: #e0e0e0;
+        }
+
+        button[type="submit"] {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+            display: inline-block;
+            width: calc(30% - 10px);
+            margin-left: 10px;
+        }
+
+        button[type="submit"]:hover {
+            background-color: #0056b3;
         }
 
         @keyframes slideFromLeft {
@@ -120,141 +137,117 @@
                 transform: translateX(0);
             }
         }
+    </style>
+
+
+
+    <header class="header" style="background-color: ghostwhite">
+        <a href="{{ path('app_home') }}" class="logo" style="color: #0f5132">HOME</a>
+        <a href="{{ path('equipe') }}" class="logo" style="color: #0f5132">Teams</a>
+        <a href="{{ path('avis') }}" class="logo" style="color: #0f5132">Review</a>
+
+
+    </header>
+
+
+
+
+
+<div class="container">
+    <h1>ChatGPT</h1>
+    <div class="message-container">
+        {% if question %}
+            <div class="message user-message">
+                <p>{{ question }}</p>
+            </div>
+        {% endif %}
+        {% if response %}
+            <div class="message bot-message">
+                <p>{{ response }}</p>
+            </div>
+        {% endif %}
+    </div>
+    <form action="{{ path('send_chat') }}" method="post">
+        <input type="text" id="text" name="text" placeholder="Type your message...">
+        <button type="submit">Send</button>
+    </form>
+
+    <!-- Suggested Questions -->
+    <div class="suggested-questions">
+        <button class="suggested-question-btn" data-question="Qui a gagné le ballon d'or en 2012 ?">Qui a gagné le ballon d'or en 2012 ?</button>
+        <button class="suggested-question-btn" data-question="Quelle équipe a gagné la coupe du monde 1998 ?">Quelle équipe a gagné la coupe du monde 1998 ?</button>
+        <button class="suggested-question-btn" data-question="Quel est le slogan du club de foot FC Barcelone ?">Quel est le slogan du club de foot FC Barcelone ?</button>
+    </div>
+</div>
+
+
+
+<script>
+    const suggestButtons = document.querySelectorAll('.suggested-question-btn');
+
+    suggestButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            const question = button.dataset.question;
+            document.getElementById('text').value = question;
+        });
+    });
+</script>
+
+
+
+
+    <style>
+        .header {
+            overflow: hidden;
+            background-color: darkgray;
+            padding: 20px 10px;
+        }
+
+        .header a {
+            float: left;
+            color: black;
+            text-align: center;
+            padding: 12px;
+            text-decoration: none;
+            font-size: 18px;
+            line-height: 25px;
+            border-radius: 4px;
+        }
+
+        /* Style the logo link (notice that we set the same value of line-height and font-size to prevent the header from increasing when the font gets bigger) */
+        .header a.logo {
+            font-size: 25px;
+            font-weight: bold;
+        }
+
+        /* Change the background color on mouse-over */
+        .header a:hover {
+            background-color: #ddd;
+            color: black;
+        }
+
+        /* Style the active/current link */
+        .header a.active {
+            background-color: mediumseagreen;
+            color: white;
+        }
+
+        /* Float the link section to the right */
+        .header-right {
+            float: right;
+        }
+
+        /* Add media queries for responsiveness - when the screen is 500px wide or less, stack the links on top of each other */
+        @media screen and (max-width: 500px) {
+            .header a {
+                float: none;
+                display: block;
+                text-align: left;
+            }
+            .header-right {
+                float: none;
+            }
+        }
 
     </style>
-</head>
-<body>
-<div class="cont">
-    <a href="{{ path('app_home') }}"><button>Back to Home</button></a>
-    <div class="container" style="margin-top: 100px">
-        <h1>ChatGPT</h1>
-        <div class="message-container">
-            {% if question %}
-                <div class="message user-message">
-                    <p>{{ question }}</p>
-                </div>
-            {% endif %}
-            {% if response %}
-                <div class="message bot-message">
-                    <p>{{ response }}</p>
-                </div>
-            {% endif %}
-        </div>
-        <form action="{{ path('send_chat') }}" method="post">
-            <input type="text" id="text" name="text" placeholder="Type your message...">
-            <button type="submit">Send</button>
-        </form>
-
-        <!-- Suggested Questions -->
-        <div class="suggested-questions">
-            <button class="suggested-question-btn" data-question="Qui a gagné le ballon d'or en 2012 ?">Qui a gagné le ballon d'or en 2012 ?</button>
-            <button class="suggested-question-btn" data-question="Quelle équipe a gagné la coupe du monde 1998 ?">Quelle équipe a gagné la coupe du monde 1998 ?</button>
-            <button class="suggested-question-btn" data-question="Quel est le slogan du club de foot FC Barcelone ?">Quel est le slogan du club de foot FC Barcelone ?</button>
-        </div>
-    </div>
-
-    <script>
-
-        const suggestButtons = document.querySelectorAll('.suggested-question-btn');
-
-        suggestButtons.forEach(button => {
-            button.addEventListener('click', () => {
-                const question = button.dataset.question;
-                document.getElementById('text').value = question;
-            });
-        });
-    </script>
-</div>
-</body>
-
-</html>
-
-<style>
-    button {
-        margin-top: 9px;
-        padding: 15px 30px;
-        font-size: 18px;
-        outline: none;
-        border: none;
-        border-radius: 10px;
-        transition: 0.5s;
-        background: deepskyblue;
-        cursor: pointer;
-        color: white;
-        box-shadow: 0 0 10px #363636, inset 0 0 10px #363636;
-        margin-left: 20px;
-    }
-
-    button:hover {
-        animation: a 0.5s 1 linear;
-    }
-
-    @keyframes a {
-        0% {
-            transform: scale(0.7, 1.3);
-        }
-
-        25% {
-            transform: scale(1.3, 0.7);
-        }
-
-        50% {
-            transform: scale(0.7, 1.3);
-        }
-
-        75% {
-            transform: scale(1.3, 0.7);
-        }
-
-        100% {
-            transform: scale(1, 1);
-        }
-    }
-
-</style>
-
-<style>
-
-    .cont {
-        position: fixed; /* Position fixed so it stays in place */
-        top: 0;
-        left: 0;
-        width: 100%; /* Cover entire width of the viewport */
-        height: 100%; /* Cover entire height of the viewport */
-        background: repeating-linear-gradient(
-                -135deg,
-                yellow,
-                pink 10px,
-                green 10px,
-                skyblue 20px
-        );
-        z-index: -1; /* Ensure it's behind other content */
-    }
-
-</style>
-
-<style>
-    .suggested-questions {
-        margin-top: 20px;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-    }
-
-    .suggested-question-btn {
-        padding: 10px 20px;
-        margin: 5px;
-        background-color: #007bff;
-        color: #fff;
-        border: none;
-        border-radius: 5px;
-        cursor: pointer;
-        font-size: 16px;
-        transition: background-color 0.3s ease;
-    }
-
-    .suggested-question-btn:hover {
-        background-color: #0056b3;
-    }
-</style>
 

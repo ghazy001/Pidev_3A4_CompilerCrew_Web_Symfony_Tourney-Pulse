@@ -16,7 +16,9 @@
                         <p>{{ donnee.dateavis|date('Y-m-d') }}</p>
                     </div>
                     <div class="flip-card-back">
-                        <p class="title commentaire">{{ donnee.commentaire }}</p>
+                        <p class="title commentaire" id="textToConvert">{{ donnee.commentaire }}</p>
+                        <button class="btn" id="convertBtn">read comment</button>
+                        <p class="error-para"></p>
                         <p>
                             {% for i in range(1, 6) %}
                                 {% if i <= donnee.note %}
@@ -30,6 +32,9 @@
                 </div>
             </div>
         {% endfor %}
+
+
+
     </div>
 
 
@@ -159,6 +164,32 @@
 
                     xhr.send('text=' + encodeURIComponent(textToTranslate));
                 });
+            });
+        });
+    </script>
+
+    <script>
+        document.querySelectorAll('.btn').forEach(function(button) {
+            button.addEventListener('click', function () {
+                const speechSynth = window.speechSynthesis;
+                const card = button.closest('.flip-card');
+                const textToConvertElement = card.querySelector('.commentaire');
+                const textToConvert = textToConvertElement.innerText;
+                const error = card.querySelector('.error-para');
+
+                if (!speechSynth.speaking && textToConvert.trim().length) {
+                    error.textContent = "";
+                    const newUtter = new SpeechSynthesisUtterance(textToConvert);
+                    newUtter.lang = 'en-US';
+                    speechSynth.speak(newUtter);
+                    button.textContent = "Sound is Playing...";
+                } else {
+                    error.textContent = "Nothing to Convert! Enter text in the text area.";
+                }
+
+                setTimeout(() => {
+                    button.textContent = "read comment";
+                }, 5000);
             });
         });
     </script>

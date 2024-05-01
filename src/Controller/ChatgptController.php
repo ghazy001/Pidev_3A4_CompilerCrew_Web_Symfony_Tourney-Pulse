@@ -8,16 +8,6 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-
-/*
-   *
-   *
-   * @author : ghazi saoudi
-   *
-   *
-   *
-   */
-
 class ChatgptController extends AbstractController
 {
     #[Route('/chatgpt', name: 'app_chatgpt')]
@@ -30,12 +20,12 @@ class ChatgptController extends AbstractController
     }
 
     #[Route('/chat', name: 'send_chat', methods: ["POST"])]
-    // Modify the chat method in your controller
+
     public function chat(Request $request): Response
     {
         $question = $request->request->get('text');
 
-        // Implementation du chat gpt
+
 
         $myApiKey ="";
 
