@@ -8,6 +8,10 @@ use App\Form\AvisType;
 use App\Form\MarketPlaceType;
 use App\Repository\MarketPlaceRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Eckinox\PdfBundle\Exception\PdfGenerationException;
+use Eckinox\PdfBundle\Pdf\FormatFactory;
+use Eckinox\PdfBundle\Pdf\PdfGeneratorInterface;
+use Knp\Bundle\SnappyBundle\Snappy\Response\PdfResponse;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Request;
@@ -19,16 +23,40 @@ use Symfony\Component\Mime\Email;
 use Symfony\Component\Mailer\Transport;
 use Symfony\Component\Mailer\Mailer;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Endroid\QrCode\Builder\BuilderInterface;
+use Endroid\QrCode\QrCode;
+use Endroid\QrCode\Writer\PngWriter;
+use Knp\Snappy\Pdf;
 
 
 #[Route('/marketplace')]
 class MarketPlaceController extends AbstractController
-{
+{  private $pdf;
+
+    public function __construct(Pdf $pdf)
+    {
+        $this->pdf = $pdf;
+    }
     #[Route('/', name: 'app_market_place_indexback', methods: ['GET'])]
     public function index(MarketPlaceRepository $marketPlaceRepository): Response
     {
+        $marketPlaces = $marketPlaceRepository->findAll();
+        $averageRatings = [];
+
+        foreach ($marketPlaces as $marketPlace) {
+            $totalRating = 0;
+            $numRatings = 0;
+            foreach ($marketPlace->getAvis() as $avis) {
+                $totalRating += $avis->getNote();
+                $numRatings++;
+            }
+            $averageRating = $numRatings > 0 ? $totalRating / $numRatings : 0;
+            $averageRatings[$marketPlace->getProdName() . '#' . $marketPlace->getId()] = $averageRating;
+        }
+
         return $this->render('market_place/index.html.twig', [
-            'market_places' => $marketPlaceRepository->findAll(),
+            'market_places' => $marketPlaces,
+            'average_ratings' => $averageRatings,
         ]);
     }
     #[Route('/front', name: 'app_market_place_index', methods: ['GET'])]
@@ -41,6 +69,9 @@ class MarketPlaceController extends AbstractController
             $imageData = $marketPlace->getImage();
             $imageString = stream_get_contents($imageData);
             $marketPlace->setImage(base64_encode($imageString));
+           
+               
+            
         }
 
         return $this->render('market_place/indexfront.html.twig', [
@@ -67,7 +98,7 @@ class MarketPlaceController extends AbstractController
             $entityManager->persist($marketPlace);
             $entityManager->flush();
 
-            return $this->redirectToRoute('app_market_place_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_market_place_indexback', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('market_place/new.html.twig', [
@@ -78,7 +109,7 @@ class MarketPlaceController extends AbstractController
 
 
     #[Route('/{id}', name: 'app_market_place_show', methods: ['GET', 'POST'])]
-    public function show(MarketPlace $marketPlace, Request $request, EntityManagerInterface $entityManager): Response
+    public function show(MarketPlace $marketPlace, Request $request, EntityManagerInterface $entityManager,Pdf $pdf): Response
     {
         $totalRating = 0;
         $numRatings = 0;
@@ -109,16 +140,50 @@ class MarketPlaceController extends AbstractController
         // Encode the image as a base64 string
         $imageString = stream_get_contents($marketPlace->getImage());
         $imageBase64 = base64_encode($imageString);
+        $qrCodeData = "Name: ". $marketPlace->getProdName(). "\nDescription: ". $marketPlace->getProdDescription(). "\nPrice: ". $marketPlace->getPrice();
 
+        if ($request->query->get('pdf')) {
+            // Render the HTML template as a PDF
+            $html = $this->renderView('market_place/show.html.twig', [
+                'market_place' => $marketPlace,
+                'averageRating' => $averageRating,
+                'image' => $imageBase64,
+                'form' => $form->createView(),
+                'qr_code_data' => $qrCodeData,
+            ]);
+
+
+
+            $pdf = $pdf->getOutputFromHtml($html);
+
+            // Return the PDF as a response
+            return new Response($pdf, 200, [
+                'Content-Type' => 'application/pdf',
+                'Content-Disposition' => 'attachment; filename="product.pdf"',
+            ]);
+        }
         // Pass the average rating and the base64 encoded image to the template
         return $this->render('market_place/show.html.twig', [
             'market_place' => $marketPlace,
             'form' => $form->createView(),
             'averageRating' => $averageRating,
             'image' => $imageBase64,
+            'qr_code_data' => $qrCodeData,
+
         ]);
 
     }
+    #[Route('/qr-code/{data}', name: 'qr_code')]
+public function qrCode(string $data): Response
+{
+    $qr_code = QrCode::create($data);
+    $writer = new PngWriter();
+    $result = $writer->write($qr_code);
+    $response = new Response();
+    $response->headers->set('Content-Type', $result->getMimeType());
+    $response->setContent($result->getString());
+    return $response;
+}
 
     #[Route('/{id}/edit', name: 'app_market_place_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, MarketPlace $marketPlace, EntityManagerInterface $entityManager): Response
@@ -129,7 +194,7 @@ class MarketPlaceController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->flush();
 
-            return $this->redirectToRoute('app_market_place_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_market_place_indexback', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('market_place/edit.html.twig', [
@@ -138,7 +203,7 @@ class MarketPlaceController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'app_market_place_delete', methods: ['POST'])]
+    #[Route('/{id}/delete', name: 'app_market_place_delete', methods: ['POST'])]
     public function delete(Request $request, MarketPlace $marketPlace, EntityManagerInterface $entityManager): Response
     {
         if ($this->isCsrfTokenValid('delete'.$marketPlace->getId(), $request->request->get('_token'))) {
@@ -146,7 +211,7 @@ class MarketPlaceController extends AbstractController
             $entityManager->flush();
         }
 
-        return $this->redirectToRoute('app_market_place_index', [], Response::HTTP_SEE_OTHER);
+        return $this->redirectToRoute('app_market_place_indexback', [], Response::HTTP_SEE_OTHER);
     }
 
     #[Route('/{id}/mail', name: 'app_market_place_mail', methods: ['GET', 'POST'])]
@@ -212,4 +277,6 @@ class MarketPlaceController extends AbstractController
             return new JsonResponse(['success' => false]);
         }
     }
+
+
 }

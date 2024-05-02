@@ -3,54 +3,117 @@
 {% block title %}MarketPlace index{% endblock %}
 
 {% block body %}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
     <h1 style="padding-top: 4rem;">MarketPlace index</h1>
+    {% set pageSize = 5 %}
+    {% set totalPages = (market_places|length + pageSize - 1) // pageSize %}
+    {% set currentPage = app.request.get('page', 1) %}
+    {% set startIndex = (currentPage - 1) * pageSize %}
+    <div style="display: flex;">
 
-    <table class="table" style="padding: 2rem;">
-        <thead>
-        <tr>
-            <th>Id</th>
-            <th>Price</th>
-            <th>Quantity</th>
-            <th>ProdName</th>
-            <th>ProdDescription</th>
-            <th>DateProd</th>
-            <th>Image</th>
-            <th>Avis</th>
-            <th>actions</th>
-        </tr>
-        </thead>
-        <tbody>
-        {% for market_place in market_places %}
-            <tr>
-                <td>{{ market_place.id }}</td>
-                <td>{{ market_place.Price }}</td>
-                <td>{{ market_place.Quantity }}</td>
-                <td>{{ market_place.ProdName }}</td>
-                <td>{{ market_place.ProdDescription }}</td>
-                <td>{{ market_place.DateProd ? market_place.DateProd|date('Y-m-d H:i:s') : '' }}</td>
-                <td>{{ market_place.Image }}</td>
-                <td>
-                    {% if market_place.avis|length > 0 %}
-                        {% for avis in market_place.avis %}
-                            {{ avis.note }}
-                            {% if not loop.last %}, {% endif %}
-                        {% endfor %}
-                    {% else %}
-                        No Reviews Assigned
+        <div style="flex: 2;">
+            <canvas id="myChart" width="800" height="400"></canvas>
+        </div>
+        <div style="flex: 2;">
+            <table class="table" style="padding: 2rem;">
+                <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Price</th>
+                    <th>Quantity</th>
+                    <th>ProdName</th>
+                    <th>ProdDescription</th>
+                    <th>DateProd</th>
+                    <th>Image</th>
+                    <th>Avis</th>
+                    <th>actions</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for market_place in market_places|slice(startIndex, pageSize) %}
+                    <tr>
+                        <td>{{ market_place.id }}</td>
+                        <td>{{ market_place.Price }}</td>
+                        <td>{{ market_place.Quantity }}</td>
+                        <td>{{ market_place.ProdName }}</td>
+                        <td>{{ market_place.ProdDescription }}</td>
+                        <td>{{ market_place.DateProd ? market_place.DateProd|date('Y-m-d H:i:s') : '' }}</td>
+                        <td>{{ market_place.Image }}</td>
+                        <td>
+                            {% if market_place.avis|length > 0 %}
+                                {% for avis in market_place.avis %}
+                                    {{ avis.note }}
+                                    {% if not loop.last %}, {% endif %}
+                                {% endfor %}
+                            {% else %}
+                                No Reviews Assigned
+                            {% endif %}
+                        </td>
+                        <td>
+                            <a href="{{ path('app_market_place_show', {'id': market_place.id}) }}">show</a>
+                            <a href="{{ path('app_market_place_edit', {'id': market_place.id}) }}">edit</a>
+                        </td>
+                    </tr>
+                {% else %}
+                    <tr>
+                        <td colspan="8">no records found</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+            <nav aria-label="Page navigation example">
+                <ul class="pagination">
+                    {% if currentPage > 1 %}
+                        <li class="page-item"><a class="page-link" href="?page={{ currentPage - 1 }}">Previous</a></li>
                     {% endif %}
-                </td>
-                <td>
-                    <a href="{{ path('app_market_place_show', {'id': market_place.id}) }}">show</a>
-                    <a href="{{ path('app_market_place_edit', {'id': market_place.id}) }}">edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="8">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+                    {% for i in 1..totalPages %}
+                    <li class="page-item {% if i == currentPage %}active{% endif %}">
+                        <a class="page-link" href="?page={{ i }}">{{ i }}</a>
+                        </li>{% endfor %}
+                    {% if currentPage < totalPages %}
+                        <li class="page-item"><a class="page-link" href="?page={{ currentPage + 1 }}">Next</a></li>
+                    {% endif %}
+                </ul>
+            </nav>
+            <a href="{{ path('app_market_place_new') }}">Create new</a>
 
-    <a href="{{ path('app_market_place_new') }}">Create new</a>
+        </div>
+    </div>
+
+    <canvas id="myChart" style="width:100%;max-width:500px"></canvas>
+
+    <script>
+        var ctx = document.getElementById('myChart').getContext('2d');
+        var chart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: [
+                    {% for market_place in market_places %}
+                    {{ market_place.id }},
+                    {% endfor %}
+                ],
+                datasets: [
+                    {
+                        label: 'Price',
+                        data: [
+                            {% for market_place in market_places %}
+                            {{ market_place.Price }},
+                            {% endfor %}
+                        ],
+                        backgroundColor: 'rgba(75, 192, 192, 0.4)',
+                        borderColor: 'rgba(75, 192, 192, 1)',
+                        borderWidth: 1
+                    }
+                ]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+    </script>
+
 {% endblock %}

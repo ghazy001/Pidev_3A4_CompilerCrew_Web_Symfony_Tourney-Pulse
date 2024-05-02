@@ -3,12 +3,18 @@
 {% block body %}
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-...." crossorigin="anonymous" />
     <div class="row" style="padding: 14rem;">
-        {% for market_place in market_places %}
+        {% set pageSize = 5 %}
+        {% set totalPages = (market_places|length + pageSize - 1) // pageSize %}
+        {% set currentPage = app.request.get('page', 1) %}
+        {% set startIndex = (currentPage - 1) * pageSize %}
+
+        {% for market_place in market_places|slice(startIndex, pageSize) %}
             <div class="col-md-4">
                 <div class="card mb-4 shadow-sm" style="width: 300px; height: 400px;">
                     <img class="card-img-top" src="data:image/jpeg;base64,{{ market_place.Image|split(';')|last|split(',')|last }}" alt="{{ market_place.ProdName }}" style="width: 300px; height: 300px;">
                     <div class="card-body">
                         <h5 class="card-title">{{ market_place.ProdName }}</h5>
+                        
                         <p class="card-text">{{ market_place.ProdDescription }}</p>
                         <p>
                             {% if market_place.avis|length > 0 %}
@@ -47,10 +53,36 @@
                                 <a href="{{ path('app_market_place_mail', { 'id': market_place.id }) }}" class="btn btn-sm btn-outline-secondary">Purchase</a>
                             </div>
                             <small class="text-muted">{{ market_place.Price }}</small>
+                            
                         </div>
                     </div>
                 </div>
             </div>
+        {% else %}
+            <div class="col-md-4">
+                <div class="card mb-4 shadow-sm" style="width: 300px; height: 400px;">
+                    <div class="card-body">
+                        <h5 class="card-title">No records found</h5>
+                    </div>
+                </div>
+            </div>
         {% endfor %}
+
+    <nav aria-label="Page navigation example">
+    <ul class="pagination justify-content-center">
+        {% if currentPage > 1 %}
+            <li class="page-item"><a class="page-link" href="?page={{ currentPage - 1 }}" style="padding: 0.3rem 0.1rem; font-size: 1.2rem;">Prev</a></li>
+        {% endif %}
+        {% for i in 1..totalPages %}
+            <li class="page-item {% if i == currentPage %}active{% endif %}">
+                <a class="page-link" href="?page={{ i }}" style="padding: 0.3rem 0.5rem; font-size: 1.2rem;">{{ i }}</a>
+            </li>
+        {% endfor %}
+        {% if currentPage < totalPages %}
+            <li class="page-item"><a class="page-link" href="?page={{ currentPage + 1 }}" style="padding: 0.3rem 0.1rem; font-size: 1.2rem;">Next</a></li>
+        {% endif %}
+    </ul>
+</nav>
     </div>
+    
 {% endblock %}

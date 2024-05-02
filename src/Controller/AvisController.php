@@ -10,15 +10,24 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Knp\Snappy\Pdf;
 
 #[Route('/avis')]
 class AvisController extends AbstractController
 {
+    private $pdf;
+
+    public function __construct(Pdf $pdf)
+    {
+        $this->pdf = $pdf;
+    }
     #[Route('/', name: 'app_avis_index', methods: ['GET'])]
     public function index(AvisRepository $avisRepository): Response
     {
         return $this->render('avis/index.html.twig', [
             'avis' => $avisRepository->findAll(),
+            'currentPage' => 1, // or the current page number
+           // 'totalPages' => $totalPages,
         ]);
     }
 
