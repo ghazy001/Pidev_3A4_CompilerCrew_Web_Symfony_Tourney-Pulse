@@ -12,6 +12,28 @@
                 <form action="{{ path('app_tournois_back_new') }}">
                     <button class="btn btn-primary" style="padding-right: 30px;" > Crée Tournois</button>
                 </form>
+                <div>
+                    <select name="cars" id="cars" class="form-select" style="width: 100px;  display: inline-block">
+                        <option value="">All</option>
+                        <option value="2024">2024</option>
+                        <option value="2025">2025</option>
+                        <option value="2026">2026</option>
+                        <option value="2027">2027</option>
+
+                    </select>
+
+                    <button id="applyButton" class="btn btn-primary"  style=" margin-left: 10px">filterBy</button>
+
+                    <select name="order" id="order" class="form-select" style="width: 120px; display: inline-block;margin-left: 30px;">
+                        <option value="">default</option>
+                        <option value="AtoZ">Tournament</option>
+                        <option value="stadium">Stadium</option>
+
+
+                    </select>
+
+                    <button id="applyB" class="btn btn-primary" style=" margin-left: 10px" >orderBy</button>
+                </div>
                 <div class="right-content">
                     <ul>
                         <li>
@@ -99,6 +121,8 @@
         }
     </style>
 
+
+
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
         $(document).ready(function() {
@@ -115,6 +139,21 @@
                     }
                 });
             });
+        });
+    </script>
+
+
+    <script>
+        document.getElementById("applyButton").addEventListener("click", function() {
+            var selectedYear = document.getElementById("cars").value;
+            window.location.href = "/tournois/back?year=" + selectedYear;
+        });
+    </script>
+
+    <script>
+        document.getElementById("applyB").addEventListener("click", function() {
+            var selectedOrder = document.getElementById("order").value;
+            window.location.href = "/tournois/back?order=" + selectedOrder;
         });
     </script>
 

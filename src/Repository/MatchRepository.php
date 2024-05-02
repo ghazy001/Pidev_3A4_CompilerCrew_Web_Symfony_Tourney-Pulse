@@ -63,6 +63,34 @@ class MatchRepository extends ServiceEntityRepository
         return $query->getResult();
     }
 
+    public function findByYear($year)
+    {
+        $entityManager = $this->getEntityManager();
+        $query = $entityManager->createQuery(
+            "SELECT m FROM App\Entity\MatchEntity m WHERE m.dateMatch >= :startOfYear AND m.dateMatch < :startOfNextYear"
+        );
+
+        $startDate = new \DateTime($year . '-01-01');
+        $endDate = new \DateTime(($year + 1) . '-01-01');
+
+        $query->setParameters([
+            'startOfYear' => $startDate,
+            'startOfNextYear' => $endDate,
+        ]);
+
+        return $query->getResult();
+    }
+
+    public function orderByname()
+    {
+        $entityManager = $this->getEntityManager();
+        $query = $entityManager->createQuery(
+            "SELECT m FROM App\Entity\MatchEntity m ORDER BY m.nomMatch "
+        );
+
+        return $query->getResult();
+    }
+
 //    /**
 //     * @return MatchEntity[] Returns an array of MatchEntity objects
 //     */

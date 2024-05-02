@@ -1,0 +1,94 @@
+{% extends 'back.html.twig' %}
+
+{% block title %}Contact Page{% endblock %}
+
+{% block body %}
+    <div class="page-title-banner">
+        <div class="bread_crumb">
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="mb-3">
+                    <ul class="breadcrumb_wrap">
+                        <li><a href="{{ path('app_tournois_index') }}">Tournaments</a></li>
+                        <li class="onpage"><a href="newform.html.twig">Create Tournament</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+<div class="createt mb-3">
+    <div class="container">
+        <div class="mb-3">
+            <h2>Formulaire De Contact</h2>
+        </div>
+        <div class="row">
+            <div class="mb-3">
+                <div class="col-sm-6">
+                    <div class="mb-3">
+                        {{ form(formulaire) }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+    <style>
+        /* Appliquer des marges en bas à tous les éléments */
+        .row .mb-3 {
+            margin-bottom: 1rem;
+        }
+
+        /* Appliquer une largeur de 50% aux colonnes pour les écrans de taille moyenne (sm) */
+        .row .col-sm-6 {
+            width: 50%;
+        }
+
+        /* Ajouter une marge à gauche et à droite auto pour centrer les colonnes */
+        .row .col-sm-6 {
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Styliser les champs de formulaire à l'intérieur du formulaire */
+        .row .col-sm-6 input[type="text"],
+        .row .col-sm-6 input[type="email"],
+        .row .col-sm-6 textarea,
+        .row .col-sm-6 select {
+            width: 100%;
+            padding: 0.5rem;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box; /* Assurer que la largeur inclut le padding et la bordure */
+            margin-bottom: 0.5rem;
+        }
+
+        .row .col-sm-6 input[type="text"]:hover {
+            border: 1px solid #007bff;
+        }
+
+        .row .col-sm-6 textarea:hover {
+            border: 1px solid #007bff;
+        }
+
+        /* Styliser le bouton de soumission */
+        .row .col-sm-6 button[type="submit"] {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        /* Au survol du bouton de soumission */
+        .row .col-sm-6 button[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+
+    </style>
+
+
+{% endblock %}

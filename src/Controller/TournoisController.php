@@ -3,14 +3,19 @@
 namespace App\Controller;
 
 use App\Entity\Tournois;
+use App\Form\ContactType;
 use App\Form\TournoisType;
 use App\Repository\MatchRepository;
 use App\Repository\TournoisRepository;
+use App\Service\PdfService;
 use Doctrine\ORM\EntityManagerInterface;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\ResponseHeaderBag;
+use Symfony\Component\Mailer\MailerInterface;
+use Symfony\Component\Mime\Email;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\UX\Chartjs\Builder\ChartBuilderInterface;
 use CMEN\GoogleChartsBundle\GoogleCharts\Charts\BarChart;
@@ -23,15 +28,12 @@ class TournoisController extends AbstractController
     public function index(TournoisRepository $tournoisRepository, Request $request, PaginatorInterface $paginator): Response
     {
         $query = $request->query->get('query');
-        $sortBy = $request->query->get('sortBy', 'name'); // Par défaut, trié par nom du tournoi
-        $sortOrder = $request->query->get('sortOrder', 'DESC'); // Par défaut, trié par ordre décroissant
 
         // Récupération des tournois selon les critères de recherche et de tri
         if ($query) {
             $tournois = $tournoisRepository->findBySearchTerm($query);
-        } elseif ($sortBy && $sortOrder) {
-            // Si aucune requête de recherche fournie, récupérer tous les tournois avec tri
-            $tournois = $tournoisRepository->findAllSorted($sortBy, $sortOrder);
+        }else {
+            $tournois = $tournoisRepository->findAll();
         }
 
         $tournois = $paginator->paginate(
@@ -41,9 +43,7 @@ class TournoisController extends AbstractController
         );
 
         return $this->render('tournois/index.html.twig', [
-            'tournois' => $tournois,
-            'sortBy' => $sortBy,
-            'sortOrder' => $sortOrder,
+            'tournois' => $tournois
         ]);
     }
 
@@ -53,12 +53,24 @@ class TournoisController extends AbstractController
     public function index_back(TournoisRepository $tournoisRepository,Request $request, PaginatorInterface $paginator): Response
     {
         $query = $request->query->get('query');
+        $year = $request->query->get('year');
+        $order = $request->query->get('order');
 
         if ($query) {
             $tournoi = $tournoisRepository->findBySearchTerm($query);
         }else {
             // If no search query provided, fetch all tournois
             $tournoi = $tournoisRepository->findAll();
+        }
+
+        if ($year) {
+            $tournoi = $tournoisRepository->findByYear($year); // Implement this method in your repository
+        }
+
+        if ($order === 'AtoZ') {
+            $tournoi = $tournoisRepository->orderByname();
+        } elseif ($order === 'stadium') {
+            $tournoi = $tournoisRepository->orderBystadium();
         }
 
         $tournoi = $paginator->paginate(
@@ -186,20 +198,7 @@ class TournoisController extends AbstractController
         return $this->redirectToRoute('app_tournois_back_index', [], Response::HTTP_SEE_OTHER);
     }
 
-    #[Route('/listA', name: 'listA')]
-    public function listTournois(TournoisRepository $tournoisRepository, Request $request): Response
-    {
-        $query = $request->query->get('query');
 
-        if ($query) {
-            $donnees = $tournoisRepository->findBySearchTerm($query);
-        } else {
-            // If no search query provided, fetch all tournois
-            $donnees = $tournoisRepository->findAll();
-        }
-
-        return $this->render('tournois/search.html.twig', ['donnees' => $donnees]);
-    }
 
 //------------------------------stats-----------------
     #[Route('/stats', name: 'stats')]
@@ -266,6 +265,61 @@ class TournoisController extends AbstractController
             'pichart' => $piChart
         ]);
     }
+
+//------------------------------pdf-----------------
+
+    #[Route('/{idTournois}/pdf', name: 'tournois_pdf')]
+    public function generatePdfTournois(Tournois $tournois = null, PdfService $pdf)
+    {
+        $html = $this->renderView('tournois_back/showPdf.html.twig', [
+            'tournois' => $tournois,
+        ]);
+        $pdfContent = $pdf->generatePdfFile($html); // Assume que la méthode retourne le contenu du PDF
+
+        $response = new Response($pdfContent);
+        $disposition = $response->headers->makeDisposition(
+            ResponseHeaderBag::DISPOSITION_ATTACHMENT,
+            'tournois.pdf'
+        );
+        $response->headers->set('Content-Disposition', $disposition);
+
+        return $response;
+    }
+
+//------------------------------mailing-----------------
+
+    #[Route('/sendmail', name: 'sendmail')]
+    public function sendmail(Request $request, MailerInterface $mailer): Response
+    {
+        $form = $this->createForm(ContactType::class);
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+
+           $data = $form->getData();
+
+           $address = $data['email'];
+            $content = $data['content'];
+
+
+           $email = (new Email())
+               ->from('rayanfath03@gmail.com')
+               ->to($address)
+               ->subject('Nouveaux Tournois')
+               ->text($content);
+
+           $mailer->send($email);
+
+        }
+
+        return $this->renderForm('tournois_back/contact.html.twig', [
+            'controller_name' => 'TournoisController',
+            'formulaire' => $form
+        ]);
+    }
+
+
 
 }
 

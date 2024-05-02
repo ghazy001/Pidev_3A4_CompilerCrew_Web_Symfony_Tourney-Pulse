@@ -10,11 +10,13 @@ use App\Form\TournoisType;
 use App\Repository\MatchRepository;
 use App\Repository\TournoisRepository;
 use App\Repository\EquipeRepository;
+use App\Service\PdfService;
 use Doctrine\ORM\EntityManagerInterface;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\ResponseHeaderBag;
 use Symfony\Component\Routing\Annotation\Route;
 
 #[Route('/match/entity')]
@@ -48,12 +50,21 @@ class MatchEntityController extends AbstractController
     public function index_back(MatchRepository $matchRepository,Request $request, PaginatorInterface $paginator): Response
     {
         $query = $request->query->get('query');
+        $year = $request->query->get('year');
+        $order = $request->query->get('order');
 
         if ($query) {
             $match_entiti = $matchRepository->findBySearchTerm($query);
         }else {
             // If no search query provided, fetch all tournois
             $match_entiti = $matchRepository->findAll();
+        }
+        if ($year) {
+            $match_entiti = $matchRepository->findByYear($year); // Implement this method in your repository
+        }
+
+        if ($order === 'AtoZ') {
+            $match_entiti = $matchRepository->orderByname();
         }
 
         $match_entiti = $paginator->paginate(
@@ -179,5 +190,25 @@ class MatchEntityController extends AbstractController
         }
 
         return $this->redirectToRoute('app_match_entity_back_index', [], Response::HTTP_SEE_OTHER);
+    }
+
+    //------------------------------pdf-----------------
+
+    #[Route('/{idMatch}/pdf', name: 'match_entity_pdf')]
+    public function generatePdfMatch(MatchEntity $matchEntity = null, PdfService $pdf)
+    {
+        $html = $this->renderView('match_entity_back/showPdf.html.twig', [
+            'match_entity' => $matchEntity,
+        ]);
+        $pdfContent = $pdf->generatePdfFile($html); // Assume que la méthode retourne le contenu du PDF
+
+        $response = new Response($pdfContent);
+        $disposition = $response->headers->makeDisposition(
+            ResponseHeaderBag::DISPOSITION_ATTACHMENT,
+            'match.pdf'
+        );
+        $response->headers->set('Content-Disposition', $disposition);
+
+        return $response;
     }
 }

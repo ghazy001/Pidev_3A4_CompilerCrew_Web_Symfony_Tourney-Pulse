@@ -5,6 +5,8 @@ namespace App\Repository;
 use App\Entity\Tournois;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Mime\Email;
 
 /**
  * @extends ServiceEntityRepository<Tournois>
@@ -28,8 +30,6 @@ class TournoisRepository extends ServiceEntityRepository
      * Find tournois by search term.
      *
      * @param string $searchTerm The search term
-     * @param string $sortBy The search term
-     * @param string $sortOrder The search term
      * @return array The matching tournois
      */
     public function findBySearchTerm($searchTerm)
@@ -42,30 +42,6 @@ class TournoisRepository extends ServiceEntityRepository
     }
 
     // TournoisRepository.php
-
-    public function findAllSorted($sortBy, $sortOrder)
-    {
-        $queryBuilder = $this->createQueryBuilder('t');
-
-        // Ajout de la logique pour le tri
-        switch ($sortBy) {
-            case 'name':
-                $queryBuilder->orderBy('t.nomTournois', $sortOrder);
-                break;
-            case 'date':
-                $queryBuilder->orderBy('t.date', $sortOrder);
-                break;
-            case 'nombreMatch':
-                $queryBuilder->orderBy('t.nombreMatch', $sortOrder);
-                break;
-            // Ajoutez d'autres cas pour d'autres colonnes de tri si nécessaire
-            default:
-                // Par défaut, triez par date de création
-                $queryBuilder->orderBy('t.createdAt', 'DESC');
-        }
-
-        return $queryBuilder->getQuery()->getResult();
-    }
 
     public function Nbrtournois(): int
     {
@@ -85,6 +61,43 @@ class TournoisRepository extends ServiceEntityRepository
         $entityManager = $this->getEntityManager();
         $query = $entityManager->createQuery(
             'SELECT t.stade, COUNT(t.idTournois) AS totalTournois FROM App\Entity\Tournois t GROUP BY t.stade ORDER BY t.stade'
+        );
+
+        return $query->getResult();
+    }
+
+    public function findByYear($year)
+    {
+        $entityManager = $this->getEntityManager();
+        $query = $entityManager->createQuery(
+            "SELECT t FROM App\Entity\Tournois t WHERE t.dateDebut >= :startOfYear AND t.dateFin < :startOfNextYear"
+        );
+
+        $startDate = new \DateTime($year . '-01-01');
+        $endDate = new \DateTime(($year + 1) . '-01-01');
+
+        $query->setParameters([
+            'startOfYear' => $startDate,
+            'startOfNextYear' => $endDate,
+        ]);
+
+        return $query->getResult();
+    }
+
+    public function orderByname()
+    {
+        $entityManager = $this->getEntityManager();
+        $query = $entityManager->createQuery(
+            "SELECT t FROM App\Entity\Tournois t ORDER BY t.nomTournois "
+        );
+
+        return $query->getResult();
+    }
+    public function orderBystadium()
+    {
+        $entityManager = $this->getEntityManager();
+        $query = $entityManager->createQuery(
+            "SELECT t FROM App\Entity\Tournois t ORDER BY t.stade "
         );
 
         return $query->getResult();
