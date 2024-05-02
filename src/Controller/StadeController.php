@@ -13,27 +13,40 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\String\Slugger\SluggerInterface;
+use Knp\Component\Pager\PaginatorInterface;
 
 #[Route('/stade')]
 class StadeController extends AbstractController
 {
     #[Route('/', name: 'app_stade_index', methods: ['GET'])]
-    public function index(EntityManagerInterface $entityManager): Response
+    public function index(EntityManagerInterface $entityManager,Request $request,
+    PaginatorInterface $paginator): Response
     {
         $stades = $entityManager
             ->getRepository(Stade::class)
             ->findAll();
-
+            $stades = $paginator->paginate(
+                $stades, /* query NOT result */
+                $request->query->getInt('page', 1),
+                1
+            );
         return $this->render('stade/index.html.twig', [
             'stades' => $stades,
         ]);
     }
     #[Route('/front', name: 'app_stade_indexFront', methods: ['GET'])]
-    public function indexFront(EntityManagerInterface $entityManager): Response
+    public function indexFront(EntityManagerInterface $entityManager,Request $request,
+    PaginatorInterface $paginator): Response
     {
         $stades = $entityManager
             ->getRepository(Stade::class)
             ->findAll();
+
+            $stades = $paginator->paginate(
+                $stades, /* query NOT result */
+                $request->query->getInt('page', 1),
+                3
+            );
 
         return $this->render('stade/indexFront.html.twig', [
             'stades' => $stades,

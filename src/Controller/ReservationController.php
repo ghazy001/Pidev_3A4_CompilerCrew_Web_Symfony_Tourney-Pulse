@@ -15,16 +15,24 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Knp\Component\Pager\PaginatorInterface;
 
 #[Route('/reservation')]
 class ReservationController extends AbstractController
 {
     #[Route('/', name: 'app_reservation_index', methods: ['GET'])]
-    public function index(EntityManagerInterface $entityManager): Response
+    public function index(EntityManagerInterface $entityManager,Request $request
+,PaginatorInterface $paginator
+): Response
     {
         $reservations = $entityManager
             ->getRepository(Reservation::class)
             ->findAll();
+            $reservations = $paginator->paginate(
+                $reservations, /* query NOT result */
+                $request->query->getInt('page', 1),
+                3
+            );
 
         return $this->render('reservation/index.html.twig', [
             'reservations' => $reservations,
@@ -111,7 +119,7 @@ class ReservationController extends AbstractController
            
             $qrCode = new QrCode('Reservation Details:' . "\n" .
             'Stade: ' . $stade->getNom() . "\n" .
-            'Reservation ID: ' . $reservation->getId() . "\n" .
+            
             'Première équipe: ' . $reservation->getIdPremiereequipe() . "\n" .
             'Deuxième équipe: ' . $reservation->getIdDeuxiemeequipe() . "\n" .
             'Organisateur: ' . $reservation->getIdOrganisateur());

@@ -39,16 +39,75 @@
                                     <img src="{{ asset('uploads/image.png') }}" alt="Default Image" class="d-block w-100">
                                 {% endif %}
                                 <div class="stade-info">
-                                    <div class="info-row nom"><span class="label">Nom:</span><span class="value">{{ stade.nom }}</span></div>
-                                    <div class="info-row lieu"><span class="label">Lieu:</span><span class="value">{{ stade.lieu }}</span></div>
-                                    <div class="info-row capacite"><span class="label">Capacité:</span><span class="value">{{ stade.capacity }}</span></div>
-                                    <div class="info-row numero"><span class="label">Numéro:</span><span class="value">{{ stade.numero }}</span></div>
+                                  <style>
+    .info-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center; /* Centre les éléments horizontalement */
+        text-align: center; /* Centre le texte à l'intérieur des éléments */
+    }
+
+    .info-row {
+        margin-bottom: 10px; /* Ajoute un espacement entre chaque ligne d'info */
+        opacity: 0; /* Commence avec une opacité de 0 */
+        transition: opacity 0.5s ease-in-out; /* Transition de l'opacité */
+    }
+
+    .info-row.visible {
+        opacity: 1; /* Met l'opacité à 1 lorsqu'il est visible */
+    }
+
+    .label {
+        font-weight: bold; /* Rend le texte de l'étiquette en gras */
+        margin-right: 10px; /* Ajoute un espace à droite de l'étiquette */
+        color: #333; /* Couleur du texte de l'étiquette */
+    }
+
+    .value {
+        color: #555; /* Couleur du texte de la valeur */
+    }
+</style>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        // Fonction pour ajouter la classe 'visible' aux lignes d'info
+        var infoRows = document.querySelectorAll(".info-row");
+        infoRows.forEach(function(row) {
+            row.classList.add("visible");
+        });
+    });
+</script>
+
+<div class="info-container">
+    <div class="info-row nom">
+        <span class="label">Nom :</span>
+        <span class="value">{{ stade.nom }}</span>
+    </div>
+
+    <div class="info-row lieu">
+        <span class="label">Lieu :</span>
+        <span class="value">{{ stade.lieu }}</span>
+    </div>
+
+    <div class="info-row capacite">
+        <span class="label">Capacité :</span>
+        <span class="value">{{ stade.capacity }}</span>
+    </div>
+
+    <div class="info-row numero">
+        <span class="label">Numéro :</span>
+        <span class="value">{{ stade.numero }}</span>
+    </div>
+</div>
+
                                 </div>
                                 <div class="cart-btn">
                                     <a href="{{ path('app_stade_reservation_new', {'stadeId': stade.id}) }}" class="cta-2"><span class="span">Reserve <i class="far fa-chevron-right"></i></span></a>
                                 </div>
                             </div>
                         </div>
+                               
+
                     {% else %}
                         <div class="col-12">
                             <p>No stades available.</p>
@@ -60,40 +119,49 @@
 
         </div>
     </section>
-    <style>
-        /* General Container Styling */
-        .search-container {
-            display: flex;
-            justify-content: center;
-            margin-top: 20px;
-            margin-bottom: 20px;
-        }
 
-        /* Styling for the Search Input */
-        .search-input {
-            padding: 10px 15px;
-            font-size: 16px;
-            border: 2px solid #ccc;
-            border-radius: 5px 0 0 5px; /* Rounded left corners */
-            width: 300px; /* You can adjust width as needed */
-        }
+ <style>
+    /* General Container Styling */
+    .search-container {
+        display: flex;
+        justify-content: center;
+        margin-top: 20px;
+        margin-bottom: 20px;
+    }
 
-        /* Styling for the Search Button */
-        .search-button {
-            padding: 10px 20px;
-            font-size: 16px;
-            background-color: #0056b3; /* Primary color for the button */
-            color: white;
-            border: none;
-            cursor: pointer;
-            border-radius: 0 5px 5px 0; /* Rounded right corners */
-            transition: background-color 0.3s;
-        }
+    /* Styling for the Search Input */
+    .search-input {
+        padding: 12px 15px; /* Ajustement du rembourrage */
+        font-size: 16px;
+        border: 2px solid #3498db; /* Couleur de la bordure bleue */
+        border-radius: 5px; /* Coins arrondis uniformes */
+        width: 300px;
+        transition: border-color 0.3s; /* Transition de couleur de bordure */
+    }
 
-        .search-button:hover {
-            background-color: #004494; /* Darker shade for hover effect */
-        }
-    </style>
+    .search-input:focus {
+        outline: none; /* Suppression de la mise en évidence de la boîte de saisie lorsqu'elle est sélectionnée */
+        border-color: #2ecc71; /* Changement de couleur de bordure lorsque la boîte de saisie est sélectionnée */
+    }
+
+    /* Styling for the Search Button */
+    .search-button {
+        padding: 12px 20px; /* Ajustement du rembourrage */
+        font-size: 16px;
+        background-color: #2ecc71; /* Couleur verte pour le bouton */
+        color: white;
+        border: none;
+        cursor: pointer;
+        border-radius: 5px; /* Coins arrondis uniformes */
+        transition: background-color 0.3s;
+    }
+
+    .search-button:hover {
+        background-color: #27ae60; /* Shade vert plus foncé pour l'effet de survol */
+    }
+</style>
+
+
 
     <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
     <script>
@@ -135,4 +203,6 @@
             };
         });
     </script>
+
+ {{ knp_pagination_render(stades) }}
 {% endblock %}
