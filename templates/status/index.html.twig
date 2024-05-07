@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8"/>
+		<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+		<title>Striker - Sports Club Html Template</title>
+		<link rel="stylesheet" href="assets/css/vendor/bootstrap.min.css"/>
+		<link rel="stylesheet" href="assets/css/app.css"/>
+		<style>
+			.row-container {
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				height: 100vh;
+			}
+
+			.content-container {
+				text-align: center;
+			}
+
+			.dashboard-button {
+				margin-top: 20px;
+				padding: 10px 20px;
+				background-color: #007bff;
+				color: #fff;
+				border-radius: 5px;
+				border: none;
+				cursor: pointer;
+				text-decoration: none;
+				display: inline-block;
+			}
+
+			.dashboard-button:hover {
+				background-color: #0056b3;
+			}
+		</style>
+	</head>
+	<body>
+
+		<!-- Content Block Start -->
+		<div class="row-container">
+			<div class="content-container">
+				<h1>Welcome to the Home Page</h1>
+				{% if app.session.get('id') is defined and app.session.get('id') is not null %}
+					<p>You are currently connected as:</p>
+					<p>Username:
+						{{ app.session.get('username') }}</p>
+					<p>Email:
+						{{ app.session.get('email') }}</p>
+					{% if app.session.get('role') =='Admin' %}
+						<form action="{{ path('app_user_index') }}" method="get">
+							<button type="submit" class="dashboard-button">Dashboard</button>
+						</form>
+					{% endif %}
+					<form action="{{ path('app_logout') }}" method="post">
+						<button type="submit" class="btn btn-primary">Disconnect</button>
+					</form>
+
+				{% else %}
+					<p>You are currently not connected.</p>
+					<form action="{{ path('login') }}" method="post">
+						<button type="submit" class="btn btn-primary">Connect</button>
+					</form>
+				{% endif %}
+			</div>
+		</div>
+		<!-- Content Block End -->
+
+		<!-- Jquery Js -->
+		<script src="assets/js/vendor/jquery-3.6.3.min.js"></script>
+		<script src="assets/js/vendor/bootstrap.min.js"></script>
+		<script src="assets/js/vendor/slick.min.js"></script>
+		<script src="assets/js/vendor/jquery-appear.js"></script>
+		<script src="assets/js/vendor/jquery-validator.js"></script>
+		<!-- Site Scripts -->
+		<script src="assets/js/app.js"></script>
+	</body>
+</html>

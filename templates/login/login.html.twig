@@ -1,0 +1,76 @@
+{% block head %}
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta name="description" content="Striker HTML5 Template">
+	<title>Striker - Sports Club Html Template</title>
+	<link rel="shortcut icon" type="image/x-icon" href="assets/media/favicon-light.png">
+	<link rel="stylesheet" href="assets/css/vendor/bootstrap.min.css">
+	<link rel="stylesheet" href="assets/css/vendor/font-awesome.css">
+	<link rel="stylesheet" href="assets/css/vendor/slick.css">
+	<link rel="stylesheet" href="assets/css/vendor/slick-theme.css">
+	<link rel="stylesheet" href="assets/css/app.css">
+
+	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-266165434-1"></script>
+	<script>
+		window.dataLayer = window.dataLayer || [];
+function gtag() {
+dataLayer.push(arguments);
+}
+gtag('js', new Date());
+gtag('config', 'UA-266165434-1');
+	</script>
+{% endblock %}
+
+{% block body %}
+	<a href="#main-wrapper" id="backto-top" class="back-to-top">
+		<i class="fas fa-angle-up"></i>
+	</a>
+	<div
+		id="main-wrapper" class="main-wrapper overflow-hidden">
+		<!-- login area Start -->
+		<div class="login p-96">
+			<div class="container">
+				<div class="row">
+					<div class="col-xl-10 col-lg-11 offset-xl-2 offset-lg-1">
+						<div class="heading mb-64">
+							<h2>Log In</h2>
+							<p>Welcome to Tourney</p>
+						</div>
+					</div>
+					<div class="col-xl-4 col-lg-6 col-sm-8 offset-xl-4 offset-lg-3 offset-sm-2">
+						<form method="post" action="{{ path('login') }}" class="login-form">
+							{{ form_start(form) }}
+							<div class="form-group mb-32">
+								{{ form_row(form.email, {'attr': {'class': 'form-control', 'placeholder': 'Email'}}) }}
+							</div>
+							<div class="form-group mb-32">
+								{{ form_row(form.password, {'attr': {'class': 'form-control', 'placeholder': 'Password'}}) }}
+							</div>
+							{{ form_end(form) }}
+
+							<div class="link-row mb-32">
+								<div class="formGroup2">
+									<input type="checkbox" id="keepcheck">
+									<label for="keepcheck">Keep me logged in</label>
+								</div>
+								<a href="{{ path('app_claimEmail') }}">Forgot Password?</a>
+							</div>
+							<p class="link">Don’t have an account?
+								<a href="{{ path('app_sign_up') }}">Sign Up here.</a>
+							</p>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- Jquery Js -->
+	<script src="assets/js/vendor/jquery-3.6.3.min.js"></script>
+	<script src="assets/js/vendor/bootstrap.min.js"></script>
+	<script src="assets/js/vendor/slick.min.js"></script>
+	<script src="assets/js/vendor/jquery-appear.js"></script>
+	<script src="assets/js/vendor/jquery-validator.js"></script>
+	<!-- Site Scripts -->
+	<script src="assets/js/app.js"></script>
+{% endblock %}

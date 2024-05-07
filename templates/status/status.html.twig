@@ -1,0 +1,5 @@
+{% if app.session.get('isBanned') == 1 %} 
+        {% include 'banned.html.twig' %}
+{% else %} 
+        {% include 'status/index.html.twig' %}
+{% endif %}

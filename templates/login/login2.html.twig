@@ -1,0 +1,5 @@
+{% if app.session.get('id') is defined and app.session.get('id') is not null %}
+        {{ include('status/status.html.twig') }}
+{% else %}
+        {{ include('login/login.html.twig') }}
+    {% endif %}

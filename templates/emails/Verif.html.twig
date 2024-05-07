@@ -1,0 +1,26 @@
+{% extends 'base_front.html.twig' %}
+
+{% block title %}Reset Password{% endblock %}
+
+{% block body %}
+{{ form_start(VerifFrom) }}
+    {% if Label == 'password' %}
+        {{ form_row(VerifFrom.Code, {
+            'label': Label,
+            'constraints': [
+                {'NotBlank': {
+                    'message': 'Please enter a password'
+                }},
+                {'Length': {
+                    'min': 6,
+                    'minMessage': 'Your password should be at least {{ limit }} characters',
+                    'max': 4096
+                }}
+            ]
+        }) }}
+    {% else %}
+        {{ form_row(VerifFrom.Code, {'label': Label}) }}
+    {% endif %}
+    {{ form_row(VerifFrom.submit) }}
+{{ form_end(VerifFrom) }}
+{% endblock %}

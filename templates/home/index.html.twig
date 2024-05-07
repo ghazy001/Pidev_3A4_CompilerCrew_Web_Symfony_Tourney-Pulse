@@ -1,0 +1,9 @@
+{% if app.session.get('id') is defined and app.session.get('id') is not null %}
+              <li class="nav-item">
+                <a class="nav-link" href="{{ path('app_logout') }}">Disconnect</a>
+              </li>
+            {% else %}
+              <li class="nav-item">
+                <a class="nav-link" href="{{ path('login') }}">Login</a>
+              </li>
+            {% endif %}
