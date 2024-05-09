@@ -1,0 +1,39 @@
+{% extends 'baseBack.html.twig' %}
+
+{% block title %}Reservation{% endblock %}
+
+{% block content %}
+    <h1>Reservation</h1>
+<section class="p-96">
+    <div class="container">
+    <table class="table">
+        <tbody>
+           
+            <tr>
+                <th>Nom Stade</th>
+                <td>{{ reservation.idStade.nom }}</td>
+            </tr>
+            <tr>
+                <th>Date</th>
+                <td>{{ reservation.date ? reservation.date|date('Y-m-d') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Premiere equipe</th>
+                <td>{{ reservation.idPremiereequipe}}</td>
+            </tr>
+             <tr>
+                <th>Deuxieme equipe</th>
+                <td>{{ reservation.idDeuxiemeequipe}}</td>
+            </tr>
+            <tr>
+                <th>Organisateur</th>
+                <td>{{ reservation.idOrganisateur}}</td>
+            </tr>
+        </tbody>
+    </table>
+
+   
+    {{ include('reservation/delete.html.twig') }}
+    </div>
+</section>
+{% endblock %}

@@ -1,0 +1,38 @@
+<div class="container mt-5">
+    {{ form_start(form, {'attr': {'class': 'form'}}) }}
+
+    <div class="mb-3">
+        {{ form_label(form.idstade) }}
+        {{ form_widget(form.idstade, {'attr': {'class': 'form-control'}}) }}
+        {{ form_errors(form.idstade) }}
+    </div>
+
+    <div class="mb-3">
+        {{ form_label(form.date) }}
+        {{ form_widget(form.date, {'attr': {'class': 'form-control', 'placeholder': 'Select a date and time'}}) }}
+        {{ form_errors(form.date) }}
+    </div>
+ <div class="mb-3">
+        Premiere equipe
+        {{ form_widget(form.idPremiereequipe, {'attr': {'class': 'form-control', 'placeholder': 'First Team ID'}}) }}
+        {{ form_errors(form.idPremiereequipe) }}
+        
+    </div>
+    <div class="mb-3">
+        Deuxieme equipe
+        {{ form_widget(form.idDeuxiemeequipe, {'attr': {'class': 'form-control', 'placeholder': 'Second Team ID'}}) }}
+        {{ form_errors(form.idDeuxiemeequipe) }}
+    </div>
+
+    <div class="mb-3">
+        Organisateur
+        {{ form_widget(form.idOrganisateur, {'attr': {'class': 'form-control', 'placeholder': 'Organizer ID'}}) }}
+        {{ form_errors(form.idOrganisateur) }}
+    </div>
+
+   
+
+    <button type="submit" class="btn btn-primary">{{ button_label|default('Save') }}</button>
+
+    {{ form_end(form) }}
+</div>

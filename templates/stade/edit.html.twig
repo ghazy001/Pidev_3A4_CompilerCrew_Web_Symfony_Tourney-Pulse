@@ -1,0 +1,16 @@
+{% extends 'baseBack.html.twig' %}
+
+{% block title %}Edit Stade{% endblock %}
+
+{% block content %}
+
+<div class="container-xxl flex-grow-1 container-p-y">
+    <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Stade /</span> Edit</h4>
+
+    {{ include('stade/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('app_stade_index') }}">back to list</a>
+
+    {{ include('stade/_delete_form.html.twig') }}
+</div>
+{% endblock %}
