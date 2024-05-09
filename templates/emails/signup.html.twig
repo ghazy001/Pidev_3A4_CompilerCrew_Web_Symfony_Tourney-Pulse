@@ -1,0 +1,25 @@
+{# templates/emails/forget_password.html.twig #}
+
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Password Reset</title>
+	</head>
+	<body>
+		<p>Hello
+			{{ username }},</p>
+
+		<p>We received a request to reset your password. Please use the following code to proceed:</p>
+
+		<p>Your verification code is:
+			<strong>{{ verificationCode }}</strong>
+		</p>
+
+		<p>If you didn't request a password reset, you can ignore this email.</p>
+
+		<p>Regards,<br>Your Application Team</p>
+	</body>
+</html>

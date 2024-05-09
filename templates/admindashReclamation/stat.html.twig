@@ -1,0 +1,256 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Reclamation{% endblock %}
+
+{% block stylesheets %}
+
+<style>
+
+.card:hover {
+  transform: scale(1.05); /* Augmente la taille de la carte */
+  box-shadow: 0 0 20px rgba(0,0,0,0.3); /* Augmente l'ombre de la carte */
+}
+</style>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+{% endblock %}
+
+{% block body %}
+
+
+<br>
+<br>
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-sm-6 col-lg-3 mb-4 mb-custom">
+    <div class="card card-border-shadow-warning h-100">
+        <div class="card-body">
+                    <h5 class="ms-1 mb-0">NOMBRE DES EVENEMENTS</h>
+
+            <div class="d-flex align-items-center">
+                <img src="{{ asset('assets/img/event-management.png') }}" class="img-fluid" style="max-width: 50px;">
+                                <h5 class="ms-1 mb-0 me-2">{{ nombreEvennements }}</h5>
+
+            </div>
+        </div>
+    </div>
+</div>
+   <div class="col-sm-6 col-lg-3 mb-4 mb-custom">
+    <div class="card card-border-shadow-warning h-100">
+        <div class="card-body">
+                    <h5 class="ms-1 mb-0">NOMBRE DE COMMENTAIRES</h>
+
+            <div class="d-flex align-items-center">
+                <img src="{{ asset('assets/img/commentant.png') }}" class="img-fluid" style="max-width: 50px;">
+                                <h5 class="ms-1 mb-0 me-2">{{ nombreCommentaires }}</h5>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <canvas id="doughnutChart"></canvas>
+        </div>
+    </div>
+</div>
+
+<div class="container text-center">
+    <div class="col-sm-15 col-lg-9 mb-4 mb-custom d-inline-block">
+        <div class="card card-border-shadow-warning h-100">
+            <div class="card-body">
+                <h1>Statistiques</h1>
+                <div class="row justify-content-center">
+                    <div class="col-md-6">
+                        <canvas id="myChart"></canvas>
+                    </div>
+                </div>
+                <div class="mt-3">
+                    <button onclick="downloadChart()" class="btn btn-primary"><i class="fas fa-download"></i></button>
+                    <button onclick="zoomIn()" class="btn btn-secondary mx-2"><i class="fas fa-search-plus"></i></button>
+                    <button onclick="zoomOut()" class="btn btn-secondary"><i class="fas fa-search-minus"></i></button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://kit.fontawesome.com/a076d05399.js"></script>
+<script>
+    var chart = null;
+    var originalMinValue = 0; // Valeur minimale originale de l'axe y
+    var originalMaxValue = 100; // Valeur maximale originale de l'axe y
+    var originalData = []; // Données originales du graphique
+
+    document.addEventListener('DOMContentLoaded', function () {
+        var ctx = document.getElementById('myChart').getContext('2d');
+        originalData = {{ data.values|json_encode|raw }};
+        chart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: {{ data.labels|json_encode|raw }},
+                datasets: [{
+                    label: 'Nombre',
+                    data: originalData,
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.2)',
+                        'rgba(54, 162, 235, 0.2)',
+                        'rgba(255, 206, 86, 0.2)',
+                        'rgba(75, 192, 192, 0.2)',
+                        'rgba(153, 102, 255, 0.2)'
+                    ],
+                    borderColor: [
+                        'rgba(255, 99, 132, 1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(255, 206, 86, 1)',
+                        'rgba(75, 192, 192, 1)',
+                        'rgba(153, 102, 255, 1)'
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        min: originalMinValue, // Valeur minimale de l'axe y
+                        max: originalMaxValue, // Valeur maximale de l'axe y
+                    }
+                },
+                plugins: {
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                return 'Nombre: ' + context.parsed.y;
+                            }
+                        }
+                    },
+                    legend: {
+                        display: true,
+                        position: 'bottom',
+                        labels: {
+                            font: {
+                                size: 14
+                            }
+                        }
+                    },
+                    animation: {
+                        duration: 2000,
+                        easing: 'easeInOutQuart'
+                    }
+                }
+            }
+        });
+    });
+
+    function downloadChart() {
+        var canvas = document.getElementById('myChart');
+        var url = canvas.toDataURL('image/png');
+        var link = document.createElement('a');
+        link.download = 'graphique.png';
+        link.href = url;
+        link.click();
+    }
+
+ function zoomIn() {
+    var currentMax = chart.options.scales.y.max;
+    var currentMin = chart.options.scales.y.min;
+    var maxVal = Math.max(...originalData);
+    var zoomFactor = 0.5; // Facteur de zoom
+
+    var range = currentMax - currentMin;
+    var newRange = range * (1 - zoomFactor);
+
+    var newMax = currentMax - (range - newRange) / 2;
+    var newMin = currentMin + (range - newRange) / 2;
+
+    // Vérifier si la nouvelle plage dépasse les limites des données d'origine
+    if (newMax > maxVal) {
+        newMax = maxVal;
+        newMin = newMax - newRange;
+    }
+    if (newMin < 0) {
+        newMin = 0;
+        newMax = newMin + newRange;
+    }
+
+    chart.options.scales.y.max = newMax;
+    chart.options.scales.y.min = newMin;
+    chart.update();
+}
+
+function zoomOut() {
+    chart.options.scales.y.min = originalMinValue;
+    chart.options.scales.y.max = originalMaxValue;
+    chart.update();
+}
+
+
+
+
+
+document.addEventListener('DOMContentLoaded', function () {
+    // Code existant pour le graphique en barres
+    // ...
+
+    // Nouveau code pour le graphique circulaire
+    var ctxDoughnut = document.getElementById('doughnutChart').getContext('2d');
+    var doughnutChart = new Chart(ctxDoughnut, {
+        type: 'doughnut',
+        data: {
+            labels: {{ data.labels|json_encode|raw }},
+            datasets: [{
+                label: 'Pourcentage des commentaires',
+                data: {{ data.values|json_encode|raw }},
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(255, 206, 86, 0.2)',
+                    'rgba(75, 192, 192, 0.2)',
+                    'rgba(153, 102, 255, 0.2)'
+                    // Ajoutez plus de couleurs au besoin
+                ],
+                borderColor: [
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 206, 86, 1)',
+                    'rgba(75, 192, 192, 1)',
+                    'rgba(153, 102, 255, 1)'
+                    // Ajoutez plus de couleurs au besoin
+                ],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            plugins: {
+                tooltip: {
+                    callbacks: {
+                        label: function(context) {
+                            var label = context.label || '';
+                            var value = context.formattedValue;
+                            return label + ': ' + value + '%';
+                        }
+                    }
+                }
+            }
+        }
+    });
+});
+
+
+</script>
+
+
+
+
+
+
+{% endblock %}
+
+{% block javascripts %}
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+{% endblock %}

@@ -1,0 +1,41 @@
+{% extends 'admindash/index.html.twig' %}
+
+{% block body %}
+    <div style="padding-top: 100px">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-md-6">
+                    <div class="card">
+                        <div class="card-header">Edit Equipe</div>
+
+                        <div class="card-body">
+                            {{ form_start(form, {'attr': {'class': 'form'}}) }}
+                            <div class="form-group">
+                                {{ form_label(form.user, 'player name', {'label_attr': {'class': 'control-label'}}) }}
+                                {{ form_widget(form.user, {'attr': {'class': 'form-control', 'readonly': 'readonly'}}) }}
+                            </div>
+
+                            <div class="form-group">
+                                {{ form_label(form.note, 'note', {'label_attr': {'class': 'control-label'}}) }}
+                                {{ form_widget(form.note, {'attr': {'class': 'form-control', 'readonly': 'readonly'}}) }}
+                            </div>
+                            <div class="form-group">
+                                {{ form_label(form.commentaire, 'commentaire', {'label_attr': {'class': 'control-label'}}) }}
+                                {{ form_widget(form.commentaire, {'attr': {'class': 'form-control'}}) }}
+                            </div>
+
+                            <div class="form-group">
+                                {{ form_label(form.dateavis, 'Date avis', {'label_attr': {'class': 'control-label'}}) }}
+                                {{ form_widget(form.dateavis, {'attr': {'class': 'form-control'}}) }}
+                            </div>
+                            <div class="form-group" style="margin-left: 210px; margin-top: 20px">
+                                {{ form_widget(form.submit, {'attr': {'class': 'btn btn-primary'}}) }}
+                            </div>
+                            {{ form_end(form) }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

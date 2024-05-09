@@ -1,0 +1,90 @@
+{% extends 'admindashReclamation/index.html.twig' %}
+
+{% block title %}Reclamation index{% endblock %}
+
+{% block body %}
+    <h1>Reclamation index</h1>
+
+
+  <div style="margin-top: 30px">
+
+<form action="{{ path('Rec') }}" method="GET">
+    <input type="text" name="search" value="" placeholder="Search...">
+    <button type="submit">Search</button>
+</form>
+
+<form method="GET" action="{{ path('Rec') }}">
+    <label for="etat">Filter by Etat:</label>
+    <select name="etat" id="etat">
+        <option value="">All</option>
+        <option value="En cours">En cours</option>
+        <option value="traité">Traité</option>
+    </select>
+    <button type="submit">Filter</button>
+</form>
+
+
+    <table class="table">
+        <thead>
+            <tr>
+                
+                <th>DateRec</th>
+                <th>Object</th>
+                <th>Reclamation</th>
+                <th>Email</th>
+                <th>Etat</th>
+                <th>actions</th>
+                <th>Traiter</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for reclamation in reclamations %}
+            <tr>
+               
+                <td>{{ reclamation.dateRec ? reclamation.dateRec|date('Y-m-d') : '' }}</td>
+                <td>{{ reclamation.object }}</td>
+                <td>{{ reclamation.reclamation }}</td>
+                <td>{{ reclamation.email }}</td>
+                 <td>
+            {% if reclamation.etat is null %}
+                En cours
+            {% else %}
+                {{ reclamation.etat }}
+            {% endif %}
+        </td>
+                <td>
+                   
+                    <a href="{{ path('reclamation_show', {'idRec': reclamation.idRec}) }}">show</a>
+                    <a href="{{ path('Rec_Edit', {'idRec': reclamation.idRec}) }}">edit</a>
+
+
+                <a>
+                
+                                <td>
+                                    <form method="post"
+                                          action="{{ path('app_reclamation_traiter', {'idRec': reclamation.idRec}) }}">
+                                        <input type="hidden" name="_token"
+                                               value="{{ csrf_token('traiter' ~ reclamation.idRec) }}">
+                                        <button type="submit">traiter</button>
+                                    </form>
+                                </td>
+                            </tr>
+
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="6">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    </div>
+
+    <a href="{{ path('Rec_new') }}">Create new</a>
+
+        {{ knp_pagination_render(reclamations) }}
+
+
+    
+{% endblock %}

@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div style="margin-top: 200px; margin-left: 450px;">
+        {% if app.flashes('error') %}
+            <div class="alert alert-danger" style="max-height: 80px; max-width: 483px">
+                <p class="alert-danger">  the team is full please try with another team </p>
+            </div>
+        {% endif %}
+
+        {{ form_start(form) }}
+
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="form-group mb-32">
+                    {{ form_row(form.equipe, {'attr': {'class': 'form-control', 'id': 'fname', 'placeholder': 'Team name', 'required': true}}) }}
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="form-group mb-32">
+                    {{ form_row(form.user, {'attr': {'class': 'form-control', 'id': 'fname', 'placeholder': 'Team name', 'required': true}}) }}
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="form-group mb-32">
+                    {{ form_widget(form.submit, {'attr': {'class': 'form-btn w-100 mb-32'}}) }}
+                </div>
+            </div>
+        </div>
+
+        {{ form_end(form) }}
+    </div>
+{% endblock %}

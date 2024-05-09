@@ -1,6 +1,11 @@
 twig:
     default_path: '%kernel.project_dir%/templates'
 
+
+
 when@test:
     twig:
+        globals:
+            gg_recaptcha_site_key: '%env(RECAPTCHA_PUBLIC_KEY)%'
         strict_variables: true
+

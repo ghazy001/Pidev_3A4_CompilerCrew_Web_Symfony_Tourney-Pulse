@@ -1,0 +1,16 @@
+{# templates/admin/repondre_reclamation.html.twig #}
+
+{% extends 'base.html.twig' %}
+
+{% block title %}Répondre à la réclamation{% endblock %}
+
+{% block body %}
+    <h1>Répondre à la réclamation</h1>
+    <p>{{ reclamation.object}}</p>
+    <p>{{ reclamation.reclamation }}</p>
+
+    {{ form_start(form) }}
+        {{ form_row(form.reponse) }}
+        <button type="submit">Envoyer</button>
+    {{ form_end(form) }}
+{% endblock %}

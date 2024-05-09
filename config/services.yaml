@@ -4,6 +4,9 @@
 # Put parameters here that don't need to change on each machine where the app is deployed
 # https://symfony.com/doc/current/best_practices.html#use-parameters-for-application-configuration
 parameters:
+    images_directory: '%kernel.project_dir%/public/uploads/images'
+    image_directory: '%kernel.project_dir%/public/uploads/images'
+
 
 services:
     # default configuration for services in *this* file
@@ -20,19 +23,11 @@ services:
             - '../src/Entity/'
             - '../src/Kernel.php'
 
-    App\Controller\:
-        resource: '../src/Controller'
-        tags: [ 'controller.service_arguments' ]
-        arguments:
-            $pdf: '@knp_snappy.pdf'
-
-    App\Controller\AvisController:
-        arguments:
-            $pdf: '@knp_snappy.pdf'
-
-    App\Controller\MarketPlaceController:
-        arguments:
-            $pdf: '@knp_snappy.pdf'
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
-    
+
+    # config/services.yaml
+
+
+
+

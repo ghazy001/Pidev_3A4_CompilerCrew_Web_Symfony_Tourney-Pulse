@@ -1,0 +1,43 @@
+
+
+<div class="container-fluid" style="margin-right: 300px; margin-left: -300px">
+    <div class="row justify-content-center align-items-center" style="min-height: 100vh;">
+        <div class="col-md-6">
+            {{ form_start(form, {'attr': {'class': 'container-fluid', 'novalidate': 'novalidate'}}) }}
+            <div class="card">
+                <div class="card-body">
+                    {# Iterate over each form field #}
+                    {% for field in [form.object, form.reclamation, form.email, form.id] %}
+                        <div class="mb-3">
+
+
+
+             {% if field.vars.name == 'id' %}
+                    {% set label = 'User' %}
+                {% else %}
+                    {% set label = field.vars.label %}
+                {% endif %}
+                <label for="{{ field.vars.id }}" class="form-label">{{ label }}</label>
+
+                            {{ form_label(field, null, {'label_attr': {'class': 'form-label'}}) }}
+                            {{ form_widget(field, {'attr': {'class': 'form-control'}}) }}
+
+                            {# Display errors for each field, styled in red #}
+                            {% if field.vars.errors|length > 0 %}
+                                <div style="color: red;">
+                                    {% for error in field.vars.errors %}
+                                        <span>{{ error.message }}</span><br>
+                                    {% endfor %}
+                                </div>
+                            {% endif %}
+                        </div>
+                    {% endfor %}
+
+                    <button type="submit" class="btn btn-primary" style="margin-left: 130px">Save</button>
+                </div>
+            </div>
+            {{ form_end(form) }}
+        </div>
+    </div>
+</div>
+

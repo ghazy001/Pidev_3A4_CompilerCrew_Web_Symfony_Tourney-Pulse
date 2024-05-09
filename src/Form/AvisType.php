@@ -2,41 +2,45 @@
 
 namespace App\Form;
 
-use App\Entity\Avis;
+use App\Entity\Author;
+use App\Entity\Avisjoueur;
+use App\Entity\User;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
-use App\Entity\MarketPlace;
-use Symfony\Component\Validator\Constraints\NotBlank;
+
 
 class AvisType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('DateAvis')
-            ->add('Note')
-           /* ->add('MarketPlace', EntityType::class, [
-                'class' => MarketPlace::class,
-                'multiple' => false, // Assuming it's a ManyToMany relationship
-                'expanded' => false, // Display as checkboxes or a select dropdown
-                'choice_label' => 'ProdName', // Change to the appropriate property
-                'label' => 'Products',
-                'constraints' => [
-                    new NotBlank(['message' => 'Please select at least one Product.']),
-                ],
+            ->add('user', EntityType::class, [
+                'class' => User::class,
+                'choice_label' => 'username'
             ])
-           // ->add('MarketPlace')
-*/
-        ;
+            ->add('dateavis', DateType::class, [
+                'widget' => 'single_text',
+                'data' => new \DateTime(), // Set current date as default
+                'attr' => ['readonly' => true], // Make it read-only
+            ])
+            ->add('note')
+
+            ->add('commentaire', TextareaType::class) // Transform commentaire to textarea
+            ->add('submit', SubmitType::class, [
+                'label' => 'Save',
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-            'data_class' => Avis::class,
+            'data_class' => Avisjoueur::class,
         ]);
     }
 }

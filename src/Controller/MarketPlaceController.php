@@ -4,14 +4,10 @@ namespace App\Controller;
 
 use App\Entity\Avis;
 use App\Entity\MarketPlace;
-use App\Form\AvisType;
+use App\Form\ReviewsType;
 use App\Form\MarketPlaceType;
 use App\Repository\MarketPlaceRepository;
 use Doctrine\ORM\EntityManagerInterface;
-use Eckinox\PdfBundle\Exception\PdfGenerationException;
-use Eckinox\PdfBundle\Pdf\FormatFactory;
-use Eckinox\PdfBundle\Pdf\PdfGeneratorInterface;
-use Knp\Bundle\SnappyBundle\Snappy\Response\PdfResponse;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Request;
@@ -26,17 +22,13 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Endroid\QrCode\Builder\BuilderInterface;
 use Endroid\QrCode\QrCode;
 use Endroid\QrCode\Writer\PngWriter;
-use Knp\Snappy\Pdf;
 
 
 #[Route('/marketplace')]
 class MarketPlaceController extends AbstractController
-{  private $pdf;
+{
 
-    public function __construct(Pdf $pdf)
-    {
-        $this->pdf = $pdf;
-    }
+
     #[Route('/', name: 'app_market_place_indexback', methods: ['GET'])]
     public function index(MarketPlaceRepository $marketPlaceRepository): Response
     {
@@ -109,7 +101,7 @@ class MarketPlaceController extends AbstractController
 
 
     #[Route('/{id}', name: 'app_market_place_show', methods: ['GET', 'POST'])]
-    public function show(MarketPlace $marketPlace, Request $request, EntityManagerInterface $entityManager,Pdf $pdf): Response
+    public function show(MarketPlace $marketPlace, Request $request, EntityManagerInterface $entityManager): Response
     {
         $totalRating = 0;
         $numRatings = 0;
@@ -123,7 +115,7 @@ class MarketPlaceController extends AbstractController
         $review = new Avis();
         $review->setDateAvis(new \DateTime()); // Set the review date to the current date/time
         $review->setMarketPlace($marketPlace); // Associate the review with the current product
-        $form = $this->createForm(AvisType::class, $review);
+        $form = $this->createForm(ReviewsType::class, $review);
 
         // Handle the form submission
         $form->handleRequest($request);
@@ -142,26 +134,7 @@ class MarketPlaceController extends AbstractController
         $imageBase64 = base64_encode($imageString);
         $qrCodeData = "Name: ". $marketPlace->getProdName(). "\nDescription: ". $marketPlace->getProdDescription(). "\nPrice: ". $marketPlace->getPrice();
 
-        if ($request->query->get('pdf')) {
-            // Render the HTML template as a PDF
-            $html = $this->renderView('market_place/show.html.twig', [
-                'market_place' => $marketPlace,
-                'averageRating' => $averageRating,
-                'image' => $imageBase64,
-                'form' => $form->createView(),
-                'qr_code_data' => $qrCodeData,
-            ]);
 
-
-
-            $pdf = $pdf->getOutputFromHtml($html);
-
-            // Return the PDF as a response
-            return new Response($pdf, 200, [
-                'Content-Type' => 'application/pdf',
-                'Content-Disposition' => 'attachment; filename="product.pdf"',
-            ]);
-        }
         // Pass the average rating and the base64 encoded image to the template
         return $this->render('market_place/show.html.twig', [
             'market_place' => $marketPlace,

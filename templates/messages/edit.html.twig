@@ -1,0 +1,17 @@
+{% extends 'baseRec.html.twig' %}
+
+{% block title %}Edit Messages{% endblock %}
+
+{% block body %}
+
+    <h1>Edit Messages</h1>
+
+ <div style="margin-top: 300px; margin-left: 600px;">
+
+    {{ include('messages/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('mymain') }}">back to list</a>
+
+    {{ include('messages/_delete_form.html.twig') }}
+    </div>
+{% endblock %}

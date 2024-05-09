@@ -1,0 +1,266 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    <body >
+                     {# first main div #}
+    <div style=" margin-top: 200px;  margin-left: 1150px; display: flex">
+        <div class="card">
+            <p class="time-text"><span id="current-time"></span><span class="time-sub-text">PM</span></p>
+            <p class="day-text"><span id="current-date"></span></p>
+            <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 16 16" stroke-width="0" fill="currentColor" stroke="currentColor" class="moon"><path d="M6 .278a.768.768 0 0 1 .08.858 7.208 7.208 0 0 0-.878 3.46c0 4.021 3.278 7.277 7.318 7.277.527 0 1.04-.055 1.533-.16a.787.787 0 0 1 .81.316.733.733 0 0 1-.031.893A8.349 8.349 0 0 1 8.344 16C3.734 16 0 12.286 0 7.71 0 4.266 2.114 1.312 5.124.06A.752.752 0 0 1 6 .278z"></path><path d="M10.794 3.148a.217.217 0 0 1 .412 0l.387 1.162c.173.518.579.924 1.097 1.097l1.162.387a.217.217 0 0 1 0 .412l-1.162.387a1.734 1.734 0 0 0-1.097 1.097l-.387 1.162a.217.217 0 0 1-.412 0l-.387-1.162A1.734 1.734 0 0 0 9.31 6.593l-1.162-.387a.217.217 0 0 1 0-.412l1.162-.387a1.734 1.734 0 0 0 1.097-1.097l.387-1.162zM13.863.099a.145.145 0 0 1 .274 0l.258.774c.115.346.386.617.732.732l.774.258a.145.145 0 0 1 0 .274l-.774.258a1.156 1.156 0 0 0-.732.732l-.258.774a.145.145 0 0 1-.274 0l-.258-.774a1.156 1.156 0 0 0-.732-.732l-.774-.258a.145.145 0 0 1 0-.274l.774-.258c.346-.115.617-.386.732-.732L13.863.1z"></path></svg>
+        </div>
+    </div>                 {# second main div #}
+    <div style="margin-top: 10px; margin-left: 450px" >
+
+
+        {{ form_start(form) }}
+
+        {% if error %}
+            <div class="alert alert-danger">{{ error }}</div>
+        {% endif %}
+
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="form-group mb-32">
+                    {{ form_row(form.nom, {'attr': {'class': 'form-control', 'id': 'fname', 'placeholder': 'Team name', 'required': true}}) }}
+                </div>
+            </div>
+        </div>
+
+        <div id="image-preview-container" style="margin-left:110px">
+            {% if form.image.vars.value is not empty %}
+                <img src="{{ asset('uploads/images/' ~ form.image.vars.value) }}" id="image-preview" alt="Current Image">
+            {% else %}
+                <img src="{{ asset('/drag.png') }}" id="image-preview" alt="No Image" style="width: 250px;height: 250px">
+            {% endif %}
+        </div>
+
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="form-group mb-32">
+                    {{ form_row(form.image, {'attr': {'class': 'form-control'}}) }}
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="form-group mb-32">
+                    {{ form_row(form.dateCreation, {'attr': {'class': 'form-control'}}) }}
+
+                </div>
+            </div>
+        </div>
+
+
+
+        <div class="checkbox-wrapper-46" style="padding-bottom:20px ; padding-left: 9px">
+            <input type="checkbox" id="send-sms" name="send_sms" class="inp-cbx" />
+            <label for="send-sms" class="cbx">
+        <span>
+            <svg viewBox="0 0 12 10" height="10px" width="12px">
+                <polyline points="1.5 6 4.5 9 10.5 1"></polyline>
+            </svg>
+        </span>
+                <span>Send SMS confirmation</span>
+            </label>
+        </div>
+
+
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="form-group mb-32">
+                    {{ form_widget(form.submit, {'attr': {'class': 'form-btn w-100 mb-32'}}) }}
+                </div>
+            </div>
+        </div>
+
+
+
+
+
+        {{ form_end(form) }}
+
+    </div>
+
+    <script>
+        document.getElementById('{{ form.image.vars.id }}').addEventListener('change', function(event) {
+            var input = event.target;
+            var reader = new FileReader();
+
+            reader.onload = function() {
+                var imgElement = document.getElementById('image-preview');
+                imgElement.src = reader.result;
+            };
+
+            reader.readAsDataURL(input.files[0]);
+        });
+    </script>
+    <style>
+        .card {
+            width: 280px;
+            height: 150px;
+            background: rgb(17, 4, 134);
+            border-radius: 15px;
+            box-shadow: rgb(0,0,0,0.7) 5px 10px 50px ,rgb(0,0,0,0.7) -5px 0px 250px;
+            display: flex;
+            color: white;
+            justify-content: center;
+            position: relative;
+            flex-direction: column;
+            background: linear-gradient(to right, rgb(20, 30, 48), rgb(36, 59, 85));
+            cursor: pointer;
+            transition: all 0.3s ease-in-out;
+            overflow: hidden;
+        }
+
+        .card:hover {
+            box-shadow: rgb(0,0,0) 5px 10px 50px ,rgb(0,0,0) -5px 0px 250px;
+        }
+
+        .time-text {
+            font-size: 50px;
+            margin-top: 0px;
+            margin-left: 15px;
+            font-weight: 600;
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+        }
+
+        .time-sub-text {
+            font-size: 15px;
+            margin-left: 5px;
+        }
+
+        .day-text {
+            font-size: 18px;
+            margin-top: 0px;
+            margin-left: 15px;
+            font-weight: 500;
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+        }
+
+        .moon {
+            font-size: 20px;
+            position: absolute;
+            right: 15px;
+            top: 15px;
+            transition: all 0.3s ease-in-out;
+        }
+
+        .card:hover > .moon {
+            font-size: 23px;
+        }
+        .checkbox-wrapper-46 input[type="checkbox"] {
+            display: none;
+            visibility: hidden;
+        }
+
+        .checkbox-wrapper-46 .cbx {
+            margin: auto;
+            -webkit-user-select: none;
+            user-select: none;
+            cursor: pointer;
+        }
+        .checkbox-wrapper-46 .cbx span {
+            display: inline-block;
+            vertical-align: middle;
+            transform: translate3d(0, 0, 0);
+        }
+        .checkbox-wrapper-46 .cbx span:first-child {
+            position: relative;
+            width: 18px;
+            height: 18px;
+            border-radius: 3px;
+            transform: scale(1);
+            vertical-align: middle;
+            border: 1px solid #9098a9;
+            transition: all 0.2s ease;
+        }
+        .checkbox-wrapper-46 .cbx span:first-child svg {
+            position: absolute;
+            top: 3px;
+            left: 2px;
+            fill: none;
+            stroke: #ffffff;
+            stroke-width: 2;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+            stroke-dasharray: 16px;
+            stroke-dashoffset: 16px;
+            transition: all 0.3s ease;
+            transition-delay: 0.1s;
+            transform: translate3d(0, 0, 0);
+        }
+        .checkbox-wrapper-46 .cbx span:first-child:before {
+            content: "";
+            width: 100%;
+            height: 100%;
+            background: #506eec;
+            display: block;
+            transform: scale(0);
+            opacity: 1;
+            border-radius: 50%;
+        }
+        .checkbox-wrapper-46 .cbx span:last-child {
+            padding-left: 8px;
+        }
+        .checkbox-wrapper-46 .cbx:hover span:first-child {
+            border-color: #506eec;
+        }
+
+        .checkbox-wrapper-46 .inp-cbx:checked + .cbx span:first-child {
+            background: #506eec;
+            border-color: #506eec;
+            animation: wave-46 0.4s ease;
+        }
+        .checkbox-wrapper-46 .inp-cbx:checked + .cbx span:first-child svg {
+            stroke-dashoffset: 0;
+        }
+        .checkbox-wrapper-46 .inp-cbx:checked + .cbx span:first-child:before {
+            transform: scale(3.5);
+            opacity: 0;
+            transition: all 0.6s ease;
+        }
+
+        @keyframes wave-46 {
+            50% {
+                transform: scale(0.9);
+            }
+        }
+
+
+
+    </style>
+
+    <script>
+        function updateTime() {
+            var now = new Date();
+            var days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+            var months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+
+            var dayOfWeek = days[now.getDay()];
+            var dayOfMonth = now.getDate();
+            var month = months[now.getMonth()];
+
+            var hours = now.getHours() > 12 ? now.getHours() - 12 : now.getHours();
+            var minutes = now.getMinutes();
+            var timeString = hours + ":" + (minutes < 10 ? "0" + minutes : minutes);
+
+            var dateString = dayOfWeek + ', ' + month + ' ' + dayOfMonth + 'th';
+
+            document.getElementById('current-time').textContent = timeString;
+            document.getElementById('current-date').textContent = dateString;
+        }
+
+        // Update time initially
+        updateTime();
+
+        // Update time every second
+        setInterval(updateTime, 1000);
+    </script>
+
+    </body>
+
+
+{% endblock %}

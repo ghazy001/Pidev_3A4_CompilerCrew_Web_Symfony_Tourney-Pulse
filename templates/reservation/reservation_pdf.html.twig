@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Details du reservation</title>
+    <style>
+        /* Add your CSS styles for the PDF here */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center; /* Center align content */
+            position: relative; /* Enable positioning for logo */
+        }
+        .logo {
+            position: absolute; /* Position the logo */
+            top: 0; /* Align to the top */
+            left: 0; /* Align to the left */
+            margin: 10px; /* Add margin for spacing */
+        }
+        h1 {
+            text-align: center;
+            font-size: 28px; /* Adjust font size as needed */
+            color: #333; /* Adjust color as needed */
+            text-transform: uppercase; /* Convert text to uppercase */
+            letter-spacing: 2px; /* Adjust letter spacing as needed */
+        }
+        .reservation-details {
+            margin-top: 30px;
+            border: 1px solid #ccc;
+            padding: 20px;
+        }
+        .reservation-details img {
+            display: block;
+            margin: 0 auto; /* Center align image */
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <img class="logo" alt="assetsFront/media/front1.jpg" >
+    <h1>VOTRE RESERVATION</h1>
+    <div class="reservation-details">
+        <p><strong>Reservation numero:</strong> {{ reservation.id }}</p>
+        <p><strong>Date:</strong> {{ reservation.date ? reservation.date|date('Y-m-d') : 'N/A' }}</p>
+        <p><strong>merci de scanner le Qr code pour plus de details</strong> </p>
+        <!-- Add more reservation details as needed -->
+
+        <!-- Embed the QR code image -->
+        <img src="data:image/png;base64,{{ qrCode }}" alt="QR Code">
+    </div>
+</div>
+</body>
+</html>

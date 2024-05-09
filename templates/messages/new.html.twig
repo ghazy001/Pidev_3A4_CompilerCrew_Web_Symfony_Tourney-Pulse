@@ -1,0 +1,14 @@
+{% extends 'baseRec.html.twig' %}
+
+{% block title %}New Messages{% endblock %}
+
+{% block body %}
+ <div style="margin-top: 300px; margin-left: 100px;">
+    <h1>Create new Messages</h1>
+
+    {{ include('messages/_form.html.twig') }}
+
+    <a href="{{ path('mymain') }}">back to list</a>
+
+    </div>
+{% endblock %}

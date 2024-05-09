@@ -1,0 +1,61 @@
+{% extends 'baseBack.html.twig' %}
+
+{% block title %}Stade{% endblock %}
+
+{% block content %}
+    <div class="container-xxl flex-grow-1 container-p-y">
+        <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">stade /</span> Display</h4>
+
+        <table class="table">
+            <tbody>
+            <tr>
+                <th>Nom</th>
+                <td>{{ stade.nom }}</td>
+            </tr>
+            <tr>
+                <th>Lieu</th>
+                <td>{{ stade.lieu }}</td>
+            </tr>
+            <tr>
+                <th>Capacity</th>
+                <td>{{ stade.capacity }}</td>
+            </tr>
+            <tr>
+                <th>Numero</th>
+                <td>{{ stade.numero }}</td>
+            </tr>
+            <tr>
+                <th>Images</th>
+                <td>
+                    <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+                        <div class="carousel-indicators">
+                            {% for image in stade.images %}
+                                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="{{ loop.index0 }}" class="{{ loop.first ? 'active' : '' }}" aria-current="{{ loop.first ? 'true' : 'false' }}" aria-label="Slide {{ loop.index }}"></button>
+                            {% endfor %}
+                        </div>
+                        <div class="carousel-inner">
+                            {% for image in stade.images %}
+                                <div class="carousel-item {{ loop.first ? 'active' : '' }}">
+                                    <img src="{{ asset('uploads/images/' ~ image.urlImage) }}" class="d-block w-100" alt="...">
+                                </div>
+                            {% endfor %}
+                        </div>
+                        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Previous</span>
+                        </button>
+                        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Next</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+
+        <a href="{{ path('app_stade_index') }}">back to list</a>
+        <a href="{{ path('app_stade_edit', {'id': stade.id}) }}">edit</a>
+        {{ include('stade/_delete_form.html.twig') }}
+    </div>
+{% endblock %}

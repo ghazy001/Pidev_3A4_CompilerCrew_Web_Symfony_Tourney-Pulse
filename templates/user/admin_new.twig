@@ -1,0 +1,5 @@
+{% if app.session.get('role') == 'Admin' %}
+    {{ include('user/new.html.twig') }}
+{% else %}
+    {{ include('deny.html.twig') }}
+{% endif %}

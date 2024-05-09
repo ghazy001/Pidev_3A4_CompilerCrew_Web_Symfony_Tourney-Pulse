@@ -13,6 +13,8 @@
         <p>Date: {{ market_place.DateProd ? market_place.DateProd|date('Y-m-d') : '' }}</p>
 
         <img src="data:image/jpeg;base64,{{ image }}" alt="{{ market_place.ProdName }}" style="width: 300px; height: 300px;">
+
+
  {% if qr_code_data %}
                     <img src="{{ path('qr_code', { 'data': qr_code_data }) }}" alt="QR Code">
                 {% endif %}
@@ -32,17 +34,9 @@
 
         <!-- Review Form -->
         <h2>Leave a Review</h2>
-        {{ include('avis/_form.html.twig', {'form': form}) }}
+        {{ include('reviews/_form.html.twig', {'form': form}) }}
 
-        <button id="print-button" class="btn btn-primary">Print</button>
 
-        <script>
-            // Add a click event listener to the "Print" button
-            document.getElementById('print-button').addEventListener('click', function() {
-                // Open a new window with the same URL but with a new query parameter
-                window.open('{{ path('app_market_place_show', {'id': market_place.id}) }}?pdf=true', '_blank');
-            });
-        </script>
         <a href="{{ path('app_market_place_index') }}">Back to Product List</a>
 
         {{ dump(averageRating) }}average rating

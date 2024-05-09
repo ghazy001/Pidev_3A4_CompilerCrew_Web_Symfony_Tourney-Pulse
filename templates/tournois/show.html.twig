@@ -1,0 +1,49 @@
+{% extends 'baseTournois.html.twig' %}
+
+{% block title %}Tournois{% endblock %}
+
+{% block body %}
+                <div class="bread_crumb">
+                </div>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-xl-10 col-lg-9 offset-xl-2 offset-lg-3">
+
+                        </div>
+                    </div>
+                </div>
+
+<div class="createt p-96">
+    <div class="container">
+        <div class="heading mb-64">
+            <h2>Show Tournament</h2>
+        </div>
+        <table class="table">
+        <tbody>
+            <tr>
+                <th>NomTournois</th>
+                <td>{{ tournoi.nomTournois }}</td>
+            </tr>
+            <tr>
+                <th>Stade</th>
+                <td>{{ tournoi.stade }}</td>
+            </tr>
+            <tr>
+                <th>NombreMatch</th>
+                <td>{{ tournoi.nombreMatch }}</td>
+            </tr>
+            <tr>
+                <th>DateDebut</th>
+                <td>{{ tournoi.dateDebut ? tournoi.dateDebut|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>DateFin</th>
+                <td>{{ tournoi.dateFin ? tournoi.dateFin|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_tournois_index') }}">back to list</a>
+    </div>
+</div>
+{% endblock %}

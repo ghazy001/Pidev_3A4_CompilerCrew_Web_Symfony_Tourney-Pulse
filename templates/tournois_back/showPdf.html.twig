@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>Tournament Details</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #87A922;
+            margin: 0;
+            padding: 0;
+            color: #FFAE1F;
+        }
+
+        .container {
+            margin: 20px auto;
+            width: 80%;
+        }
+
+        .tournament-details {
+            background-color: #114232;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .tournament-details h1 {
+            text-align: center;
+            color: #ffda6a;
+            margin-bottom: 20px;
+        }
+
+        .tournament-details p {
+            font-size: 40px;
+            margin-bottom: 10px;
+            line-height: 1.6;
+        }
+
+        .tournament-details p strong {
+            font-weight: bold;
+        }
+
+
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="tournament-details">
+        <h1>Tournament Details</h1>
+
+        <p><strong>Tournament Name:</strong> {{ tournois.nomTournois }}</p>
+
+        <p><strong>Stadium Name:</strong> {{ tournois.stade }}</p>
+
+        <p><strong>Number Of Matches:</strong> {{ tournois.nombreMatch }}</p>
+
+        <p><strong>Beginning Date:</strong> {{ tournois.dateDebut ? tournois.dateDebut|date('Y-m-d H:i:s') : '' }}</p>
+
+        <p><strong>End Date:</strong> {{ tournois.dateFin ? tournois.dateFin|date('Y-m-d H:i:s') : '' }}</p>
+    </div>
+</div>
+</body>
+</html>

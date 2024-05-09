@@ -1,0 +1,15 @@
+{% extends 'admindash/index.html.twig' %}
+
+{% block title %}Edit Avis{% endblock %}
+
+{% block body %}
+    <div style="padding: 4rem;">
+        <h1>Edit Avis</h1>
+
+        {{ include('reviews/_form.html.twig', {'button_label': 'Update'}) }}
+
+        <a href="{{ path('app_avis_index') }}">back to list</a>
+
+        {{ include('reviews/_delete_form.html.twig') }}
+    </div>
+{% endblock %}

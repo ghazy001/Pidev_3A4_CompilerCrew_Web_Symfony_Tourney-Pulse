@@ -1,0 +1,57 @@
+{% extends 'baseTournois.html.twig' %}
+
+{% block title %}MatchEntity{% endblock %}
+
+{% block body %}
+                <div class="bread_crumb">
+                </div>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-xl-10 col-lg-9 offset-xl-2 offset-lg-3">
+                            
+                        </div>
+                    </div>
+                </div>
+<div class="createt p-96">
+    <div class="container">
+        <div class="heading mb-64">
+            <h2>Show Match</h2>
+        </div>
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>IdMatch</th>
+                <td>{{ match_entity.idMatch }}</td>
+            </tr>
+            <tr>
+                <th>NomMatch</th>
+                <td>{{ match_entity.nomMatch }}</td>
+            </tr>
+            <tr>
+                <th>DateMatch</th>
+                <td>{{ match_entity.dateMatch ? match_entity.dateMatch|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>DureeMatch</th>
+                <td>{{ match_entity.dureeMatch }}</td>
+            </tr>
+            <tr>
+                <th>Tournois</th>
+                <td>{{ match_entity.idTournois.nomTournois }}</td>
+            </tr>
+            <tr>
+                <th>Equipe1</th>
+                <td>{{ match_entity.idEquipe1.nom }}</td>
+            </tr>
+            <tr>
+                <th>Equipe2</th>
+                <td>{{ match_entity.idEquipe2.nom }}</td>
+            </tr>
+        </tbody>
+    </table>
+        
+    <a href="{{ path('app_match_entity_index') }}">back to list</a>
+    </div>
+</div>
+{% endblock %}
+

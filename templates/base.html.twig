@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <meta name="description" content="Striker HTML5 Template" />
 
-    <title>{% block title %}Striker - Sports Club Html Template {% endblock %}</title>
+    <title>{% block title %}Tourney Pulse {% endblock %}</title>
 
 
 
@@ -86,7 +86,7 @@
     <header class="header-2">
         <div class="container">
             <nav class="navbar upper d-lg-flex d-none">
-                <a class="navbar-brand" href="index.html"><img alt="" src="{{ asset('./assets/media/logo-dark.png') }}" /></a>
+                <a class="navbar-brand" ><img alt="" src="{{asset('assetsFront/media/front1.jpg')}}" /></a>
                 <div class="search-bar">
                     <form method="get" action="index.html">
                         <div class="form-group header-search">
@@ -98,14 +98,12 @@
                 <div class="right-content">
                     <ul>
                         <li>
-                            <a href="login.html"><img src="{{ asset('assets/media/icon/user.png') }}" alt="" /><br />ACCOUNT</a>
+                            <a href="login.html"><img src="{{ asset('assets/media/icon/user.png') }}" alt="" /><br />{{ app.session.get('username') }}</a>
                         </li>
                         <li>
-                            <a href=""><img src="{{ asset('assets/media/icon/wishlist.png') }}" alt="" /><br />WISHLIST(7)</a>
+                            <a href="{{ path('app_logout') }}"  ><img src="{{ asset('assets/media/icon/shopping-cart.png') }}" alt="" /><br />Log out</a>
                         </li>
-                        <li>
-                            <a href="javascript:;" class="cart-button" ><img src="{{ asset('assets/media/icon/shopping-cart.png') }}" alt="" /><br />CART</a>
-                        </li>
+
                     </ul>
                 </div>
             </nav>
@@ -116,24 +114,44 @@
                 </button>
                 <div class="collapse navbar-collapse" id="mynavbar">
                     <ul class="navbar-nav mainmenu m-0">
-                        <li class="menu-item-has-children">
-                            <a href="javascript:void(0);" class="active">HOME</a>
-                            <ul class="submenu">
-                                <li><a href="index.html" class="active">Home 1</a></li>
-                                <li><a href="index-2.html">Home 2</a></li>
-                                <li><a href="index-3.html">Home 3</a></li>
-                            </ul>
+                        <li class="menu-item">
+                            <a href="{{ path('app_home') }}" >HOME</a>
+
                         </li>
                         <li class="menu-item-has-children">
-                            <a href="javascript:void(0);">SHOP</a>
+                            <a href="javascript:void(0);">plus</a>
                             <ul class="submenu">
-                                <li><a href="shop-grid.html">Shop grid</a></li>
-                                <li><a href="product-detail.html">Product Detail</a></li>
-                                <li><a href="cart.html">Cart</a></li>
+                                <li><a href="{{ path('mymain') }}">Messages</a></li>
+                                <li><a href="{{ path('app_reclamation_index') }}">Reclamation</a></li>
+                                <li><a href="{{ path('app_tournois_index') }}">Tournois</a></li>
+                                <li><a href="{{ path('app_match_entity_index') }}">match</a></li>
+
                                 <li><a href="checkout.html">Checkout</a></li>
                             </ul>
                         </li>
+                        <li class="menu-item">
+                            <a href="{{ path('app_market_place_index') }}">SHOP</a>
+                        <li class="menu-item-has-children">
+                            <a href="javascript:void(0);">PAGES</a>
+                            <ul class="submenu">
+                                <li><a href="{{ path('equipe') }}">Teams</a></li>
+                                <li><a href="{{ path('add') }}">add team</a></li>
+                                <li><a href="{{ path('avis') }}">Avis players</a></li>
+                                <li><a href="{{ path('addA') }}">add Avis</a></li>
+                                <li><a href="{{ path('affecter') }}">join team</a></li>
+                                <li><a href="{{ path('player') }}">Lineup</a></li>
+                                <li><a href="{{ path('news') }}">premier league table</a></li>
+                                <li><a href="{{ path('newsscroll') }}">News</a></li>
+                                <li><a href="{{ path('comp') }}">compare player</a></li>
+                                <li><a href="{{ path('test') }}">voice Ai</a></li>
+                                <li><a href="{{ path('app_chatgpt') }}">ask Chatgpt</a></li>
+                                <li><a href="{{ path('app_stade_indexFront') }}">stades</a></li>
 
+
+
+
+                            </ul>
+                        </li>
 
                         <li class="menu-item"><a href="contact.html">CONTACT</a></li>
                         <li class="menu-item"><a href="about.html">ABOUT</a></li>

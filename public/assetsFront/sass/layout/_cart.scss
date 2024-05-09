@@ -1,0 +1,144 @@
+.cart{
+    .cart-item{
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        margin-bottom: 32px;
+        border-radius: 15px;
+        background: $white-1;
+        box-shadow: 0px 0px 0px 0px rgba(23, 31, 24, 0.08), 0px 2px 4px 0px rgba(23, 31, 24, 0.08), 0px 7px 7px 0px rgba(23, 31, 24, 0.07), 0px 16px 10px 0px rgba(23, 31, 24, 0.04), 0px 29px 11px 0px rgba(23, 31, 24, 0.01), 0px 45px 13px 0px rgba(23, 31, 24, 0.00);
+        @include media-query(575px) {
+            flex-direction: column;
+            padding: 24px;
+        }
+        .about-product{
+            @include media-query(575px) {
+                text-align: center;
+            }
+            .name{
+                font-size: 25px;
+                font-weight: 600;
+                line-height: 120%;
+                letter-spacing: 1.25px; 
+                color: $dark-2;
+                margin-bottom: 16px;              
+            }
+            .title{
+                font-size: 13px;
+                font-weight: 700;
+                line-height: 160%;
+                letter-spacing: 0.78px;  
+                color: $light-gray; 
+                margin-right: 8px;          
+            }
+            p{
+                font-size: 16px;
+                font-weight: 500;
+                line-height: 160%;
+                letter-spacing: 0.32px;
+                color: $dark-2;
+                margin-bottom: 16px;
+            }
+        }
+        .c-quantity{
+            display: flex;
+            align-items: center;
+            margin-bottom: 16px;
+            @include media-query(575px) {
+                justify-content: center;
+            }
+            .quantity{
+                background: $white-1;
+                display: flex;
+                border-radius: 5px;
+                height: 46px;
+                input{
+                    border: none;
+                    width: 40px;
+                    height: 46px;
+                    text-align: center;
+                    font-size: 25px;
+                    font-weight: 600;
+                    line-height: 120%;
+                    letter-spacing: 1.25px;
+                    margin: 0;
+                    color: $dark-gray;
+                    padding: 8px 12px;
+                    background: $white-3;
+                    border-width: 1px;
+                    border-style: solid;
+                    border-color: $dark-2;
+                    &.decrement{
+                        border-radius: 5px 0 0 5px;
+                    }
+                    &.number{
+                        color: $dark-2;
+                        border-width: 1px 0;
+                        background: $white-1;
+                    }
+                    &.increment{
+                        border-radius:  0 5px 5px 0;
+                    }
+                }
+            }
+        }
+        .price{
+            width: fit-content;
+            font-size: 25px;
+            font-weight: 600;
+            line-height: 120%;
+            letter-spacing: 1.25px;
+            padding: 8px;
+            color: $white-2;
+            background-color: $dark-2;
+            border-radius: 5px;
+            margin-right: 8px;
+            margin-left: auto;
+            @include media-query(575px) {
+                margin: 0 auto;
+            }
+        }
+    }
+}
+.cart-total{
+    .title{
+        font-size: 25px;
+        font-weight: 600;
+        line-height: 120%;
+        letter-spacing: 1.25px; 
+        color: $dark-2;      
+    }
+    .content-row{
+        display: flex;
+        padding: 16px;
+        justify-content: space-between;
+        box-shadow: $soft-shadow;
+        border-radius: 15px;
+        margin-bottom: 32px;
+        background-color: $white-2;
+        p{
+            color: $dark-gray;
+        }
+        h5{
+            font-size: 25px;
+            font-weight: 600;
+            line-height: 120%;
+            letter-spacing: 1.25px;
+            color: $white-2;          
+        }
+    }
+}
+@mixin hover-active() {
+	&:active,
+	&:hover {
+		@content;
+	}
+}
+
+
+
+.vr-line{
+    background: $light-gray;
+    width: 100%;
+    height: 1px;
+}

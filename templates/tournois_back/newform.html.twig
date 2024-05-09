@@ -1,0 +1,92 @@
+<div class="page-title-banner">
+                <div class="bread_crumb">
+                </div>
+                <div class="container">
+                    <div class="row">
+                        <div class="mb-3">
+                            <ul class="breadcrumb_wrap">
+                                <li><a href="{{ path('app_tournois_index') }}">Tournaments</a></li>
+                                <li class="onpage"><a href="newform.html.twig">Create Tournament</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+<div class="createt mb-3">
+    <div class="container">
+        <div class="mb-3">
+            <h2>Create a Tournament</h2>
+        </div>
+        <div class="row">
+            <div class="mb-3">
+                {{ form_start(form, {'attr': {'class': 'createt-form', 'novalidate': 'novalidate'}}) }}
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="mb-3">
+                                {{ form_label(form.nomTournois, 'Tournament Name') }}
+                                {{ form_widget(form.nomTournois, {'attr': {'class': 'form-control'}}) }}
+                                {% if form.nomTournois.vars.errors|length > 0 %}
+                                    <div style="color: red;">
+                                        {% for error in form.nomTournois.vars.errors %}
+                                            <span>{{ error.message }}</span><br>
+                                        {% endfor %}
+                                    </div>
+                                {% endif %}
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="mb-3">
+                                {{ form_label(form.stade, 'Stadium Name') }}
+                                {{ form_widget(form.stade, {'attr': {'class': 'form-control'}}) }}
+                                {% if form.stade.vars.errors|length > 0 %}
+                                    <div style="color: red;">
+                                        {% for error in form.stade.vars.errors %}
+                                            <span>{{ error.message }}</span><br>
+                                        {% endfor %}
+                                    </div>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        {{ form_label(form.nombreMatch, 'Number of Matchs') }}
+                        {{ form_widget(form.nombreMatch, {'attr': {'class': 'form-control'}}) }}
+                        {% if form.nombreMatch.vars.errors|length > 0 %}
+                            <div style="color: red;">
+                                {% for error in form.nombreMatch.vars.errors %}
+                                    <span>{{ error.message }}</span><br>
+                                {% endfor %}
+                            </div>
+                        {% endif %}
+                    </div>
+                    <div class="mb-3">
+                        {{ form_label(form.dateDebut, 'Begining Date') }}
+                        {{ form_widget(form.dateDebut, {'attr': {'class': 'form-control'}}) }}
+                        {% if form.dateDebut.vars.errors|length > 0 %}
+                            <div style="color: red;">
+                                {% for error in form.dateDebut.vars.errors %}
+                                    <span>{{ error.message }}</span><br>
+                                {% endfor %}
+                            </div>
+                        {% endif %}
+                    </div>
+                    <div class="mb-7">
+                        {{ form_label(form.dateFin, 'End Date') }}
+                        {{ form_widget(form.dateFin, {'attr': {'class': 'form-control'}}) }}
+                        {% if form.dateFin.vars.errors|length > 0 %}
+                            <div style="color: red;">
+                                {% for error in form.dateFin.vars.errors %}
+                                    <span>{{ error.message }}</span><br>
+                                {% endfor %}
+                            </div>
+                        {% endif %}
+                    </div>
+
+
+                    <button type="submit" class="btn btn-primary w-100 py-8 fs-4 mb-4 rounded-2" class="btn">{{ button_label|default('Create Tournament') }}</button>
+                    <p class="link">Changed your mind? <a href="{{ path('app_tournois_back_index') }}">back to list</a></p>
+                {{ form_end(form) }}                                 
+            </div>
+        </div>
+    </div>
+</div>

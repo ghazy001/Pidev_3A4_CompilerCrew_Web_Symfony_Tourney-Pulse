@@ -1,0 +1,57 @@
+{% extends 'admindash/index.html.twig' %}
+{% block body %}
+    <div style="padding: 4rem; margin-right: 20px; margin-bottom: 200px;">
+        <h1>Avis index</h1>
+
+{% set pageSize = 5 %}
+{% set totalPages = (avis|length + pageSize - 1) // pageSize %}
+{% set currentPage = app.request.get('page', 1) %}
+{% set startIndex = (currentPage - 1) * pageSize %}
+
+<table class="table">
+    <thead>
+    <tr>
+        <th>Id</th>
+        <th>DateAvis</th>
+        <th>Note</th>
+        <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for avi in avis|slice(startIndex,pageSize ) %}
+        <tr>
+            <td>{{ avi.id }}</td>
+            <td>{{ avi.DateAvis? avi.DateAvis|date('Y-m-d H:i:s') : '' }}</td>
+            <td>{{ avi.Note }}</td>
+            <td>
+                <a href="{{ path('app_avis_show', {'id': avi.id}) }}">Show</a>
+                <a href="{{ path('app_avis_edit', {'id': avi.id}) }}">Edit</a>
+            </td>
+        </tr>
+    {% else %}
+        <tr>
+            <td colspan="4">No records found</td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+
+<nav aria-label="Page navigation example">
+    <ul class="pagination">
+        {% if currentPage > 1 %}
+            <li class="page-item"><a class="page-link" href="?page={{ currentPage - 1 }}">Previous</a></li>
+        {% endif %}
+        {% for i in 1..totalPages %}
+            <li class="page-item {% if i == currentPage %}active{% endif %}">
+                <a class="page-link" href="?page={{ i }}">{{ i }}</a>
+            </li>
+        {% endfor %}
+        {% if currentPage < totalPages %}
+            <li class="page-item"><a class="page-link" href="?page={{ currentPage + 1 }}">Next</a></li>
+        {% endif %}
+    </ul>
+</nav>
+
+<a href="{{ path('app_avis_new') }}">Create new</a>
+    </div>
+{% endblock %}

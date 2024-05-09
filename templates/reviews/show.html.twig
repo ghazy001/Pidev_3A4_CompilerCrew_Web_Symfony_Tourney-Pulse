@@ -1,0 +1,30 @@
+{% extends 'admindash/index.html.twig' %}
+
+{% block title %}Avis{% endblock %}
+
+{% block body %}
+    <h1>Avis</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ avi.id }}</td>
+            </tr>
+            <tr>
+                <th>DateAvis</th>
+                <td>{{ avi.DateAvis ? avi.DateAvis|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Note</th>
+                <td>{{ avi.Note }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_avis_index') }}">back to list</a>
+
+    <a href="{{ path('app_avis_edit', {'id': avi.id}) }}">edit</a>
+
+    {{ include('reviews/_delete_form.html.twig') }}
+{% endblock %}

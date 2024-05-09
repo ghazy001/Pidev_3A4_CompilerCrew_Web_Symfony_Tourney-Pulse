@@ -1,0 +1,124 @@
+<?php
+
+namespace App\Entity;
+
+use App\Repository\ReservationRepository;
+use Doctrine\DBAL\Types\Types;
+use Symfony\Component\Validator\Constraints as Assert;
+use Doctrine\ORM\Mapping as ORM;
+
+#[ORM\Entity(repositoryClass: ReservationRepository::class)]
+#[ORM\Table(name: "reservation")]
+class Reservation
+{
+    #[ORM\Id]
+    #[ORM\GeneratedValue(strategy: "IDENTITY")]
+    #[ORM\Column(type: "integer", nullable: false)]
+    private $id;
+
+    #[ORM\ManyToOne(targetEntity: Stade::class)]
+    #[ORM\JoinColumn(name: "id_stade", referencedColumnName: "id")]
+    private $idStade;
+
+    #[ORM\Column(type: "date", nullable: false)]
+    #[Assert\NotNull(message: "La date ne peut pas être vide")]
+    #[Assert\Expression(
+        "value >= this.getCurrentDate()",
+        message: "La date doit être postérieure à la date actuelle"
+    )]
+    private $date;
+
+    public function getCurrentDate(): \DateTime
+    {
+        return new \DateTime();
+    }
+
+    #[ORM\ManyToOne(targetEntity: Equipe::class)]
+    #[ORM\JoinColumn(name: "id_DeuxiemeEquipe", referencedColumnName: "id")]
+    #[Assert\NotBlank(message: "L'équipe ne peut pas être vide")]
+    #[Assert\NotEqualTo(propertyPath: "idPremiereequipe", message: "Les équipes ne peuvent pas être les mêmes.")]
+    private $idDeuxiemeequipe;
+
+    #[ORM\ManyToOne(targetEntity: Equipe::class)]
+    #[ORM\JoinColumn(name: "id_PremiereEquipe", referencedColumnName: "id")]
+    #[Assert\NotBlank(message: "L'équipe ne peut pas être vide")]
+    private $idPremiereequipe;
+
+    #[ORM\ManyToOne(targetEntity: User::class)]
+    #[ORM\JoinColumn(name: "id_organisateur", referencedColumnName: "id")]
+    #[Assert\NotBlank(message: "L'organisateur ne peut pas être vide")]
+    private $idOrganisateur;
+
+    #[ORM\Column(type: "text", nullable: true)]
+    private $qrCodeBase64;
+
+    public function getQrCodeBase64()
+    {
+        return $this->qrCodeBase64;
+    }
+
+    public function setQrCodeBase64($qrCodeBase64): void
+    {
+        $this->qrCodeBase64 = $qrCodeBase64;
+    }
+
+    public function getId(): ?int
+    {
+        return $this->id;
+    }
+
+    public function getIdStade(): ?Stade
+    {
+        return $this->idStade;
+    }
+
+    public function setIdStade(?Stade $idStade): self
+    {
+        $this->idStade = $idStade;
+        return $this;
+    }
+
+    public function getDate(): ?\DateTimeInterface
+    {
+        return $this->date;
+    }
+
+    public function setDate(\DateTimeInterface $date): self
+    {
+        $this->date = $date;
+        return $this;
+    }
+
+    public function getIdDeuxiemeequipe(): ?Equipe
+    {
+        return $this->idDeuxiemeequipe;
+    }
+
+    public function setIdDeuxiemeequipe(?Equipe $idDeuxiemeequipe): self
+    {
+        $this->idDeuxiemeequipe = $idDeuxiemeequipe;
+        return $this;
+    }
+
+    public function getIdOrganisateur(): ?User
+    {
+        return $this->idOrganisateur;
+    }
+
+    public function setIdOrganisateur(?User $idOrganisateur): self
+    {
+        $this->idOrganisateur = $idOrganisateur;
+        return $this;
+    }
+
+    public function getIdPremiereequipe(): ?Equipe
+    {
+        return $this->idPremiereequipe;
+    }
+
+    public function setIdPremiereequipe(?Equipe $idPremiereequipe): self
+    {
+        $this->idPremiereequipe = $idPremiereequipe;
+        return $this;
+    }
+}

@@ -1,0 +1,24 @@
+{{ form_start(form, {'attr': {'class': 'container-fluid', 'novalidate': 'novalidate'}}) }}
+<div class="card">
+    <div class="card-body">
+        {# Iterate over each form field #}
+        {% for field in [form.nom, form.lieu, form.capacity, form.numero, form.images] %}
+            <div class="mb-3">
+                {{ form_label(field, null, {'label_attr': {'class': 'form-label'}}) }}
+                {{ form_widget(field, {'attr': {'class': 'form-control'}}) }}
+
+                {# Display errors for each field, styled in red #}
+                {% if field.vars.errors|length > 0 %}
+                    <div style="color: red;">
+                        {% for error in field.vars.errors %}
+                            <span>{{ error.message }}</span><br>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            </div>
+        {% endfor %}
+
+        <button type="submit" class="btn btn-primary">Save</button>
+    </div>
+</div>
+{{ form_end(form) }}

@@ -1,0 +1,168 @@
+{% extends 'backTournois.html.twig' %}
+
+{% block title %}Tournois index{% endblock %}
+
+{% block body %}
+
+    <div style="padding-top: 100px">
+
+        <h1 style="padding-top: 40px; text-align: center;">Liste des Tournois</h1>
+        <div style="overflow-x:auto;">
+            <nav class="navbar upper d-lg-flex d-none">
+                <form action="{{ path('app_tournois_back_new') }}">
+                    <button class="btn btn-primary" style="padding-right: 30px;" > Crée Tournois</button>
+                </form>
+                <div>
+                    <select name="cars" id="cars" class="form-select" style="width: 100px;  display: inline-block">
+                        <option value="">All</option>
+                        <option value="2024">2024</option>
+                        <option value="2025">2025</option>
+                        <option value="2026">2026</option>
+                        <option value="2027">2027</option>
+
+                    </select>
+
+                    <button id="applyButton" class="btn btn-primary"  style=" margin-left: 10px">filterBy</button>
+
+                    <select name="order" id="order" class="form-select" style="width: 120px; display: inline-block;margin-left: 30px;">
+                        <option value="">default</option>
+                        <option value="AtoZ">Tournament</option>
+                        <option value="stadium">Stadium</option>
+
+
+                    </select>
+
+                    <button id="applyB" class="btn btn-primary" style=" margin-left: 10px" >orderBy</button>
+                </div>
+                <div class="right-content">
+                    <ul>
+                        <li>
+                            <form action="{{ path('app_tournois_back_index') }}" method="GET">
+                                <input type="text" class="form-control" id="searchInput" name="query" placeholder="Search...">
+                            </form>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+            <table class="table table-bordered table-striped">
+                <thead>
+                <tr>
+                    <th style="width: 10%;">Tournament Name</th>
+                    <th style="width: 30%;">Stadium Name</th>
+                    <th style="width: 30%;">Number Match</th>
+                    <th style="width: 30%;">Begining Date</th>
+                    <th style="width: 30%;">End Date</th>
+                    <th style="width: 30%;">Actions</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for tournoi in tournois %}
+                    <tr>
+                        <td>{{ tournoi.nomTournois }}</td>
+                        <td>{{ tournoi.stade }}</td>
+                        <td>{{ tournoi.nombreMatch }}</td>
+                        <td>{{ tournoi.dateDebut ? tournoi.dateDebut|date('Y-m-d') : '' }}</td>
+                        <td>{{ tournoi.dateFin ? tournoi.dateFin|date('Y-m-d') : '' }}</td>
+                        <td> <form action="{{ path('app_tournois_back_show', {'idTournois': tournoi.idTournois}) }}">
+                                <button class="btn btn-info"  style="margin-bottom: 10px">Show</button>
+                            </form>
+                            <form action="{{ path('app_tournois_back_edit', {'idTournois': tournoi.idTournois}) }}">
+                                <button class="btn btn-primary" style="padding-right: 30px;" > Edit</button>
+                            </form>
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <style>
+        nav {
+            display: flex;
+            justify-content: center;
+        }
+
+        .paginassion {
+            display: inline-block;
+            border-radius: 5px;
+        }
+
+        .paginassion a {
+            color: black;
+            float: left;
+            padding: 8px 16px;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color .3s;
+            border: 1px solid #0056b3; /* Blue */
+            margin: 0 4px; /* 0 is for top and bottom. Feel free to change it */
+            font-size: 22px;
+            text-align: center;
+            box-shadow: 0 8px 14px 0 rgba(0, 0, 0, 0.2);
+        }
+
+        .paginassion a.active {
+            background-color: #4CAF50;
+            color: white;
+            border-radius: 5px;
+        }
+
+        .paginassion a:hover:not(.active) {background-color: #0056b3;}
+
+        .paginassion a:first-child {
+            border-top-left-radius: 5px;
+            border-bottom-left-radius: 5px;
+        }
+
+        .paginassion a:last-child {
+            border-top-right-radius: 5px;
+            border-bottom-right-radius: 5px;
+        }
+    </style>
+
+
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            // Function to trigger search as the user types
+            $('#searchInput').on('input', function() {
+                var query = $(this).val(); // Get the search query from the input field
+                // Make an AJAX request to fetch search results based on the query
+                $.ajax({
+                    url: 'TournoisController.php', // Assuming your PHP script handling the search is named search.php
+                    method: 'GET',
+                    data: {query: query}, // Pass the search query as a parameter
+                    success: function(response) {
+                        $('#searchResults').html(response); // Display the search results
+                    }
+                });
+            });
+        });
+    </script>
+
+
+    <script>
+        document.getElementById("applyButton").addEventListener("click", function() {
+            var selectedYear = document.getElementById("cars").value;
+            window.location.href = "/tournois/back?year=" + selectedYear;
+        });
+    </script>
+
+    <script>
+        document.getElementById("applyB").addEventListener("click", function() {
+            var selectedOrder = document.getElementById("order").value;
+            window.location.href = "/tournois/back?order=" + selectedOrder;
+        });
+    </script>
+
+    <nav aria-label="pagination">
+        <ul class="paginassion">
+            <li>{{ knp_pagination_render(tournois) }}</li>
+        </ul>
+    </nav>
+
+{% endblock %}
+
+
