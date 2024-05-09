@@ -1,0 +1,197 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+
+    <div class="players-grid p-96" style="margin-top: 100px; padding-left: 180px">
+
+        <button class="translateButton" data-url="{{ path('avis') }}" style="display: block" >🇫🇷</button>
+
+        {% for donnee in donnees %}
+            <div class="flip-card">
+                <div class="flip-card-inner">
+                    <div class="flip-card-front">
+                        <p class="title">{{ donnee.user.firstname }}</p>
+                        <img src="/player.png" style="align-content: center">
+                        <p>{{ donnee.dateavis|date('Y-m-d') }}</p>
+                    </div>
+                    <div class="flip-card-back">
+                        <p class="title commentaire" id="textToConvert">{{ donnee.commentaire }}</p>
+                        <button class="btn" id="convertBtn">read comment</button>
+                        <p class="error-para"></p>
+                        <p>
+                            {% for i in range(1, 6) %}
+                                {% if i <= donnee.note %}
+                                    <i class="fas fa-star"></i>
+                                {% else %}
+                                    <i class="far fa-star"></i>
+                                {% endif %}
+                            {% endfor %}
+                        </p>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+
+
+
+    </div>
+
+
+    <style>
+        .translateButton {
+            align-items: center;
+            appearance: none;
+            background-image: radial-gradient(100% 100% at 100% 0, #5adaff 0, #5468ff 100%);
+            border: 0;
+            border-radius: 6px;
+            box-shadow: rgba(45, 35, 66, .4) 0 2px 4px, rgba(45, 35, 66, .3) 0 7px 13px -3px, rgba(58, 65, 111, .5) 0 -3px 0 inset;
+            box-sizing: border-box;
+            color: #fff;
+            cursor: pointer;
+            display: inline-flex;
+            font-family: "JetBrains Mono",monospace;
+            height: 48px;
+            justify-content: center;
+            line-height: 1;
+            list-style: none;
+            overflow: hidden;
+            padding-left: 16px;
+            padding-right: 16px;
+            position: relative;
+            text-align: left;
+            text-decoration: none;
+            transition: box-shadow .15s,transform .15s;
+            user-select: none;
+            -webkit-user-select: none;
+            touch-action: manipulation;
+            white-space: nowrap;
+            will-change: box-shadow,transform;
+            font-size: 18px;
+        }
+
+        .translateButton:focus {
+            box-shadow: #3c4fe0 0 0 0 1.5px inset, rgba(45, 35, 66, .4) 0 2px 4px, rgba(45, 35, 66, .3) 0 7px 13px -3px, #3c4fe0 0 -3px 0 inset;
+        }
+
+        .translateButton:hover {
+            box-shadow: rgba(45, 35, 66, .4) 0 4px 8px, rgba(45, 35, 66, .3) 0 7px 13px -3px, #3c4fe0 0 -3px 0 inset;
+            transform: translateY(-2px);
+        }
+
+        .translateButton:active {
+            box-shadow: #3c4fe0 0 3px 7px inset;
+            transform: translateY(2px);
+        }
+
+        .flip-card {
+            background-color: transparent;
+            width: 200px;
+            height: 300px;
+            perspective: 1000px;
+            font-family: sans-serif;
+            display: inline-block;
+            margin-right: 100px;
+            margin-top: 30px;
+        }
+
+        .title {
+            font-size: 1.2em;
+            font-weight: 900;
+            text-align: center;
+            margin: 0;
+        }
+
+        .flip-card-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            text-align: center;
+            transition: transform 0.8s;
+            transform-style: preserve-3d;
+        }
+
+        .flip-card:hover .flip-card-inner {
+            transform: rotateY(180deg);
+        }
+
+        .flip-card-front, .flip-card-back {
+            box-shadow: 0 8px 14px 0 rgba(0, 0, 0, 0.2);
+            position: absolute;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            width: 100%;
+            height: 100%;
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+            border: 2px solid #0056b3; /* Blue border */
+            border-radius: 10px; /* Rounded corners */
+        }
+
+        .flip-card-front {
+            background-color: #f8f9fa; /* Light gray background */
+            color: #343a40; /* Dark text color */
+        }
+
+        .flip-card-back {
+            background-color: #343a40; /* Dark background */
+            color: #f8f9fa; /* Light text color */
+            transform: rotateY(180deg);
+        }
+    </style>
+    <script>
+        document.querySelectorAll('.translateButton').forEach(function(button) {
+            button.addEventListener('click', function() {
+                var textToTranslateElements = document.querySelectorAll('.commentaire');
+                var url = this.getAttribute('data-url');
+
+                textToTranslateElements.forEach(function(element) {
+                    var textToTranslate = element.innerText;
+                    var xhr = new XMLHttpRequest();
+
+                    xhr.open('POST', url);
+                    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+                    xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
+
+                    xhr.onload = function() {
+                        if (xhr.status === 200) {
+                            element.innerText = xhr.responseText;
+                        } else {
+                            console.log('Request failed.  Returned status of ' + xhr.status);
+                        }
+                    };
+
+                    xhr.send('text=' + encodeURIComponent(textToTranslate));
+                });
+            });
+        });
+    </script>
+
+    <script>
+        document.querySelectorAll('.btn').forEach(function(button) {
+            button.addEventListener('click', function () {
+                const speechSynth = window.speechSynthesis;
+                const card = button.closest('.flip-card');
+                const textToConvertElement = card.querySelector('.commentaire');
+                const textToConvert = textToConvertElement.innerText;
+                const error = card.querySelector('.error-para');
+
+                if (!speechSynth.speaking && textToConvert.trim().length) {
+                    error.textContent = "";
+                    const newUtter = new SpeechSynthesisUtterance(textToConvert);
+                    newUtter.lang = 'en-US';
+                    speechSynth.speak(newUtter);
+                    button.textContent = "Sound is Playing...";
+                } else {
+                    error.textContent = "Nothing to Convert! Enter text in the text area.";
+                }
+
+                setTimeout(() => {
+                    button.textContent = "read comment";
+                }, 5000);
+            });
+        });
+    </script>
+
+{% endblock %}

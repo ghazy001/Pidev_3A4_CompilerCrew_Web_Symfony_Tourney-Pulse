@@ -1,0 +1,167 @@
+{% extends 'admindash/index.html.twig' %}
+
+{% block body %}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <div style="padding-top: 100px">
+
+
+
+
+
+
+        <div>
+            <input required="" autocomplete="off" placeholder="search your items" id="search" type="text">
+            <button id="click_to_record" class="btn btn-danger" style="border-radius: 200px"><i class="fa-solid fa-microphone"></i></button>
+        </div>
+
+
+
+
+
+
+
+
+
+        <h1 style="text-align: center">Liste des Avis</h1>
+        <div style="overflow-x:auto;">
+            <table class="table table-bordered table-striped">
+                <thead>
+                <tr>
+                    <th style="width: 10%;">ID</th>
+                    <th style="width: 30%;">user</th>
+                    <th style="width: 30%;">commentaire</th>
+                    <th style="width: 30%;">date</th>
+                    <th style="width: 30%;">note</th>
+                    <th style="width: 30%;">Action</th>
+                </tr>
+                </thead>
+                <tbody id="avisTableBody">
+                {% for donnee in donnees %}
+                    <tr>
+                        <td>{{ donnee.idAvis }}</td>
+                        <td>{{ donnee.user.firstname }}</td>
+                        <td>{{ donnee.commentaire }}</td>
+                        <td>{{ donnee.dateAvis|date('Y-m-d') }}</td>
+                        <td>
+                            {% for i in range(1, 6) %}
+                                {% if i <= donnee.note %}
+                                    <i class="fas fa-star"></i>
+                                {% else %}
+                                    <i class="far fa-star"></i>
+                                {% endif %}
+                            {% endfor %}
+                        </td>
+                        <td>
+                            <form action="{{ path('suppA',{'i':donnee.idAvis}) }}">
+                                <button class="btn btn-danger" style="margin-bottom: 10px">supprimer</button>
+                            </form>
+                            <form action="{{ path('edit_avis',{'id':donnee.idAvis}) }}">
+                                <button class="btn btn-primary" style="padding-right: 30px;">modifier</button>
+                            </form>
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#search').keyup(function () {
+                var query = $(this).val().toLowerCase(); // Convert query to lowercase for case-insensitive search
+                $('#avisTableBody tr').each(function () {
+                    var rowText = $(this).text().toLowerCase(); // Convert row text to lowercase
+                    if (rowText.indexOf(query) === -1) {
+                        $(this).hide(); // Hide row if it does not match the search query
+                    } else {
+                        $(this).show(); // Show row if it matches the search query
+                    }
+                });
+            });
+        });
+    </script>
+
+
+
+
+
+<style>
+    input[type=text] {
+        width: 15%;
+        padding: 10px;
+        border: 2px solid #ccc;
+
+        margin-left: 8px;
+        border-radius: 5px;
+        transition: width 0.4s ease-in-out;
+    }
+
+    input[type=text] {
+        transition: width 0.4s ease-in-out;
+    }
+
+    input[type=text]:focus {
+        width: 25%;
+    }
+
+
+
+
+</style>
+
+
+
+    <script>
+        window.addEventListener('DOMContentLoaded', () => {
+            const clickToRecord = document.getElementById("click_to_record");
+            const searchInput = document.getElementById("search");
+            let speech = true;
+
+            if (!('webkitSpeechRecognition' in window)) {
+                alert("Web Speech API is not supported by this browser!");
+                return;
+            }
+
+            const recognition = new webkitSpeechRecognition();
+            recognition.interimResults = true;
+
+            recognition.addEventListener('result', e => {
+                const transcript = Array.from(e.results)
+                    .map(result => result[0])
+                    .map(result => result.transcript)
+                    .join('');
+
+                searchInput.value = transcript;
+                console.log(transcript);
+            });
+
+            clickToRecord.addEventListener('click', () => {
+                if (speech) {
+                    recognition.start();
+                }
+            });
+        });
+    </script>
+
+
+
+
+
+
+
+
+{% endblock %}

@@ -1,0 +1,57 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    <!-- players area Start -->
+    <div class="players-grid p-96" style="margin-top: 200px;">
+
+
+
+        <div class="container">
+            <div class="heading mb-64">
+                <p>Teams : ({{ donnees.getTotalItemCount }})</p>
+            </div>
+            <div class="row">
+                {% for donnee in donnees %}
+                <div class="col-xl-3 col-sm-6 mb-xl-0 mb-30">
+                    <div class="player-card">
+                        <div class="player-role">
+                            <h6>{{ donnee.dateCreation|date('Y-m-d') }}</h6>
+                        </div>
+                        <div class="img-block">
+                            <img src="/{{ donnee.image }}" style="align-content: center">
+                            <div class="overlay">
+                                <div class="content">
+                                    <ul class="social-links">
+                                        <li><a href="https://www.facebook.com"><img src="{{ asset('assets/media/icon/facebook-w.png') }}" alt="Facebook" /></a></li>
+                                        <li><a href="https://www.instagram.com"><img src="{{ asset('assets/media/icon/instagram-w.png') }}" alt="Instagram" /></a></li>
+                                        <li><a href="https://twitter.com"><img src="{{ asset('assets/media/icon/twitter-w.png') }}" alt="Twitter" /></a></li>
+                                        <li><a href="https://www.youtube.com"><img src="{{ asset('assets/media/icon/youtube-w.png') }}" alt="Youtube" /></a></li>
+                                    </ul>
+                                    <a href="{{ path('player',{'id':donnee.id}) }}" class="name">{{ donnee.nom }}</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% if loop.index % 4 == 0 %}
+            </div>
+            <div class="row mt-4">
+                {% endif %}
+                {% endfor %}
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+
+        <div class="pagination-container">
+            {{ knp_pagination_render(donnees) }}
+        </div>
+
+
+
+{% endblock %}

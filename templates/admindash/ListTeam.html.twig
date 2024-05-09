@@ -1,0 +1,180 @@
+{% extends 'admindash/index.html.twig' %}
+
+{% block body %}
+
+    <div style="padding-top: 100px">
+
+
+
+        <a href="{{ path('export') }}" class="buttonDownload" style="margin-left: 1000px">Download</a>
+
+
+        <div>
+        <select name="cars" id="cars" class="form-select" style="width: 100px;  display: inline-block">
+            <option value="">All</option>
+            <option value="2020">2020</option>
+            <option value="2021">2021</option>
+            <option value="2022">2022</option>
+            <option value="2024">2024</option>
+
+        </select>
+
+            <button id="applyButton" class="btn btn-primary"  style=" margin-left: 10px">filterBy</button>
+
+            <select name="order" id="order" class="form-select" style="width: 120px; display: inline-block;margin-left: 30px;">
+                <option value="">default</option>
+                <option value="AtoZ">A-Z</option>
+                <option value="date">Date added</option>
+
+
+            </select>
+
+            <button id="applyB" class="btn btn-primary" style=" margin-left: 10px" >ordeBy</button>
+        </div>
+
+        <h1 style="padding-top: 40px; text-align: center;">Liste des équipes</h1>
+        <div style="overflow-x:auto;">
+            <table class="table table-bordered table-striped">
+                <thead>
+                <tr>
+                    <th style="width: 10%;">ID</th>
+                    <th style="width: 30%;">Nom</th>
+                    <th style="width: 30%;">Image</th>
+                    <th style="width: 30%;">Date</th>
+                    <th style="width: 30%;">Action</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for donnee in donnees %}
+                    <tr>
+                        <td>{{ donnee.id }}</td>
+                        <td>{{ donnee.nom }}</td>
+                        <td><img src="/{{ donnee.image }}" style="align-content: center; width: 100px; height: 100px;"></td>
+                        <td>{{ donnee.dateCreation|date('Y-m-d') }}</td>
+                        <td> <form action="{{ path('suppE',{'i':donnee.id}) }}">
+                                <button class="btn btn-danger"  style="margin-bottom: 10px">supprimer</button>
+
+                            </form>
+
+                            <form action="{{ path('edit_equipe',{'id':donnee.id}) }}">
+                                <button class="btn btn-primary" style="padding-right: 30px;" > modifier</button>
+
+                            </form>
+
+
+
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+
+    </div>
+
+    <style>
+        .buttonDownload {
+            display: inline-block;
+            position: relative;
+            padding: 10px 25px;
+            background-color: #4CC713;
+            color: white;
+            font-family: sans-serif;
+            text-decoration: none;
+            font-size: 0.9em;
+            text-align: center;
+            text-indent: 15px;
+            border: none;
+        }
+
+        .buttonDownload:hover {
+            background-color: #45a21a;
+            color: white;
+        }
+
+        .buttonDownload:before, .buttonDownload:after {
+            content: ' ';
+            display: block;
+            position: absolute;
+            left: 15px;
+            top: 52%;
+        }
+
+        .buttonDownload:before {
+            width: 10px;
+            height: 2px;
+            border-style: solid;
+            border-width: 0 2px 2px;
+        }
+
+        .buttonDownload:after {
+            width: 0;
+            height: 0;
+            margin-left: 3px;
+            margin-top: -7px;
+            border-style: solid;
+            border-width: 4px 4px 0 4px;
+            border-color: transparent;
+            border-top-color: inherit;
+            animation: downloadArrow 1s linear infinite;
+            animation-play-state: paused;
+        }
+
+        .buttonDownload:hover:before {
+            border-color: #cdefbd;
+        }
+
+        .buttonDownload:hover:after {
+            border-top-color: #cdefbd;
+            animation-play-state: running;
+        }
+
+        @keyframes downloadArrow {
+            0% {
+                margin-top: -7px;
+                opacity: 1;
+            }
+
+            0.001% {
+                margin-top: -15px;
+                opacity: 0.4;
+            }
+
+            50% {
+                opacity: 1;
+            }
+
+            100% {
+                margin-top: 0;
+                opacity: 0.4;
+            }
+        }
+    </style>
+
+
+
+    <script>
+        document.getElementById("applyButton").addEventListener("click", function() {
+            var selectedYear = document.getElementById("cars").value;
+            window.location.href = "/list?year=" + selectedYear;
+        });
+    </script>
+
+    <script>
+        document.getElementById("applyB").addEventListener("click", function() {
+            var selectedOrder = document.getElementById("order").value;
+            window.location.href = "/list?order=" + selectedOrder;
+        });
+    </script>
+
+
+
+
+
+
+
+
+
+
+{% endblock %}
