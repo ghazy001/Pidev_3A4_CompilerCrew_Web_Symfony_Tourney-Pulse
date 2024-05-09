@@ -3,10 +3,6 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use App\Repository\ImagesStadeRepository;
-
-
-#[ORM\Entity(repositoryClass: ImagesStadeRepository::class)]
 
 /**
  * ImagesStade
@@ -39,23 +35,6 @@ class ImagesStade
      */
     private $urlImage;
 
-    /**
-     * @ORM\ManyToOne(targetEntity=Stade::class, inversedBy="images")
-     * @ORM\JoinColumn(name="id_stade", referencedColumnName="id")
-     */
-    private $stade;
-
-    public function getStade(): ?Stade
-    {
-        return $this->stade;
-    }
-
-    public function setStade(?Stade $stade): self
-    {
-        $this->stade = $stade;
-
-        return $this;
-    }
     public function getId(): ?int
     {
         return $this->id;
@@ -85,5 +64,13 @@ class ImagesStade
         return $this;
     }
 
+    /*
+   *
+   *
+   * @author : ghazi saoudi
+   *
+   *
+   *
+   */
 
 }

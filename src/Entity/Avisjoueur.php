@@ -4,58 +4,39 @@ namespace App\Entity;
 
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\AvisjoueurRepository;
+use Symfony\Component\Validator\Constraints as Assert;
 
-/**
- * Avisjoueur
- *
- * @ORM\Table(name="avisjoueur", indexes={@ORM\Index(name="idJoueur", columns={"idJoueur"})})
- * @ORM\Entity
- */
+#[ORM\Entity(repositoryClass: AvisjoueurRepository::class)]
 class Avisjoueur
 {
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="idAvis", type="integer", nullable=false)
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
-     */
-    private $idavis;
+    #[ORM\Id]
+    #[ORM\GeneratedValue]
+    #[ORM\Column(name: "idAvis", type: Types::INTEGER)]
+    private ?int $idAvis = null;
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="commentaire", type="string", length=255, nullable=false)
-     */
-    private $commentaire;
+    #[ORM\Column(length: 255)]
+    #[Assert\NotBlank(message:"Commentaire is required")]
+    #[Assert\Regex(
+        pattern: "/^[a-zA-Z0-9\s]*$/",
+        message: "Only alphanumeric characters and spaces are allowed"
+    )]
+    private ?string $commentaire = null;
 
-    /**
-     * @var float
-     *
-     * @ORM\Column(name="note", type="float", precision=10, scale=0, nullable=false)
-     */
-    private $note;
+    #[ORM\Column]
+    #[Assert\NotBlank(message: "Note is required")]
+    private ?float $note = null;
 
-    /**
-     * @var \DateTime
-     *
-     * @ORM\Column(name="dateAvis", type="date", nullable=false)
-     */
-    private $dateavis;
+    #[ORM\Column(type: "datetime")]
+    private ?\DateTime $dateavis = null;
 
-    /**
-     * @var \User
-     *
-     * @ORM\ManyToOne(targetEntity="User")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="idJoueur", referencedColumnName="id")
-     * })
-     */
-    private $idjoueur;
+    #[ORM\ManyToOne(inversedBy: 'avisjoueur')]
+    #[ORM\JoinColumn(name: "idJoueur", referencedColumnName: "id")]
+    private ?User $user = null;
 
     public function getIdavis(): ?int
     {
-        return $this->idavis;
+        return $this->idAvis;
     }
 
     public function getCommentaire(): ?string
@@ -94,17 +75,25 @@ class Avisjoueur
         return $this;
     }
 
-    public function getIdjoueur(): ?User
+    public function getUser(): ?User
     {
-        return $this->idjoueur;
+        return $this->user;
     }
 
-    public function setIdjoueur(?User $idjoueur): static
+    public function setUser(?User $user): self
     {
-        $this->idjoueur = $idjoueur;
+        $this->user = $user;
 
         return $this;
     }
 
-
+    /*
+   *
+   *
+   * @author : ghazi saoudi
+   *
+   *
+   *
+   */
 }
+

@@ -2,46 +2,92 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\EquipeRepository;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Validator\Mapping\ClassMetadata;
 
-/**
- * Equipe
- *
- * @ORM\Table(name="equipe")
- * @ORM\Entity
- */
+
+
+#[ORM\Entity(repositoryClass: EquipeRepository::class)]
+
 class Equipe
 {
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="id", type="integer", nullable=false)
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
-     */
-    private $id;
+    #[ORM\Id]
+    #[ORM\GeneratedValue]
+    #[ORM\Column]
+    private ?int $id = null;
+
+
+    #[ORM\Column(length: 255)]
+    #[Assert\NotBlank(message:"nom is required")]
+    #[Assert\Regex(
+        pattern: "/^[a-zA-Z][a-zA-Z\s]*$/",
+        message: "Only alphabetic characters and spaces are allowed, and spaces are not allowed at the beginning"
+    )]
+    private ?string $nom = null;
+
+
+    #[ORM\Column(length: 255)]
+    private ?string $image = null;
+
+
+    #[ORM\Column(name: "dateCreation", type: "datetime")]
+    #[Assert\Range(
+        max: 'today',
+        maxMessage: "The date cannot be in the future."
+    )]
+    private ?\DateTime $dateCreation = null;
+
+
+
+
+
+    #[ORM\OneToMany(targetEntity: User::class, mappedBy: 'equipe')]
+    private Collection $users;
+
+    public function __construct()
+    {
+        $this->users = new ArrayCollection();
+    }
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="nom", type="string", length=255, nullable=false)
+     * @return Collection|User[]
      */
-    private $nom;
+    public function getUsers(): Collection
+    {
+        return $this->users;
+    }
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="image", type="string", length=2000, nullable=false)
-     */
-    private $image;
+    public function addUser(User $user): self
+    {
+        if (!$this->users->contains($user)) {
+            $this->users[] = $user;
+            $user->setEquipe($this);
+        }
 
-    /**
-     * @var \DateTime
-     *
-     * @ORM\Column(name="dateCreation", type="date", nullable=false)
-     */
-    private $datecreation;
+        return $this;
+    }
+
+    public function removeUser(User $user): self
+    {
+        if ($this->users->removeElement($user)) {
+            // set the owning side to null (unless already changed)
+            if ($user->getEquipe() === $this) {
+                $user->setEquipe(null);
+            }
+        }
+
+        return $this;
+    }
+
+
+
+
+
 
     public function getId(): ?int
     {
@@ -72,27 +118,27 @@ class Equipe
         return $this;
     }
 
-    public function getDatecreation(): ?\DateTimeInterface
+    public function getDateCreation(): ?\DateTimeInterface
     {
-        return $this->datecreation;
+        return $this->dateCreation;
     }
 
-    public function setDatecreation(\DateTimeInterface $datecreation): static
+    public function setDateCreation(\DateTimeInterface $dateCreation): static
     {
-        $this->datecreation = $datecreation;
+        $this->dateCreation = $dateCreation;
 
         return $this;
     }
 
+    /*
+       *
+       *
+       * @author : ghazi saoudi
+       *
+       *
+       *
+       */
 
-    /**
-     * String representation of this class.
-     *
-     * @return string
-     */
-    public function __toString(): string
-    {
-        // Return the team name (nom) when the object is treated as a string
-        return $this->nom;
-    }
+
+
 }

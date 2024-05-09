@@ -1,0 +1,126 @@
+.players-grid{
+    .player-card{
+        border-radius: 15px;
+        height: 100%;
+        background: $white-3;
+        box-shadow: $soft-shadow;
+        .player-role{
+            position: relative;
+            z-index: 5;
+            width: fit-content;
+            padding: 12px 16px;
+            background: $dark-2;
+            text-align: center;
+            margin: 0 auto;
+            transition: $transition-2;
+            h6{
+                font-weight: 400;
+                font-size: 25px;
+                line-height: 120%;
+                color: $white-2;
+                letter-spacing: 0.05em;
+                font-family: $font-sec;
+                transition: $transition-2;
+                @include short-query(1200px , 1599px) {
+                    font-size: 20px;
+                }
+                @include short-query(576px , 767px) {
+                    font-size: 18px;
+                }
+                @include media-query(400px) {
+                    font-size: 20px;
+                } 
+            }
+        }
+        .img-block{
+            border-radius: 15px;
+            margin: 0 32px 42px;
+            position: relative;
+            overflow: hidden;
+            @include short-query(576px , 767px) {
+                margin: 0 16px 24px;
+            }
+            .overlay{
+                position: absolute;
+                top: 0;
+                left: 0;
+                height: 100%;
+                width: 100%;
+                overflow: hidden;
+                border-radius: 15px;
+                transition: $transition-2;
+                .content{
+                    position: relative;
+                    height: 100%;
+                    .social-links{
+                        position: absolute;
+                        right: -70px;
+                        top: 16px;
+                        list-style: none;
+                        display: flex;
+                        flex-direction: column;
+                        justify-content: end;
+                        gap: 16px;
+                        transition: $transition-2;
+                    }
+                    .name{
+                        position: absolute;
+                        left: -500px;
+                        bottom: 8px;
+                        color: $white-2;
+                        font-size: 49px;
+                        font-family: $font-sec;
+                        line-height: 98%;
+                        letter-spacing: -0.49px;
+                        transition: $transition-2;
+                        @include short-query(1200px , 1599px) {
+                            font-size: 36px;
+                        }
+                        @include short-query(576px , 767px) {
+                            font-size: 32px;
+                        }
+                        @include media-query(400px) {
+                            font-size: 32px;
+                        } 
+                        &:hover{
+                            background: $gradient;
+                            -webkit-background-clip: text;
+                            -webkit-text-fill-color: transparent;
+                            background-clip: text;
+                            text-fill-color: transparent;
+                            transition: $transition-2;
+                        }
+                    }
+                }
+            }
+        }
+        &:hover{
+            .player-role{
+                transition: $transition-2;
+                background: $gradient;
+                h6{
+                    color: $dark-2;
+                    transition: $transition-2;
+                }
+            }
+            .img-block{
+                box-shadow: 0px 4px 28px -4px #2CDD3D;
+                transition: $transition-2;
+                .overlay{
+                    background: rgba(23, 31, 24, 0.64);
+                    transition: $transition-2;
+                    .content{
+                        .social-links{
+                            right: 16px;
+                            transition: $transition-2;
+                        }
+                        .name{
+                            left: 16px;
+                            transition: $transition-2;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

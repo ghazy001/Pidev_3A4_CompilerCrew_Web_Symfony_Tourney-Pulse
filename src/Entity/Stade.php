@@ -3,10 +3,8 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Doctrine\Common\Collections\Collection;
-use Doctrine\Common\Collections\ArrayCollection;
-use Symfony\Component\Validator\Constraints as Assert;
-use Symfony\Component\Validator\Context\ExecutionContextInterface;
+
+
 
 
 
@@ -24,105 +22,36 @@ class Stade
      * @ORM\Column(name="id", type="integer", nullable=false)
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
-     *
      */
     private $id;
 
-    
-    
-
-   /**
-     * @ORM\Column(name="Nom", type="string", length=255, nullable=false, unique=true)
-     * @Assert\NotBlank(message="The name cannot be blank.")
-     * @Assert\Length(
-     *      min = 3,
-     *      minMessage = "The name cannot be shorter than {{ limit }} characters."
-     * )
-     * @Assert\Regex(
-     *     pattern="/^[a-zA-Z]+(?:\s+[a-zA-Z]+)*$/",
-     *     message="The name must contain only alphabetic characters."
-     * )
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="Nom", type="string", length=255, nullable=false)
      */
     private $nom;
 
-
-    
-    
-
-
-/**
- * @ORM\Column(name="Lieu", type="string", length=255, nullable=false)
- * @Assert\NotBlank(message="The location cannot be blank.")
- * @Assert\Length(
- *      min = 3,
- *      minMessage = "The name cannot be shorter than {{ limit }} characters."
- * )
- * @Assert\Regex(
- *     pattern="/^[a-zA-Z\s]+$/",
- *     message="The location must contain only letters."
- * )
- */
-private $lieu;
-
-   /**
- * @ORM\Column(name="Capacity", type="integer", nullable=false)
- * @Assert\NotBlank(message="The capacity cannot be blank.")
- * @Assert\Type(type="integer", message="The capacity must be an integer.")
- * @Assert\GreaterThanOrEqual(value=0, message="The capacity must be a positive number.")
- */
-private $capacity;
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="Lieu", type="string", length=255, nullable=false)
+     */
+    private $lieu;
 
     /**
- * @ORM\Column(name="Numero", type="integer", nullable=false)
- * @Assert\NotBlank(message="The number cannot be blank.")
- * @Assert\Regex(
- *     pattern="/^\d+$/",
- *     message="The number must contain only digits."
- * )
- */
-private $numero;
-
-
- /**
-     * @ORM\OneToMany(targetEntity=ImagesStade::class, mappedBy="stade", cascade={"persist", "remove"}, orphanRemoval=true)
+     * @var int
+     *
+     * @ORM\Column(name="Capacity", type="integer", nullable=false)
      */
-private $images;
-
-
-    public function __construct()
-    {
-        $this->images = new ArrayCollection();
-    }
+    private $capacity;
 
     /**
-     * @return Collection
+     * @var int
+     *
+     * @ORM\Column(name="Numero", type="integer", nullable=false)
      */
-    public function getImages(): Collection
-    {
-        return $this->images;
-    }
-
-    public function addImage(ImagesStade $image): self
-    {
-        if (!$this->images->contains($image)) {
-            $this->images[] = $image;
-            $image->setStade($this);
-        }
-
-        return $this;
-    }
-
-    public function removeImage(ImagesStade $image): self
-    {
-        if ($this->images->removeElement($image)) {
-            // Set the owning side to null
-            if ($image->getStade() === $this) {
-                $image->setStade(null);
-            }
-        }
-
-        return $this;
-    }
+    private $numero;
 
     public function getId(): ?int
     {
@@ -134,7 +63,7 @@ private $images;
         return $this->nom;
     }
 
-    public function setNom(?string $nom): self
+    public function setNom(string $nom): static
     {
         $this->nom = $nom;
 
@@ -146,7 +75,7 @@ private $images;
         return $this->lieu;
     }
 
-    public function setLieu(?string $lieu): self
+    public function setLieu(string $lieu): static
     {
         $this->lieu = $lieu;
 
@@ -158,7 +87,7 @@ private $images;
         return $this->capacity;
     }
 
-    public function setCapacity(int $capacity): ?self
+    public function setCapacity(int $capacity): static
     {
         $this->capacity = $capacity;
 
@@ -170,21 +99,23 @@ private $images;
         return $this->numero;
     }
 
-    public function setNumero(?int $numero): self
+    public function setNumero(int $numero): static
     {
         $this->numero = $numero;
 
         return $this;
     }
 
-    /**
-     * String representation of this class.
-     *
-     * @return string
-     */
-    public function __toString(): string
-    {
-        // Return the team name (nom) when the object is treated as a string
-        return $this->nom;
-    }
+
+
+    /*
+   *
+   *
+      @author : ghazi saoudi
+   *
+   *
+   *
+   */
+
+
 }

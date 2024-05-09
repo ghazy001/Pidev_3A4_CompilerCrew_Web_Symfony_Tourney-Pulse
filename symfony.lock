@@ -1,4 +1,7 @@
 {
+    "cmen/google-charts-bundle": {
+        "version": "6.0.0"
+    },
     "doctrine/annotations": {
         "version": "2.0",
         "recipe": {
@@ -38,11 +41,20 @@
             "./migrations/.gitignore"
         ]
     },
-    "endroid/qr-code-bundle": {
-        "version": "5.0.1"
-    },
     "knplabs/knp-paginator-bundle": {
         "version": "v5.9.0"
+    },
+    "php-http/discovery": {
+        "version": "1.19",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "main",
+            "version": "1.18",
+            "ref": "f45b5dd173a27873ab19f5e3180b2f661c21de02"
+        },
+        "files": [
+            "config/packages/http_discovery.yaml"
+        ]
     },
     "phpunit/phpunit": {
         "version": "9.6",
@@ -56,18 +68,6 @@
             "./.env.test",
             "./phpunit.xml.dist",
             "./tests/bootstrap.php"
-        ]
-    },
-    "sensio/framework-extra-bundle": {
-        "version": "6.2",
-        "recipe": {
-            "repo": "github.com/symfony/recipes",
-            "branch": "main",
-            "version": "5.2",
-            "ref": "fb7e19da7f013d0d422fa9bce16f5c510e27609b"
-        },
-        "files": [
-            "./config/packages/sensio_framework_extra.yaml"
         ]
     },
     "symfony/console": {
@@ -262,8 +262,23 @@
             "./templates/base.html.twig"
         ]
     },
+    "symfony/twilio-notifier": {
+        "version": "5.4",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "main",
+            "version": "5.0",
+            "ref": "10af129fcac6d00ffc9bb23d039d997dee35e657"
+        }
+    },
+    "symfony/ux-chartjs": {
+        "version": "v2.16.0"
+    },
     "symfony/ux-turbo": {
         "version": "v2.14.2"
+    },
+    "symfony/ux-typed": {
+        "version": "v2.16.0"
     },
     "symfony/validator": {
         "version": "5.4",
@@ -288,6 +303,22 @@
         "files": [
             "./config/packages/web_profiler.yaml",
             "./config/routes/web_profiler.yaml"
+        ]
+    },
+    "symfony/webpack-encore-bundle": {
+        "version": "2.1",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "main",
+            "version": "2.0",
+            "ref": "082d754b3bd54b3fc669f278f1eea955cfd23cf5"
+        },
+        "files": [
+            "assets/app.js",
+            "assets/styles/app.css",
+            "config/packages/webpack_encore.yaml",
+            "package.json",
+            "webpack.config.js"
         ]
     },
     "twig/extra-bundle": {

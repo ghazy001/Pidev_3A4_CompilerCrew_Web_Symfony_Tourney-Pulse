@@ -1,0 +1,109 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    <div class="table-container" style="margin-top: 200px">
+        <table class="table">
+            <thead>
+            <tr>
+                <th>Rank</th>
+                <th>Team</th>
+                <th>Played</th>
+                <th>Win</th>
+                <th>Draw</th>
+                <th>Loss</th>
+                <th>Goals For</th>
+                <th>Goals Against</th>
+                <th>Points</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% set rank = 1 %}
+            {% for record in records %}
+                <tr>
+                    <td>{{ rank }}</td>
+                    <td>
+                        {% if rank == 1 %}
+                            <img src="{{ asset('first.png') }}" alt="Crown" width="40" style="padding-right: 10px">
+                        {% endif %}
+                        {{ record.team }}
+                    </td>
+                    <td>{{ record.played }}</td>
+                    <td>{{ record.win }}</td>
+                    <td>{{ record.draw }}</td>
+                    <td>{{ record.loss }}</td>
+                    <td>{{ record.goalsFor }}</td>
+                    <td>{{ record.goalsAgainst }}</td>
+                    <td>{{ record.points }}</td>
+                </tr>
+                {% set rank = rank + 1 %}
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <style>
+        /* Container styles */
+        .table-container {
+            overflow-x: auto;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Table styles */
+        .table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        /* Table header styles */
+        .table th {
+            background-color: #2c3e50;
+            color: #ffffff;
+            font-weight: bold;
+            text-align: center;
+            padding: 15px;
+        }
+
+        /* Table row styles */
+        .table tbody tr:nth-child(odd) {
+            background-color: #f9f9f9;
+        }
+
+        /* Table cell styles */
+        .table td {
+            padding: 10px;
+            text-align: center;
+        }
+
+        /* Hover effect */
+        .table tbody tr:hover {
+            background-color: #e0e0e0;
+            transition: background-color 0.3s ease;
+        }
+
+        /* Specific row styling */
+        .table tbody tr:nth-child(-n+4) {
+            background-color: skyblue; /* Blue */
+            font-family: "Montserrat", sans-serif;
+            color: white;
+        }
+
+        .table tbody tr:nth-last-child(-n+3) {
+            background-color: palevioletred; /* Red */
+            color: white;
+        }
+
+        .table tbody tr:nth-last-child(-n+3):hover {
+            background-color: skyblue; /* Red */
+            color: white;
+        }
+
+        .table tbody tr:nth-child(-n+4):hover {
+            background-color: palevioletred; /* Red */
+            font-family: "Montserrat", sans-serif;
+            color: white;
+        }
+    </style>
+
+{% endblock %}

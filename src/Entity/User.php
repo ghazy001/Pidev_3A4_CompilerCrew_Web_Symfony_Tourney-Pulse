@@ -2,98 +2,48 @@
 
 namespace App\Entity;
 
-use Doctrine\DBAL\Types\Types;
+use Cassandra\Blob;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\UserRepository;
 
-/**
- * User
- *
- * @ORM\Table(name="user", indexes={@ORM\Index(name="fkequipe", columns={"id_equipe"})})
- * @ORM\Entity
- */
+#[ORM\Entity(repositoryClass: UserRepository::class)]
 class User
 {
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="id", type="integer", nullable=false)
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
-     */
-    private $id;
+    #[ORM\Id]
+    #[ORM\GeneratedValue]
+    #[ORM\Column]
+    private ?int $id = null;
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="email", type="string", length=255, nullable=false)
-     */
-    private $email;
+    #[ORM\Column(length: 255)]
+    private ?string $email = null;
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="password", type="string", length=255, nullable=false)
-     */
-    private $password;
+    #[ORM\Column(length: 255)]
+    private ?string $password = null;
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="role", type="string", length=255, nullable=false)
-     */
-    private $role;
+    #[ORM\Column(length: 255)]
+    private ?string $role = null;
 
-    /**
-     * @var string|null
-     *
-     * @ORM\Column(name="OTP", type="string", length=2500, nullable=true)
-     */
-    private $otp;
+    #[ORM\Column(length: 2500)]
+    private ?string $otp = null;
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="number", type="string", length=20, nullable=false)
-     */
-    private $number;
+    #[ORM\Column(length: 20)]
+    private ?string $number = null;
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="image", type="blob", length=0, nullable=false)
-     */
-    private $image;
+    #[ORM\Column()]
+    private ?string $image = null;
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="firstname", type="string", length=3000, nullable=false)
-     */
-    private $firstname;
+    #[ORM\Column(length: 3000)]
+    private ?string $firstname = null;
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="lastname", type="string", length=3000, nullable=false)
-     */
-    private $lastname;
+    #[ORM\Column(length: 3000)]
+    private ?string $lastname = null;
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="username", type="string", length=3000, nullable=false)
-     */
-    private $username;
+    #[ORM\Column(length: 3000)]
+    private ?string $username = null;
 
-    /**
-     * @var \Equipe
-     *
-     * @ORM\ManyToOne(targetEntity="Equipe")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="id_equipe", referencedColumnName="id")
-     * })
-     */
-    private $idEquipe;
+    #[ORM\ManyToOne(inversedBy: 'user')]
+    #[ORM\JoinColumn(name: "id_equipe", referencedColumnName: "id")]
+    private ?Equipe $equipe = null;
 
     public function getId(): ?int
     {
@@ -105,7 +55,7 @@ class User
         return $this->email;
     }
 
-    public function setEmail(string $email): static
+    public function setEmail(string $email): self
     {
         $this->email = $email;
 
@@ -117,7 +67,7 @@ class User
         return $this->password;
     }
 
-    public function setPassword(string $password): static
+    public function setPassword(string $password): self
     {
         $this->password = $password;
 
@@ -129,7 +79,7 @@ class User
         return $this->role;
     }
 
-    public function setRole(string $role): static
+    public function setRole(string $role): self
     {
         $this->role = $role;
 
@@ -141,7 +91,7 @@ class User
         return $this->otp;
     }
 
-    public function setOtp(?string $otp): static
+    public function setOtp(?string $otp): self
     {
         $this->otp = $otp;
 
@@ -153,19 +103,19 @@ class User
         return $this->number;
     }
 
-    public function setNumber(string $number): static
+    public function setNumber(string $number): self
     {
         $this->number = $number;
 
         return $this;
     }
 
-    public function getImage()
+    public function getImage(): ?string
     {
         return $this->image;
     }
 
-    public function setImage($image): static
+    public function setImage(string $image): self
     {
         $this->image = $image;
 
@@ -177,7 +127,7 @@ class User
         return $this->firstname;
     }
 
-    public function setFirstname(string $firstname): static
+    public function setFirstname(string $firstname): self
     {
         $this->firstname = $firstname;
 
@@ -189,7 +139,7 @@ class User
         return $this->lastname;
     }
 
-    public function setLastname(string $lastname): static
+    public function setLastname(string $lastname): self
     {
         $this->lastname = $lastname;
 
@@ -201,27 +151,30 @@ class User
         return $this->username;
     }
 
-    public function setUsername(string $username): static
+    public function setUsername(string $username): self
     {
         $this->username = $username;
 
         return $this;
     }
 
-    public function getIdEquipe(): ?Equipe
+    public function getEquipe(): ?Equipe
     {
-        return $this->idEquipe;
+        return $this->equipe;
     }
 
-    public function setIdEquipe(?Equipe $idEquipe): static
+    public function setEquipe(?Equipe $equipe): self
     {
-        $this->idEquipe = $idEquipe;
+        $this->equipe = $equipe;
 
         return $this;
     }
-    public function __toString(): string
-    {
-        return $this->firstname;
-    }
-
+    /*
+   *
+   *
+   * @author : ghazi saoudi
+   *
+   *
+   *
+   */
 }

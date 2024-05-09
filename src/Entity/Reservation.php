@@ -4,11 +4,7 @@ namespace App\Entity;
 
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
-use App\Repository\ReservationRepository;
-use Symfony\Component\Validator\Constraints as Assert;
 
-
-#[ORM\Entity(repositoryClass: ReservationRepository::class)]
 /**
  * Reservation
  *
@@ -27,12 +23,9 @@ class Reservation
     private $id;
 
     /**
-     * @var \Stade
+     * @var int
      *
-     * @ORM\ManyToOne(targetEntity="Stade")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="id_stade", referencedColumnName="id")
-     * })
+     * @ORM\Column(name="id_stade", type="integer", nullable=false)
      */
     private $idStade;
 
@@ -40,18 +33,8 @@ class Reservation
      * @var \DateTime
      *
      * @ORM\Column(name="date", type="date", nullable=false)
-     * @Assert\NotNull(message="La date ne peut pas être vide")
-     * @Assert\Expression(
-     *     "value >= this.getCurrentDate()",
-     *     message="La date doit être  postérieure à la date actuelle"
-     * )
      */
     private $date;
-
-    public function getCurrentDate(): \DateTime
-    {
-        return new \DateTime();
-    }
 
     /**
      * @var \Equipe
@@ -60,22 +43,8 @@ class Reservation
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="id_DeuxiemeEquipe", referencedColumnName="id")
      * })
-     * @Assert\NotBlank(message="L'équipe ne peut pas être vide")
-     * @Assert\NotEqualTo(propertyPath="idPremiereequipe", message="Les équipes ne peuvent pas être les mêmes.")
      */
     private $idDeuxiemeequipe;
-
-
-    /**
-     * @var \Equipe
-     *
-     * @ORM\ManyToOne(targetEntity="Equipe")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="id_PremiereEquipe", referencedColumnName="id")
-     * })
-     * @Assert\NotBlank(message="L'équipe ne peut pas être vide")
-     */
-    private $idPremiereequipe;
 
     /**
      * @var \User
@@ -84,53 +53,40 @@ class Reservation
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="id_organisateur", referencedColumnName="id")
      * })
-     * @Assert\NotBlank(message="L'organisateur ne peut pas être vide")
      */
     private $idOrganisateur;
-    /**
-     * @ORM\Column(type="text", nullable=true)
-     */
-    private $qrCodeBase64;
 
     /**
-     * @return mixed
+     * @var \Equipe
+     *
+     * @ORM\ManyToOne(targetEntity="Equipe")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="id_PremiereEquipe", referencedColumnName="id")
+     * })
      */
-    public function getQrCodeBase64()
-    {
-        return $this->qrCodeBase64;
-    }
-
-    /**
-     * @param mixed $qrCodeBase64
-     */
-    public function setQrCodeBase64($qrCodeBase64): void
-    {
-        $this->qrCodeBase64 = $qrCodeBase64;
-    }
+    private $idPremiereequipe;
 
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getIdStade(): ?Stade
+    public function getIdStade(): ?int
     {
         return $this->idStade;
     }
 
-    public function setIdStade(?Stade $idStade): self
+    public function setIdStade(int $idStade): static
     {
         $this->idStade = $idStade;
 
         return $this;
     }
 
-
     public function getDate(): ?\DateTimeInterface
     {
         return $this->date;
     }
-
 
     public function setDate(\DateTimeInterface $date): static
     {
@@ -174,6 +130,14 @@ class Reservation
 
         return $this;
     }
+    /*
+   *
+   *
+   * @author : ghazi saoudi
+   *
+   *
+   *
+   */
 
 
 }
